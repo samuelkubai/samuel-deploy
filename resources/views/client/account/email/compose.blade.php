@@ -31,7 +31,7 @@
                                             <div class="controls">
                                                <select name="receiver_id">
                                                    <option>--   Choose Recipient   -- </option>
-                                                   <option value="{{ $owner->id }}">Official School Mail</option>
+                                                   <option value="{{ $owner->id }}">Official Group Administrator</option>
                                                    @foreach($admins as $admin)
                                                        @if($admin->class == $client->class)
                                                         <option value="{{ $admin->user_id }}">{{ $admin->name .": ".$admin->role }}</option>

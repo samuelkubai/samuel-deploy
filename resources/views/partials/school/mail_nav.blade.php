@@ -35,8 +35,7 @@
             <ul class="big-items">
                 <li class={{ ($title == "Inbox")? "active": "" }}><a href="{{ url($school->username .'/mail/') }}" > Inbox</a></li>
                 <li  class={{ ($title == "Sent")? "active": "" }}><a href="{{ url($school->username .'/mail/sent') }}">Sent</a></li>
-                <li  class={{ ($title == "Draft")? "active": "" }}><a href="">Draft</a></li>
-                <li  class={{ ($title == "Trash")? "active": "" }}><a href="">Trash</a></li>
+                <li  class={{ ($title == "Trash")? "active": "" }}><a href="{{ url($school->username .'/mail/trash') }}">Trash</a></li>
             </ul>
             <ul class="small-items">
                 <li class=""><a href="#" > Home</a></li>

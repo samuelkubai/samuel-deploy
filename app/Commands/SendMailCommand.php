@@ -104,6 +104,8 @@ class SendMailCommand extends Command implements SelfHandling {
                 'to' => $this->to,
                 'client_id' =>  $this->client_id,
                 'admin_id' => $this->admin_id,
+                'trash_receiver' => 0,
+                'trash_sender' => 0,
             ]
         );
 

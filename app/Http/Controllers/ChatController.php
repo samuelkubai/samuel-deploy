@@ -28,14 +28,8 @@ class ChatController extends Controller {
 	 */
 	public function index($recipient)
 	{
-		$client = \App\Client::where('user_id', \Auth::user()->id)->first();
 
-		$members = $this->service->membersOf($client->username);
-
-		$messages = $this->service->messagesOf($client, $recipient);
-		//dd($messages);
-
-		return $this->service->view('inspina.chat.index', 'Chat', $members , $recipient , $messages);
+		return $this->service->homeView('inspina.chat.home', 'Chat',  $recipient );
 	}
 
 	/**
@@ -43,9 +37,10 @@ class ChatController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create()
+	public function create($recipient)
 	{
-		//
+		
+		return $this->service->chatView('inspina.chat.index', 'Chat', $recipient);
 	}
 
 	/**

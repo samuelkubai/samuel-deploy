@@ -37,19 +37,19 @@
                 <?php endif; ?>
             </li>
             <li>
-                <a href="<?php echo e(url('/noAccount')); ?>"><i class="fa fa-bullhorn"></i> <span class="nav-label">Forums</span><span class="fa arrow"></span></a>
+                <a href="<?php echo e(url('/noAccount')); ?>"><i class="fa fa-bullhorn"></i> <span class="nav-label">Forums</span></a>
                 <?php if($clients->count() != 0 ): ?>
                     <ul class="nav nav-second-level">
                         <?php if($clients->count() != 0): ?>
-                                    <?php foreach($clients as $client): ?>
-                                        <li><a href="<?php echo e(url('/community/'. $client->id)); ?>"><?php echo e("- " .$client->firstName." ". $client->middleName); ?></a> </li>
-                                    <?php endforeach; ?>
+                            <?php foreach($clients as $client): ?>
+                                <li><a href="<?php echo e(url('/community/'. $client->id)); ?>"><?php echo e("- " .$client->firstName." ". $client->middleName); ?></a> </li>
+                            <?php endforeach; ?>           
                         <?php endif; ?>
                     </ul>
                 <?php endif; ?>
             </li>
             <li>
-                <a href="<?php echo e(url('timeline')); ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span><span class="fa arrow"></span></a>
+                <a href="<?php echo e(url('/noAccount')); ?>"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span></a>
                  <?php if($clients->count() != 0): ?>
                     <ul class="nav nav-second-level">
                     <?php if($clients->count() != 0): ?>
@@ -59,17 +59,6 @@
                     <?php endif; ?>
                     </ul>
                 <?php endif; ?>
-            </li>
-            <li>
-                <a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Clients</span><span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li > <a href="<?php echo e(url('/patch')); ?>"> Register New Client + </a> </li>
-                    <?php if($clients->count() != 0): ?>
-                                <?php foreach($clients as $client): ?>
-                                    <li><a href=""> <?php echo e("- " .$client->firstName . " ". $client->lastName); ?> </a> </li>
-                                <?php endforeach; ?>
-                    <?php endif; ?>
-                </ul>
             </li>
             <li>
                 <a href="#"><i class="fa fa-info-circle"></i> <span class="nav-label">Notice Board</span></a>
@@ -83,6 +72,29 @@
                     </ul>
                 <?php endif; ?>
 
+            </li>
+            <li>
+                <a href="#"><i class="fa fa-comments-o"></i> <span class="nav-label">Chats</span></a>
+                <?php if($clients->count() != 0): ?>
+                    <ul class="nav nav-second-level">
+                    <?php if($clients->count() != 0): ?>
+                                <?php foreach($clients as $client): ?>
+                                    <li><a href="<?php echo e(url('/chat/'. $client->id. '/home/')); ?>"><?php echo e("- " .$client->firstName." ". $client->middleName); ?></a> </li>
+                                <?php endforeach; ?>
+                    <?php endif; ?>
+                    </ul>
+                <?php endif; ?>
+            </li>
+             <li>
+                <a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Clients</span></a>
+                <ul class="nav nav-second-level">
+                    <li > <a href="<?php echo e(url('/patch')); ?>"> Register New Client + </a> </li>
+                    <?php if($clients->count() != 0): ?>
+                                <?php foreach($clients as $client): ?>
+                                    <li><a href=""> <?php echo e("- " .$client->firstName . " ". $client->lastName); ?> </a> </li>
+                                <?php endforeach; ?>
+                    <?php endif; ?>
+                </ul>
             </li>
             <li>
                 <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">Gallery</span></a>

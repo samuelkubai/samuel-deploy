@@ -4,7 +4,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Mail extends Model {
 
-    protected $fillable = ['subject', 'message', 'user_id','client_id','admin_id', 'receiver_id', 'school_id', 'status', 'role', 'from', 'to'];
+    protected $fillable = ['trash_receiver','trash_sender','subject', 'message', 'user_id','client_id','admin_id', 'receiver_id', 'school_id', 'status', 'role', 'from', 'to'];
 
 
     public function school(){

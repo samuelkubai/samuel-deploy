@@ -1,4 +1,5 @@
-    <div class="page-title" style="display:none"> <a href="#" id="btn-back"><i class="icon-custom-left"></i></a>
+@include('partials.email.mail_success')
+<div class="page-title" style="display:none"> <a href="#" id="btn-back"><i class="icon-custom-left"></i></a>
         <h3>Back- <span class="semi-bold">Inbox</span></h3>
     </div>
     <div class="row"  id="inbox-wrapper">
@@ -30,7 +31,8 @@
                                                 <li class="next"><a href="#"><i class="fa fa-chevron-right"></i></a></li>
                                             </ul>
                                         </div>
-                                        <div class="dataTables_info hidden-xs" id="example_info">Showing <b>1 to 10</b> of 14 entries</div></div>
+                                        <div class="dataTables_info hidden-xs" id="example_info">Showing <b>1 to 10</b> of 14 entries </div></div>
+
                                     <div class="clearfix"></div>
                                 </div>
 
@@ -52,13 +54,13 @@
 
                                                     <td  class="small-cell v-align-middle">
                                                         <div class="checkbox check-success ">
-                                                            <input id="checkbox8" type="checkbox" value="1" >
+                                                            <input id="checkbox8" type="checkbox" value="2" >
                                                             <label for="checkbox8"></label>
                                                         </div>
                                                     </td>
                                                     <td  class="small-cell v-align-middle">
                                                         <div class="star">
-                                                            <input id="checkbox9" type="checkbox" value="1" checked >
+                                                            <input id="checkbox9" type="checkbox" value="1" {{ ($mail->status == 0)? 'checked' : ''}} >
                                                             <label for="checkbox9"></label>
                                                         </div>
                                                     </td>

@@ -25,6 +25,9 @@ class CreateMailsTable extends Migration {
             $table->integer('client_id')->nullable();
             $table->integer('admin_id')->nullable();
 
+            $table->integer('trash_sender')->nullable();
+            $table->integer('trash_receiver')->nullable();
+            
             $table->integer('from')->nullable();
             $table->integer('to')->nullable();
 

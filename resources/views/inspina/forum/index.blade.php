@@ -16,7 +16,7 @@
             <div class="pull-right forum-desc">
                 <samll>Total posts: 320,800</samll>
             </div>
-            <h3>Skoolspace subjects</h3>
+            <h3>Skoolspace Groups</h3>
         </div>
 
         <div class="forum-item active">

@@ -36,7 +36,7 @@ class ChatService
 	}
 
 
-	public function view($route, $title, $members, $recipient, $messages)
+	public function chatView($route, $title, $recipient)
 	{
 		 $user = \Auth::user();
         $admin_schools = null;
@@ -46,11 +46,35 @@ class ChatService
         if($administrator != null)
         {
             $admin_schools = \App\School::where('id', $administrator->school_id)->first();
-        }
+       	}
 
-        //dd($members);
+       	$client = \App\Client::where('user_id', \Auth::user()->id)->first();
+
+		$members = $this->membersOf($client->username);
+
+		$messages = $this->messagesOf($client, $recipient);
+
         $schools = \Auth::user()->schools()->get();
-        //dd($schools->count());
+        
+        return view($route, compact('admin_schools','schools','clients', 'title', 'messages', 'members', 'recipient'));
+	}
+
+	public function homeView($route, $title, $recipient)
+	{
+		$user = \Auth::user();
+        $admin_schools = null;
+        $client_schools = null;
+        $administrator = \App\Administrator::where('user_id', $user->id)->first();
+        $clients = \App\Client::where('user_id' , $user->id)->get();
+        if($administrator != null)
+        {
+            $admin_schools = \App\School::where('id', $administrator->school_id)->first();
+       	}
+       	
+		$members = $this->membersOf($recipient->username);
+
+        $schools = \Auth::user()->schools()->get();
+        
         return view($route, compact('admin_schools','schools','clients', 'title', 'messages', 'members', 'recipient'));
 	}
 }

@@ -1,4 +1,6 @@
-<?php $__env->startSection('content'); ?>
+@extends('inspina')
+
+@section('content')
     <div class="wrapper wrapper-content animated fadeInUp">
             <div class="row">
         <div class="col-lg-12">
@@ -16,34 +18,15 @@
                         <div class="row">
 
                             <div class="col-md-9 ">
-                                <div class="chat-discussion">
-
-                                   
-                                     <?php if($messages != null): ?>
-                                        <?php foreach($messages as $message): ?>
-                                            <div class="chat-message">
-                                                <img class="message-avatar" src="http://localhost:8000/inspina/img/a1.jpg" alt="" >
-                                                <div class="message">
-                                                    <a class="message-author" href="#"> Michael Smith </a>
-                                                    <span class="message-date"> <?php echo e($message->created_at); ?> </span>
-                                                    <span class="message-content"><?php echo e($message->message); ?></span>
-                                                </div>
-                                            </div> 
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
-                                    <div class="chat-message">
-                                        <img class="message-avatar" src="http://localhost:8000/inspina/img/a6.jpg" alt="" >
-                                        <div class="message">
-                                            <a class="message-author" href="#"> Mark Smith </a>
-                                            <span class="message-date">  Fri Jan 25 2015 - 11:12:36 </span>
-                                            <span class="message-content">
-											All the Lorem Ipsum generators on the Internet tend to repeat predefined chunks as necessary, making this the first true generator on the Internet.
-                                                It uses a dictionary of over 200 Latin words.
-                                            </span>
+                                <div class="wrapper wrapper-content">
+                                    <div class="middle-box text-center animated fadeInRightBig">
+                                        <h3 class="font-bold">Chat with Everyone in <b>{{ $recipient->username }}</b></h3>
+                                        <div class="error-desc">
+                                            You can chat with anyone in the group: {{ $recipient->username }} from here privately
+                                            <br/><a href="{{url('/')}}" class="btn btn-primary m-t">News Feed</a>
                                         </div>
-                                    </div>
-
                                 </div>
+                            </div>
 
                             </div>
                             <div class="col-md-3">
@@ -51,16 +34,16 @@
 
 
                                     <div class="users-list">
-                                    <?php if($members != null): ?>
-                                        <?php foreach($members as $member): ?>
+                                    @if($members != null)
+                                        @foreach($members as $member)
                                             <div class="chat-user">
                                                 <img class="chat-avatar" src="http://localhost:8000/inspina/img/a4.jpg" alt="" >
                                                 <div class="chat-user-name">
-                                                    <a href="<?php echo e(url('/chat/'. $member->user_id . '/')); ?>"><?php echo e($member->firstName . " ". $member->lastName); ?></a>
+                                                    <a href="{{ url('/chat/'. $member->user_id . '/') }}">{{ $member->firstName . " ". $member->lastName }}</a>
                                                 </div>
                                             </div>
-                                        <?php endforeach; ?>
-                                    <?php endif; ?>
+                                        @endforeach
+                                    @endif
                                         <div class="chat-user">
                                             <img class="chat-avatar" src="http://localhost:8000/inspina/img/a4.jpg" alt="" >
                                             <div class="chat-user-name">
@@ -120,28 +103,6 @@
                             </div>
 
                         </div>
-                        <div class="row">
-                        <form action="<?php echo e(url('/chat/' .$recipient->id. '/')); ?>" method="POST">
-                        <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-                            <div class="col-lg-12">
-                                <div class="chat-message-form">
-
-                                    <div class="form-group">
-
-                                        <textarea class="form-control message-input" name="message" placeholder="Enter message text"></textarea>
-                                    </div>
-
-                                </div>
-                            </div>
-                        
-                        <div class="col-lg-12">
-                                <div class="chat-message-form">
-                                <button type="submit" class="form-control btn btn-info btn-lg">Send Message </button>
-                                </div>
-                            </div>
-                        </form>
-                        </div>
-
                     </div>
 
                 </div>
@@ -151,5 +112,4 @@
 
 
     </div>
-<?php $__env->stopSection(); ?>
-<?php echo $__env->make('inspina', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+@endsection

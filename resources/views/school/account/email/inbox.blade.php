@@ -20,7 +20,7 @@
     <script src="http://localhost:8000/assets/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js" type="text/javascript"></script>
     <script src="http://localhost:8000/assets/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js" type="text/javascript"></script>
     <script src="http://localhost:8000/assets/js/demo.js" type="text/javascript"></script>
-
+     
     <script>
         $(document).ready(function() {
             $('#text-editor').wysihtml5();

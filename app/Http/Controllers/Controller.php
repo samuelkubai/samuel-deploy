@@ -26,4 +26,13 @@ abstract class Controller extends BaseController {
         return view($route, compact('admin_schools','schools','clients', 'title'));
     }
 
+    public function user()
+    {
+        return \Auth::user();
+    }
+
+    public function clientsForUser()
+    {
+        return \App\Client::where('user_id', $this->user()->id)->get();
+    }
 }

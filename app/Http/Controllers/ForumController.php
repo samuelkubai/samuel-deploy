@@ -45,9 +45,13 @@ class ForumController extends Controller {
      */
     public function clientIndex($client)
     {
-        return $this->forumView('inspina.forum.index', 'Home', $client);
+
     }
 
+    public function clientShow($client)
+    {
+        return $this->forumView('inspina.forum.index', 'Home', $client);
+    }
     public function clientChat($client, $subject)
     {
         $messages = $this->service->clientMessages($client, $subject);

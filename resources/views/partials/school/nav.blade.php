@@ -2,89 +2,46 @@
 <ul>
     <li class="start active "> <a href="{{ url('/') }}"> <i class="fa fa-th-large"></i> <span class="title">Dashboard</span> <span class="selected"></span> </a> </li>
 
-    <li class=""> <a href="{{ url('/admin/mail/') }}"> <i class="fa fa-envelope"></i> <span class="title">Mail</span><span class=" badge badge-disable pull-right ">203</span></a>
+    <li class=""> <a href="{{ url('/noAccount') }}"> <i class="fa fa-envelope"></i> <span class="title">Mail</span><span class=" badge badge-disable pull-right ">203</span></a>
+     @if($clients->count() != 0)
         <ul class="sub-menu">
-                @if($schools != null)
-                <li > <a href=""> Owner's Mail<span class="arrow "></span></a>
-                    <ul class="sub-menu">
-                        @foreach($schools as $school)
-                            <li><a href="{{ url('/'. $school->username. '/mail/') }}">{{ $school->schoolName }}</a> </li>
-                        @endforeach
-                    </ul>
-                </li>
-                @endif
-
-                @if($admin_schools != null)
-                <li > <a href=""> Administrator's Mail<span class="arrow "></span></a>
-                    <ul class="sub-menu">
-                    @foreach($admin_schools as $school)
-                        <li><a href="{{ url('/'. $school->username. '/mail/admin') }}">{{ $school->schoolName }}</a> </li>
-                    @endforeach
-                    </ul>
-                </li>
-                @endif
-
                 @if($clients!= null)
                 <li > <a href=""> Client's Mail<span class="arrow "></span></a>
                     <ul class="sub-menu">
                         @foreach($clients as $client)
-                            <li><a href="{{ url('/'. $client->username. '/client/mail/'. $client->id) }}">{{ $client->firstName." ". $client->middleName }}</a> </li>
+                            <li><a href="{{ url('/'. $client->username. '/client/mail/'. $client->id) }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
                         @endforeach
                     </ul>
                 </li>
                 @endif
 
         </ul>
+    @endif
     </li>
 
-    <li class=""> <a href="{{ url('/admin/messenger/school/') }}"> <i class="fa fa-bullhorn"></i>  <span class="title">Forums</span> <span class="badge badge-primary pull-right">5</span> </a>
+    <li class=""> <a href="{{ url('/noAccount') }}"> <i class="fa fa-bullhorn"></i>  <span class="title">Forums</span> <span class="badge badge-primary pull-right">5</span> </a>
+        @if($clients->count() != 0 )
         <ul class="sub-menu">
-            @if($schools != null)
-                <li > <a href=""> Owner's Forums<span class="arrow "></span></a>
-                    <ul class="sub-menu">
-                        @foreach($schools as $school)
-                            <li><a href="{{ url('/'. $school->username. '/forum/') }}">{{ $school->schoolName }}</a> </li>
-                        @endforeach
-                    </ul>
-                </li>
-            @endif
-
-            @if($admin_schools != null)
-                <li > <a href=""> Administrator's Forums<span class="arrow "></span></a>
-                    <ul class="sub-menu">
-                        @foreach($admin_schools as $school)
-                            <li><a href="{{ url('/'. $school->username. '/mail/admin') }}">{{ $school->schoolName }}</a> </li>
-                        @endforeach
-                    </ul>
-                </li>
-            @endif
-
             @if($clients != null)
-                <li > <a href=""> Client's Forums<span class="arrow "></span></a>
-                    <ul class="sub-menu">
-                        @foreach($clients as $client)
-                            <li><a href="{{ url('/'. $client->username. '/client/forum/'. $client->id) }}">{{ $client->firstName." ". $client->middleName }}</a> </li>
-                        @endforeach
-                    </ul>
-                </li>
+                @foreach($clients as $client)
+                    <li><a href="{{ url('/community/'. $client->id) }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
+                @endforeach
             @endif
-
         </ul>
+        @endif
     </li>
-    <li class=""> <a href="javascript:;">  <i class="fa fa-calendar"></i>  <span class="title">Calendar</span></a>
+    <li class=""> <a href="javascript:;">  <i class="fa fa-calendar"></i>  <span class="title">Event</span></a>
+         @if($clients->count() != 0 )
         <ul class="sub-menu">
-            <li > <a href=""> School Calendar</a> </li>
-            <li > <a href=""> Intergrated Calendar </a> </li>
+            @if($clients != null)
+                @foreach($clients as $client)
+                    <li><a href="{{ url('/'. $client->username. '/events/') }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
+                @endforeach
+            @endif
         </ul>
+        @endif
     </li>
-    <li class=""> <a href="javascript:;"> <i class="fa fa-building-o"></i> <span class="title">Schools</span> </a>
-        <ul class="sub-menu">
-            <li> <a href="{{ url('/schools/') }}">- All Schools </a> </li>
-            @foreach($schools as $school)
-                <li > <a href="{{ url('/'.$school->username. '/') }}"> {{ $school->schoolName }}</a> </li>
-            @endforeach
-        </ul>
-    </li>
+   
     <li class=""> <a href="javascript:;"> <i class="fa fa-laptop"></i>  <span class="title">Clients</span></a>
         <ul class="sub-menu">
             <li > <a href="{{ url('/patch') }}"> Register New Client </a> </li>
@@ -92,12 +49,36 @@
                 <li > <a href="{{ url('/patch') }}"> Registered Clients: <span class="arrow "></span> </a>
                     <ul class="sub-menu">
                 @foreach($clients as $client)
-                    <li><a href=""> {{ $client->firstName . " ". $client->lastName }} </a> </li>
+                    <li><a href=""> {{ "- " .$client->firstName . " ". $client->lastName }} </a> </li>
                 @endforeach
                     </ul>
                 </li>
             @endif
         </ul>
+    </li>
+     <li class=""><a href="javascript:;"><i class="fa fa-info-circle"></i> <span class="title">Notice Board</span></a>
+        @if($clients->count() != 0 )
+        <ul class="sub-menu">
+            @if($clients != null)
+                @foreach($clients as $client)
+                    <li><a href="{{ url('/'. $client->username. '/notice/') }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
+                @endforeach
+            @endif
+        </ul>
+        @endif
+       
+    </li>
+    <li>
+        <a href="javascript:;"><i class="fa fa-comments-o"></i> <span class="title">Chats</span></a>
+            @if($clients->count() != 0)
+            <ul class="sub-menu">
+                @if($clients->count() != 0)
+                    @foreach($clients as $client)
+                        <li><a href="{{ url('/chat/'. $client->id. '/home/') }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
+                    @endforeach
+                @endif
+            </ul>
+            @endif
     </li>
     <li class=""> <a href="javascript:;"> <i class="fa fa-picture-o"></i> <span class="title">Gallery</span></a>
     </li>

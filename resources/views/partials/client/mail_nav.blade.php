@@ -33,10 +33,9 @@
                 <p class="menu-title">FOLDER <span class="pull-right"><i class="icon-refresh"></i></span></p>
             </div>
             <ul class="big-items">
-                <li class="active"><span class="badge badge-important">2</span><a href="{{ url('/'.$school->username.'/client/mail/'.$client->id) }}" > Inbox</a></li>
-                <li><a href="{{ url('/'.$school->username.'/client/mail/sent/'.$client->id) }}">Sent</a></li>
-                <li><a href="">Draft</a></li>
-                <li><a href="">Trash</a></li>
+                <li class={{ ($title == "Inbox")? "active": "" }}><span class="badge badge-important">2</span><a href="{{ url('/'.$school->username.'/client/mail/'.$client->id) }}" > Inbox</a></li>
+                <li class={{ ($title == "Sent")? "active": "" }}><a href="{{ url('/'.$school->username.'/client/mail/sent/'.$client->id) }}">Sent</a></li>
+                <li class={{ ($title == "Trash")? "active": "" }}><a href="{{ url('/'.$school->username.'/client/mail/'.$client->id.'/trash/') }}">Trash</a></li>
             </ul>
             <ul class="small-items">
                 <li class=""><a href="#" > Home</a></li>

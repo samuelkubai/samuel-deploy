@@ -26,84 +26,36 @@
 
             <li>
                 <a href="{{ url('/noAccount') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
-                @if($schools->count() != 0 || $clients->count() != 0 || $admin_schools != null)
-                    <ul class="nav nav-second-level">
                         @if($schools->count() != 0)
-                            <li> <a href=""> Owner's Mail<span class="arrow "></span></a>
-                                <ul class="nav nav-third-level">
+                                <ul class="nav nav-second-level">
                                     @foreach($schools as $school)
                                         <li><a href="{{ url('/'. $school->username. '/mail/') }}">{{"- " . $school->schoolName }}</a> </li>
                                     @endforeach
                                 </ul>
-                            </li>
-                        @endif
-
-                        @if($admin_schools != null)
-                            <li > <a href=""> Administrator's Mail<span class="arrow "></span></a>
-                                <ul class="nav nav-third-level">
-                                    @foreach($admin_schools as $school)
-                                        <li><a href="{{ url('/'. $school->username. '/mail/admin') }}">{{"- " . $school->schoolName }}</a> </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                @endif
+                        @endif  
             </li>
             <li>
-                <a href="{{ url('/noAccount') }}"><i class="fa fa-bullhorn"></i> <span class="nav-label">Forums</span><span class="fa arrow"></span></a>
-                @if($schools->count() != 0 || $clients->count() != 0 || $admin_schools != null)
-                    <ul class="nav nav-second-level">
-                        @if($schools->count() != 0)
-                            <li > <a href=""> Owner's Forums<span class="arrow "></span></a>
-                                <ul class="nav nav-third-level">
+                <a href="{{ url('/noAccount') }}"><i class="fa fa-bullhorn"></i> <span class="nav-label">Forums</span></a>
+                            @if($schools->count() != 0)
+                                <ul class="nav nav-second-level">
                                     @foreach($schools as $school)
                                         <li><a href="{{ url('/admin/community/'. $school->username. '/') }}">{{ "- " .$school->schoolName }}</a> </li>
                                     @endforeach
                                 </ul>
-                            </li>
-                        @endif
-
-                        @if($admin_schools != null)
-                            <li > <a href=""> Administrator's Forums<span class="arrow "></span></a>
-                                <ul class="nav nav-third-level">
-                                    @foreach($admin_schools as $school)
-                                        <li><a href="{{ url('/'. $school->username. '/mail/admin') }}">{{"- " . $school->schoolName }}</a> </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                @endif
+                            @endif
             </li>
             <li>
-                <a href="{{ url('admin/timeline')}}"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span><span class="fa arrow"></span></a>
-                @if($schools->count() != 0 || $clients->count() != 0 || $admin_schools != null)
-                    <ul class="nav nav-second-level">
-                        @if($schools->count() != 0)
-                            <li> <a href=""> Admin Events<span class="arrow "></span></a>
-                                <ul class="nav nav-third-level">
+                <a href="{{ url('admin/timeline')}}"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span></a>
+                            @if($schools->count() != 0)
+                                <ul class="nav nav-second-level">
                                     @foreach($schools as $school)
                                         <li><a href="{{ url('/admin/'. $school->username. '/events/') }}">{{"- " . $school->schoolName }}</a> </li>
                                     @endforeach
                                 </ul>
-                            </li>
-                        @endif
-
-                        @if($admin_schools != null)
-                            <li > <a href=""> Administrator's Mail<span class="arrow "></span></a>
-                                <ul class="nav nav-third-level">
-                                    @foreach($admin_schools as $school)
-                                        <li><a href="{{ url('/admin/'. $school->username. '/events/') }}">{{"- " . $school->schoolName }}</a> </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                @endif
+                            @endif
             </li>
             <li>
-                <a href=""><i class="fa fa-building-o"></i> <span class="nav-label">Schools</span> <span class="fa arrow"></span></a>
+                <a href=""><i class="fa fa-building-o"></i> <span class="nav-label">Schools</span></a>
                 <ul class="nav nav-second-level">
                     @if($schools->count() != 0)
                         <li> <a href="{{ url('/schools/') }}">All Schools </a> </li>
@@ -117,29 +69,13 @@
             </li>
              <li>
                 <a href="#"><i class="fa fa-info-circle"></i> <span class="nav-label">Notice Board</span></a>
-                @if($schools->count() != 0 || $clients->count() != 0 || $admin_schools != null)
-                    <ul class="nav nav-second-level">
-                        @if($schools->count() != 0)
-                            <li> <a href=""> Admin Events<span class="arrow "></span></a>
-                                <ul class="nav nav-third-level">
+                            @if($schools->count() != 0)
+                                <ul class="nav nav-second-level">
                                     @foreach($schools as $school)
                                         <li><a href="{{ url('/admin/'. $school->username. '/notice/') }}">{{"- " . $school->schoolName }}</a> </li>
                                     @endforeach
                                 </ul>
-                            </li>
-                        @endif
-
-                        @if($admin_schools != null)
-                            <li > <a href=""> Administrator's Mail<span class="arrow "></span></a>
-                                <ul class="nav nav-third-level">
-                                    @foreach($admin_schools as $school)
-                                        <li><a href="{{ url('/admin/'. $school->username. '/notice/') }}">{{"- " . $school->schoolName }}</a> </li>
-                                    @endforeach
-                                </ul>
-                            </li>
-                        @endif
-                    </ul>
-                @endif
+                            @endif
             </li>
             <li>
                 <a href="#"><i class="fa fa-picture-o"></i> <span class="nav-label">Gallery</span></a>

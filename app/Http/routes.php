@@ -58,7 +58,7 @@ Route::bind('subject' , function($name)
 Route::bind('recipient' , function($id)
 {
     /** @var TYPE_NAME $id */
-    return App\User::where('id',$id)->first();
+    return App\Client::where('id',$id)->first();
 });
 
 /**Route::bind('school' , function($school)
@@ -81,6 +81,40 @@ Route::get('/test', function(){
 /* Testing Route Ends */
 
 
+/* Mail Routes */
+
+    /* Client Routes */
+        Route::get('/{username}/client/mail/{client}/trash',  ['middleware' => 'school', 'uses' => 'MailController@getClientTrash']);
+        Route::get('/{username}/client/mail/trash/{client}/{mail}',  ['middleware' => 'school', 'uses' => 'MailController@getClientMessageTrash']);
+        Route::get('/{username}/client/mail/{client}/' , ['middleware' => 'client', 'uses' => 'MailController@getClientMail']);
+        Route::get('/{username}/client/mail/sent/{client}/' , ['middleware' => 'client', 'uses' =>  'MailController@getClientSent']);
+        Route::get('/{username}/client/mail/send/{client}' , ['middleware' => 'client', 'uses' => 'MailController@getClientCompose']);
+        Route::post('/{username}/client/mail/send/{client}' , ['middleware' => 'client', 'uses' =>  'MailController@postClientCompose']);
+        Route::get('/{username}/client/mail/sent/{client}/{mail}' , ['middleware' => 'client', 'uses' =>  'MailController@getClientMessageSent']);
+        Route::get('/{username}/client/mail/{client}/{mail}' , ['middleware' => 'client', 'uses' =>  'MailController@getClientMessageInbox']);
+      
+       
+       /*   
+        Route::get('/{username}/client/mail/{client}/{mail}/trash' , ['middleware' => 'client', 'uses' =>  'MailController@markInboxTrash']);
+        Route::get('/{username}/client/mail/sent/{mail}/trash' , ['middleware' => 'client', 'uses' =>  'MailController@markSentTrash']);
+       */
+
+    /* School Routes */
+
+        Route::get('/{username}/mail/trash',  ['middleware' => 'school', 'uses' => 'MailController@getSchoolTrash']);
+        Route::get('/{username}/mail/trash/{mail}',  ['middleware' => 'school', 'uses' => 'MailController@getSchoolMessageTrash']);
+        Route::get('/{username}/mail/' ,  ['middleware' => 'school', 'uses' => 'MailController@getSchoolMail']);
+        Route::get('/{username}/mail/send' ,  ['middleware' => 'school', 'uses' => 'MailController@getSchoolSend']);
+        Route::post('/{username}/mail/send' ,  ['middleware' => 'school', 'uses' => 'MailController@postSchoolSend']);
+        Route::get('/{username}/mail/sent',  ['middleware' => 'school', 'uses' => 'MailController@getSchoolSent']);
+        Route::get('/{username}/mail/sent/{mail}',  ['middleware' => 'school', 'uses' => 'MailController@getSchoolMessageSent']);
+        Route::get('/{username}/mail/{mail}',  ['middleware' => 'school', 'uses' => 'MailController@getSchoolMessageInbox']  );
+        Route::get('/{username}/mail/{mail}/trash',  ['middleware' => 'school', 'uses' => 'MailController@markInboxTrash']  );
+        Route::get('/{username}/mail/sent/{mail}/trash',  ['middleware' => 'school', 'uses' => 'MailController@markSentTrash']  );
+       
+
+
+/* End Mail Routes */
 
 /* SCHOOL'S ROUTES */
 
@@ -96,6 +130,7 @@ Route::get('/', ['middleware' => 'school', 'uses' => 'HomeController@index']);
 
 Route::get('/noAccount', ['middleware' => 'school', 'uses' => 'HomeController@noAccount']);
 Route::get('/community/{client}',  ['middleware' => 'school', 'uses' => 'ForumController@clientIndex']);
+Route::get('/community/{client}',  ['middleware' => 'school', 'uses' => 'ForumController@clientChat']);
 Route::get('/{client}/{subject}/community/',  ['middleware' => 'school', 'uses' => 'ForumController@clientChat']);
 Route::post('/{client}/{subject}/community',  ['middleware' => 'school', 'uses' => 'ForumController@postClientChat']);
 Route::get('/admin',  ['middleware' => 'school', 'uses' => 'HomeController@admin']);
@@ -108,7 +143,8 @@ Route::post('/admin/{username}/events',  ['middleware' => 'school', 'uses' => 'T
 Route::get('/{username}/notice',  ['middleware' => 'school', 'uses' => 'NoticeController@index']);
 Route::post('/{username}/notice',  ['middleware' => 'school', 'uses' => 'NoticeController@store']);
 Route::get('/admin/{username}/notice',  ['middleware' => 'school', 'uses' => 'NoticeController@admin']);
-Route::get('/chat/{recipient}', ['middleware' => 'school', 'uses' => 'ChatController@index']);
+Route::get('/chat/{recipient}/home', ['middleware' => 'school', 'uses' => 'ChatController@index']);
+Route::get('/chat/{recipient}', ['middleware' => 'school', 'uses' => 'ChatController@create']);
 Route::post('/chat/{recipient}', ['middleware' => 'school', 'uses' => 'ChatController@store']);
 
 
@@ -124,46 +160,10 @@ Route::get('/{username}/',  ['middleware' => 'school', 'uses' => 'SchoolControll
 Route::post('/{username}/update/',  ['middleware' => 'school', 'uses' => 'SchoolController@updateSchool']);
 Route::get('/{username}/delete/',  ['middleware' => 'school', 'uses' => 'SchoolController@deleteSchool']);
 
-/* Forum Routes */
-
-/* End Forum Routes */
 
 /* School Messenger Routes */
 Route::get('/{username}/forum/' ,  ['middleware' => 'school', 'uses' => 'MessengerController@getSchoolMessages']);
 Route::post('/{username}/forum/' ,  ['middleware' => 'school', 'uses' => 'MessengerController@postSchoolMessages']);
-
-/* School Mail Routes */
-Route::get('/{username}/mail/' ,  ['middleware' => 'school', 'uses' => 'MailController@getSchoolMail']);
-Route::get('/{username}/mail/send' ,  ['middleware' => 'school', 'uses' => 'MailController@getSchoolSend']);
-Route::post('/{username}/mail/send' ,  ['middleware' => 'school', 'uses' => 'MailController@postSchoolSend']);
-Route::get('/{username}/mail/sent',  ['middleware' => 'school', 'uses' => 'MailController@getSchoolSent']);
-Route::get('/{username}/mail/sent/{mail}',  ['middleware' => 'school', 'uses' => 'MailController@getSchoolMessageSent']);
-Route::get('/{username}/mail/{mail}',  ['middleware' => 'school', 'uses' => 'MailController@getSchoolMessageInbox']  );
-
-
-
-
-
-/* ADMINISTRATOR'S ROUTES  */
-
-/* Administrators Routes: Login and Registration */
-
-Route::get('/{username}/admin/login', 'AdministratorController@getLogin');
-Route::post('/{username}/admin/login' , 'AdministratorController@postLogin');
-//Route::get('/admin/{username}/admin/' , 'AdministratorController@getRegister');
-Route::post('/{username}/admin/register' , 'AdministratorController@postRegister');
-Route::get('/{username}/admin/' , ['middleware' => 'admin', 'uses' => 'AdministratorController@home']);
-
- /* Mail Routes */
-
-Route::get('/{username}/admin/mail', ['middleware' => 'admin', 'uses' => 'MailController@getAdminMail']);
-Route::get('/{username}/admin/mail/send', ['middleware' => 'admin', 'uses' => 'MailController@getAdminCompose']);
-Route::post('/{username}/admin/mail/send', ['middleware' => 'admin', 'uses' => 'MailController@postAdminCompose']);
-Route::get('/{username}/admin/mail/sent', ['middleware' => 'admin', 'uses' => 'MailController@getAdminSent']);
-Route::get('/{username}/admin/mail/sent/{mail}', ['middleware' => 'admin', 'uses' => 'MailController@getAdminMessageSent']);
-Route::get('/{username}/admin/mail/{mail}', ['middleware' => 'admin', 'uses' => 'MailController@getAdminMessageInbox']);
-
-
 
 
 /* CLIENT'S ROUTES */
@@ -179,18 +179,38 @@ Route::post('/{username}/register' , 'ClientController@postRegister');
 
 //Route::get('/{username}/' ,['middleware' => 'client', 'uses' => 'ClientController@getHome']);
 
-/* Client Routes: Mail*/
-
-Route::get('/{username}/client/mail/{client}/' , ['middleware' => 'client', 'uses' => 'MailController@getClientMail']);
-Route::get('/{username}/client/mail/sent/{client}/' , ['middleware' => 'client', 'uses' =>  'MailController@getClientSent']);
-Route::get('/{username}/client/mail/send/{client}' , ['middleware' => 'client', 'uses' => 'MailController@getClientCompose']);
-Route::post('/{username}/client/mail/send/{client}' , ['middleware' => 'client', 'uses' =>  'MailController@postClientCompose']);
-Route::get('/{username}/client/mail/sent/{client}/{mail}' , ['middleware' => 'client', 'uses' =>  'MailController@getClientMessageSent']);
-Route::get('/{username}/client/mail/{client}/{mail}' , ['middleware' => 'client', 'uses' =>  'MailController@getClientMessageInbox']);
-
-
 /* Client Forum Routes  */
 Route::get('/{username}/client/forum/{client}/' , ['middleware' => 'client', 'uses' => 'MessengerController@getClientMessages']);
 Route::post('/{username}/client/forum/{client}/' , ['middleware' => 'client', 'uses' => 'MessengerController@postClientMessages']);
 Route::get('/{username}/client/forum/class/{client}/' , ['middleware' => 'client', 'uses' => 'MessengerController@getClientClassMessages']);
 Route::post('/{username}/client/forum/class/{client}/' , ['middleware' => 'client', 'uses' => 'MessengerController@postClientClassMessages']);
+
+
+
+
+
+
+
+
+
+
+/* ADMINISTRATOR'S ROUTES  */
+
+/* Administrators Routes: Login and Registration 
+
+Route::get('/{username}/admin/login', 'AdministratorController@getLogin');
+Route::post('/{username}/admin/login' , 'AdministratorController@postLogin');
+//Route::get('/admin/{username}/admin/' , 'AdministratorController@getRegister');
+Route::post('/{username}/admin/register' , 'AdministratorController@postRegister');
+Route::get('/{username}/admin/' , ['middleware' => 'admin', 'uses' => 'AdministratorController@home']);
+
+ /* Mail Routes */
+
+/*
+Route::get('/{username}/admin/mail', ['middleware' => 'admin', 'uses' => 'MailController@getAdminMail']);
+Route::get('/{username}/admin/mail/send', ['middleware' => 'admin', 'uses' => 'MailController@getAdminCompose']);
+Route::post('/{username}/admin/mail/send', ['middleware' => 'admin', 'uses' => 'MailController@postAdminCompose']);
+Route::get('/{username}/admin/mail/sent', ['middleware' => 'admin', 'uses' => 'MailController@getAdminSent']);
+Route::get('/{username}/admin/mail/sent/{mail}', ['middleware' => 'admin', 'uses' => 'MailController@getAdminMessageSent']);
+Route::get('/{username}/admin/mail/{mail}', ['middleware' => 'admin', 'uses' => 'MailController@getAdminMessageInbox']);
+*/

@@ -1,3 +1,4 @@
+@include('partials.email.mail_success')
 <div id="portlet-config" class="modal hide">
     <div class="modal-header">
         <button data-dismiss="modal" class="close" type="button"></button>
@@ -52,8 +53,8 @@
 <div class="admin-bar" id="quick-access" style="">
     <div class="admin-bar-inner">
 
-        <button class="btn btn-danger  btn-add" type="button"><i class="icon-trash"></i> Move to trash</button>
-        <button class="btn btn-white  btn-cancel" type="button">Cancel</button>
+        <a href="{{ url('/'. $school->username . '/mail/' . $mail->id . '/trash/    ') }}" class="btn btn-danger  btn-add"><i class="icon-trash"></i> Move to trash</a> 
+        <button class="btn btn-white  btn-cancel" type="reset">Cancel</button>
     </div>
 </div>
 </div>
