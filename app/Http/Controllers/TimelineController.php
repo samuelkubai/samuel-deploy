@@ -7,6 +7,7 @@ use Illuminate\Http\Request;
 
 use App\Http\Timeline\TimelineService;
 use App\Http\Timeline\TimelineRepository;
+use App\Http\Client\ClientRepository;
 
 
 class TimelineController extends Controller {
@@ -15,10 +16,12 @@ class TimelineController extends Controller {
 
 	protected $repo;
 
-	function __construct(TimelineService $service, TimelineRepository $repo)
+	protected $client;
+
+	function __construct(TimelineService $service, TimelineRepository $repo, ClientRepository $client)
 	{
 		$this->service = $service;
-
+		$this->client = $client;
 		$this->repo = $repo;
 	}
 	/**
@@ -29,8 +32,8 @@ class TimelineController extends Controller {
 	public function index(){
 	
 		$title = "Events";
-		$clients = $this->clientsForUser();
-		return view('inspina.index.events', compact('title' , 'clients'));
+		$groups = $this->client->groupsForUser($this->user());
+		return view('inspina.index.events', compact('title' , 'groups'));
 	}
 
 	/**
@@ -41,8 +44,8 @@ class TimelineController extends Controller {
 	public function admin(){
 	
 		$title = "Events";
-		$schools = $this->schoolsForUser();
-		return view('inspina.index.admin.events', compact('title' , 'schools'));
+		$groups = $this->groupsForUser();
+		return view('inspina.index.admin.events', compact('title' , 'groups'));
 	}
 
 	/**

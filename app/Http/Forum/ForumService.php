@@ -1,7 +1,6 @@
 <?php namespace App\Http\Forum;
 
 
-use App\Commands\SendMessageComand;
 use App\Message;
 use App\School;
 
@@ -30,18 +29,38 @@ class ForumService {
         $message =null;
 
         if($client != null){
-            $user = \Auth::user();
-            if (isset($client->id) && isset($client->class))
+            if (isset($client->id))
             {
-
-                $message = new SendMessageComand($request->title, $subject->id, $user, $name, $request->message, $school->id, $client->id , null, $client->class , 1);
-            }
-
+                $message = \Auth::user()->messages()->create(
+                                [
+                                    'title' => $request->title,
+                                    'name' => $name,
+                                    'message' => $request->message,
+                                    'class' => 0,
+                                    'subject' => $subject->id,
+                                    'school_id' => $school->id,
+                                    'client_id' =>  $client->id,
+                                    'admin_id' => null,
+                                    'role' => 1,
+                                ]
+                            );
+            } 
 
         } else {
-            $user = \Auth::user();
-            $message = new SendMessageComand($request->title, $subject->id, $user, $name, $request->message, $school->id, null, 0);
 
+            $message = \Auth::user()->messages()->create(
+                            [
+                                'title' => $request->title,
+                                'name' => $name,
+                                'message' => $request->message,
+                                'class' => 0,
+                                'subject' => $subject->id,
+                                'school_id' => $school->id,
+                                'client_id' =>  null,
+                                'admin_id' => 0,
+                                'role' => 0,
+                            ]
+                        );
         }
         return $message;
     }
@@ -50,10 +69,8 @@ class ForumService {
      * @param $client
      * @param $subject
      */
-    public function clientMessages($client, $subject)
+    public function clientMessages($school, $subject)
     {
-        $school = School::where('username', $client->username)->first();
-
         return $this->messages($school, $subject);
     }
 

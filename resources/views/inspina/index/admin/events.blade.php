@@ -19,15 +19,15 @@
             <h3>Skoolspace Groups</h3>
         </div>
 
-        @foreach($schools as $school)
+         @foreach($groups as $group)
             <div class="forum-item active">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="forum-icon">
                             <i class="fa fa-shield"></i>
                         </div>
-                        <a href="{{ url('/admin/'. $school->username .'/events') }}" class="forum-item-title">{{$school->schoolName}}</a>
-                        <div class="forum-sub-title">{{$school->schoolMotto}}.</div>
+                        <a href="{{ url('/admin/'. $group->username.'/events') }}" class="forum-item-title">{{$group->username}}</a>
+                        <div class="forum-sub-title">{{$group->description }}.</div>
                     </div>
                     <div class="col-md-1-offset-1 forum-info">
                         <span class="views-number"> 0 </span>

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Chat\ChatService;
 use App\Http\Chat\ChatRepository;
+use App\Http\Client\ClientRepository;
 
 
 class ChatController extends Controller {
@@ -15,11 +16,15 @@ class ChatController extends Controller {
 
 	private $service;
 
-	public function __construct(ChatRepository $repo, ChatService $service)
+	private $client;
+
+	public function __construct(ChatRepository $repo, ChatService $service, ClientRepository $client)
 	{
 		$this->service = $service;
 
 		$this->repo  = $repo;
+
+		$this->client = $client;
 	}
 	/**
 	 * Display a listing of the resource.
@@ -29,8 +34,8 @@ class ChatController extends Controller {
 	public function index()
 	{
 		$title = 'Chat';
-		$clients = $this->clientsForUser();
-		return view('inspina.index.chat', compact('clients', 'title'));
+		$groups = $this->client->groupsForUser($this->user());
+		return view('inspina.index.chat', compact('groups', 'title'));
 	}
 
 	/**

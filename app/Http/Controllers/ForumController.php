@@ -9,6 +9,7 @@ use App\School;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Http\Request;
 use App\Commands\SendMessageComand;
+use App\Http\Client\ClientRepository;
 
 
 class ForumController extends Controller {
@@ -28,14 +29,18 @@ class ForumController extends Controller {
      */
     private $service;
 
+
+    private $client;
+
     /**
      * Create a new controller instance.
      * @param ForumService $service
      */
-    public function __construct(ForumService $service)
+    public function __construct(ForumService $service, ClientRepository $client)
     {
         $this->middleware('auth');
         $this->service = $service;
+        $this->client = $client;
     }
 
     /**
@@ -46,15 +51,16 @@ class ForumController extends Controller {
     public function clientIndex()
     {
         $title = "Forums";
-        $clients = $this->clientsForUser();
-        return view('inspina.forum.index', compact('clients', 'title'));
+        $groups = $this->client->groupsForUser($this->user());
+        return view('inspina.forum.index', compact('groups', 'title'));
     }
 
-    public function clientShow($client, $subject)
+    public function clientShow($school, $subject)
     {
         $title = "Forums";
-        $messages = $this->service->clientMessages($client, $subject);
-        return view('inspina.forum.view', compact('messages', 'title', 'client', 'subject'));
+        $messages = $this->service->clientMessages($school, $subject);
+        $client = $this->client->retrieveClient($school, $this->user());
+        return view('inspina.forum.view', compact('messages', 'title', 'client', 'subject', 'school'));
     }
     public function clientChat($client, $subject)
     {
@@ -71,11 +77,12 @@ class ForumController extends Controller {
      */
     public function postClientChat(Request $request, $client, $subject)
     {
-
         $message = $this->service->clientPost($request, $client, $subject);
+        return redirect()->back();
+    }
 
-        $this->dispatch($message);
-
+    public function postForum()
+    {
         return redirect()->back();
     }
 
@@ -87,8 +94,8 @@ class ForumController extends Controller {
     public function adminIndex()
     {
         $title = "Forums";
-        $schools = $this->schoolsForUser();
-        return view('inspina.forum.admin.index', compact('schools', 'title'));
+        $groups = $this->groupsForUser();
+        return view('inspina.forum.admin.index', compact('groups', 'title'));
     }
 
     public function adminChat($school, $subject)

@@ -22,11 +22,10 @@ class CreateSchoolRequest extends Request {
 	public function rules()
 	{
 		return [
-            'schoolName' => 'required',
-            'schoolMotto' => 'required',
+            'name' => 'required',
+            'description' => 'required',
             'username' => 'required | unique:schools,username',
             'email' => 'email| unique:schools,email',
-            'telNumber' => 'required',
            // 'url' => 'required',
 		];
 	}

@@ -62,7 +62,7 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-envelope"></i>  <span class="label label-warning">16</span>
+                            <i class="fa fa-envelope"></i> 
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
                             <li>
@@ -115,7 +115,7 @@
                     </li>
                     <li class="dropdown">
                         <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i>  <span class="label label-primary">8</span>
+                            <i class="fa fa-bell"></i> 
                         </a>
                         <ul class="dropdown-menu dropdown-alerts">
                             <li>
@@ -158,8 +158,8 @@
 
 
                     <li>
-                        <a href="{{ url('/') }}">
-                            <i class="fa fa-sign-out"></i> Client Panel
+                        <a href="{{ url('/auth/logout') }}">
+                            <i class="fa fa-sign-out"></i> Log out
                         </a>
                     </li>
                 </ul>

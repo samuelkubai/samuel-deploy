@@ -17,15 +17,15 @@
             <h3>Skoolspace Groups</h3>
         </div>
 
-        <?php foreach($clients as $client): ?>
+        <?php foreach($groups as $group): ?>
             <div class="forum-item active">
                 <div class="row">
                     <div class="col-md-9">
                         <div class="forum-icon">
                             <i class="fa fa-shield"></i>
                         </div>
-                        <a href="<?php echo e(url('/'. $client->id .'/general/community')); ?>" class="forum-item-title"><?php echo e($client->username); ?></a>
-                        <div class="forum-sub-title">Talk about sports, entertainment, music, movies, your favorite color, talk about enything.</div>
+                        <a href="<?php echo e(url('/'. $group->username.'/general/community')); ?>" class="forum-item-title"><?php echo e($group->name); ?></a>
+                        <div class="forum-sub-title"><?php echo e($group->description); ?>.</div>
                     </div>
                     <div class="col-md-1 forum-info">
                         <span class="views-number"> 1216 </span>

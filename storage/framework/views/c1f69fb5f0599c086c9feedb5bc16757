@@ -4,4 +4,4 @@
         <?php echo $__env->make('inspina.notice.partials.pin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
     </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('inspina', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

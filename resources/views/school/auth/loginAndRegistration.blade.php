@@ -45,6 +45,7 @@
             <div class="tiles grey p-t-20 p-b-20 text-black">
                 <form id="frm_login" class="animated fadeIn" method="post" action="{{ url('/login') }}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                   
                     <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
                         <div class="col-md-6 col-sm-6 ">
                             <input name="email" id="login_username" type="text"  class="form-control" placeholder="Email" value="{{ old('email') }}">
@@ -68,6 +69,17 @@
                 </form>
                 <form id="frm_register" class="animated fadeIn" style="display:none" method="post" action="{{ url('/register') }}">
                     <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                     <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
+                        <div class="col-md-4 col-sm-4">
+                            <input name="firstName" id="reg_first_Name" type="text"  class="form-control" placeholder="First Name">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <input name="lastName" id="reg_first_Name" type="text"  class="form-control" placeholder="Last Name">
+                        </div>
+                        <div class="col-md-4 col-sm-4">
+                            <input name="telNumber" id="reg_first_Name" type="text"  class="form-control" placeholder="Telephone Number">
+                        </div>
+                    </div>
                     <div class="row form-row m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
                         <div class="col-md-12 ">
                             <input name="email" id="reg_email" type="text"  class="form-control" placeholder="Email" value="{{ old('email') }}">

@@ -3,7 +3,7 @@
 @section('content')
     <div class="ibox-content forum-post-container">
         <div class="forum-post-info">
-            <h4><span class="text-navy"><i class="fa fa-globe"></i> {{ $subject->name }}</span> - <span class="text-muted">{{ $client->firstName }} {{ $client->lastName }}</span></h4>
+            <h4><span class="text-navy"><i class="fa fa-globe"></i> {{ $school->name}}</span><span class="text-muted"></span></h4>
         </div>
         @foreach($messages as $message)
         <div class="media">
@@ -23,7 +23,7 @@
             </div>
         </div>
         @endforeach
-        <form action="{{ url('/'. $client->id .'/'.$subject->name.'/community') }}" method="post" >
+        <form action="{{ url('/community/'. $client->id .'/'.$subject->name.'/') }}" method="post" >
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
             <div class="row">

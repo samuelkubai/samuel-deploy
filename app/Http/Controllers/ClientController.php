@@ -8,130 +8,43 @@ use App\User;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Contracts\Auth\Registrar;
 use Illuminate\Http\Request;
+use App\Http\Client\ClientRepository;
 
 class ClientController extends Controller {
 
-    /**
-     * The Guard implementation.
-     *
-     * @var Guard
-     */
-    protected $auth;
+   protected $repo;
 
-    /**
-     * The registrar implementation.
-     *
-     * @var Registrar
-     */
-    protected $registrar;
+   function __construct(ClientRepository $repo)
+   {    
+        $this->repo = $repo;
+   }
 
-    /**
-     * The redirectPath variable for the school admin page
-     *
-     * TEMPORARY.
-     */
+   public function index()
+   {
+        $title = "Your Groups";
+        $groups = $this->repo->groupsForUser($this->user());    
+        return view('inspina.client.groups', compact('title', 'groups'));
+   }
 
-    protected $redirectPath = '/school/admin/1';
+   public function create()
+   {
+        $title = "Join New Group";
+        $groups = $this->repo->allGroups();
+        return view('inspina.client.join', compact('title', 'groups'));
+   }
 
-    /**
-     * Create a new authentication controller instance.
-     *
-     * @param  \Illuminate\Contracts\Auth\Guard $auth
-     * @param  \Illuminate\Contracts\Auth\Registrar $registrar
-     */
-    public function __construct(Guard $auth, Registrar $registrar)
-    {
-        $this->auth = $auth;
-        $this->registrar = $registrar;
-
-        /*$this->middleware('client', ['except' => 'getLoginAndRegistration','postLogin', 'postRegister',
-            'ifPatched', 'getPatchClient', 'postPatchClient']);*/
-    }
-
-    /**
-     * Show the application registration form.
-     *
-     * @param $school
-     * @return \Illuminate\Http\Response
-     */
-    public function getLoginAndRegistration($school)
-    {
-        return view('client.auth.loginAndRegistration', compact('school'));
-    }
-
-    /**
-     * Handle a registration request for the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function postRegister(Request $request)
-    {
-        $validator = $this->registrar->validator($request->all());
-
-        if ($validator->fails())
-        {
-            $this->throwValidationException(
-                $request, $validator
-            );
-        }
-
-        $this->auth->login($this->registrar->create($request->all()));
-
-        return redirect($this->redirectPath());
-    }
-
-    /**
-     * Show the application login form.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    /*public function getLogin()
-    {
-        return view('client.auth.login');
-    }*/
-
-    /**
-     * Handle a login request to the application.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function postLogin($school, Request $request)
-    {
-        $this->validate($request, [
-            'email' => 'required|email', 'password' => 'required',
-        ]);
-
-        $credentials = $request->only('email', 'password');
-
-
-        if ($this->auth->attempt($credentials, $request->has('remember')))
-        {
-
-            if ($this->ifPatched($school)){
-
-                return redirect( $school->username .'/');
-            } else {
-
-                return redirect($school->username.'/patch/'. \Auth::user()->id);
-            }
-        }
-
-
-
-        return redirect($this->loginPath())
-            ->withInput($request->only('email', 'remember'))
-            ->withErrors([
-                'email' => $this->getFailedLoginMessage(),
-            ]);
-    }
-
+   public function store($group)
+   {
+        $this->repo->clientJoin($group, $this->user());
+        return redirect('/groups');
+   }
     /**
      * Get the failed login message.
      *
      * @return string
      */
+
+    /*
     protected function getFailedLoginMessage()
     {
         return 'These credentials do not match our records.';
@@ -142,6 +55,7 @@ class ClientController extends Controller {
      *
      * @return \Illuminate\Http\Response
      */
+    /*
     public function getLogout()
     {
         $this->auth->logout();
@@ -154,6 +68,7 @@ class ClientController extends Controller {
      *
      * @return string
      */
+    /*
     public function redirectPath()
     {
         if (property_exists($this, 'redirectPath'))
@@ -169,6 +84,7 @@ class ClientController extends Controller {
      *
      * @return string
      */
+    /*
     public function loginPath()
     {
         return property_exists($this, 'loginPath') ? $this->loginPath : '/auth/login';
@@ -180,6 +96,7 @@ class ClientController extends Controller {
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      * @internal param User $user
      */
+    /*
     public function getHome($school)
     {
         return view('client.account.dashboard', compact('school'));
@@ -190,6 +107,7 @@ class ClientController extends Controller {
      * @param $school
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */
+    /*
     public function ifPatched($school)
     {
         $clients = Client::where('user_id',\Auth::user()->id)->get();
@@ -218,5 +136,5 @@ class ClientController extends Controller {
 
         \Auth::user()->clients()->create($request->all());
         return redirect('/');
-    }
+    }*/
 }

@@ -18,16 +18,16 @@
             </div>
             <h3>Skoolspace Groups</h3>
         </div>
-@foreach($schools as $school)
-        <div class="forum-item active">
-            <div class="row">
-                <div class="col-md-9">
-                    <div class="forum-icon">
-                        <i class="fa fa-shield"></i>
+ @foreach($groups as $group)
+            <div class="forum-item active">
+                <div class="row">
+                    <div class="col-md-9">
+                        <div class="forum-icon">
+                            <i class="fa fa-shield"></i>
+                        </div>
+                        <a href="{{ url('/'. $group->username.'/admin/general/community') }}" class="forum-item-title">{{$group->username}}</a>
+                        <div class="forum-sub-title">{{$group->description }}.</div>
                     </div>
-                    <a href="{{ url('/'. $school->username .'/admin/general/community') }}" class="forum-item-title">{{ $school->schoolName }}</a>
-                    <div class="forum-sub-title">Talk about sports, entertainment, music, movies, your favorite color, talk about enything.</div>
-                </div>
                 <div class="col-md-1 forum-info">
                     <span class="views-number"> 1216 </span>
                     <div>

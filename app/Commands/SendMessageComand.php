@@ -4,7 +4,7 @@ use App\Commands\Command;
 
 use Illuminate\Contracts\Bus\SelfHandling;
 
-class SendMessageComand extends Command implements SelfHandling {
+class SendMessageComand extends Command  {
     protected $subject;
     /**
      * @var
@@ -76,6 +76,7 @@ class SendMessageComand extends Command implements SelfHandling {
 	 *
 	 * @return void
 	 */
+    /*
 	public function handle()
 	{
         $this->user->messages()->create(
@@ -92,5 +93,5 @@ class SendMessageComand extends Command implements SelfHandling {
             ]
         );
 	}
-
+    */  
 }

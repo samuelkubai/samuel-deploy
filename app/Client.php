@@ -13,7 +13,7 @@ class Client extends Model {
      *
      * @var array
      */
-    protected $fillable = ['firstName','middleName', 'lastName', 'admNo', 'class', 'email', 'telNumber', 'school_id', 'gender','username'];
+    protected $fillable = ['firstName' ,'lastName', 'user_id', 'username'];
 
 
     public function school(){

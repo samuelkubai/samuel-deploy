@@ -6,6 +6,8 @@ use App\Http\Controllers\Controller;
 use Illuminate\Http\Request;
 use App\Http\Notice\NoticeService;
 use App\Http\Notice\NoticeRepository;
+use App\Http\Client\ClientRepository;
+
 
 
 class NoticeController extends Controller {
@@ -15,10 +17,12 @@ class NoticeController extends Controller {
 
 	protected $repo;
 
-	function __construct(NoticeService $service, NoticeRepository $repo)
+	protected $client;
+
+	function __construct(NoticeService $service, NoticeRepository $repo, ClientRepository $client)
 	{
 		$this->service = $service;
-
+		$this->client = $client;
 		$this->repo = $repo;
 	}
 	/**
@@ -29,8 +33,8 @@ class NoticeController extends Controller {
 	public function index()
 	{
 		$title = 'Notice';
-		$clients = $this->clientsForUser();
-		return view('inspina.index.notice', compact('clients','title'));
+		$groups = $this->client->groupsForUser($this->user());
+		return view('inspina.index.notice', compact('title', 'groups'));
 	}
 
 	/**
@@ -42,8 +46,7 @@ class NoticeController extends Controller {
 	{
 		$title = 'Notice Board';
 		$notices = $this->repo->pinsForSchool($school);
-
-		return $this->service->view('inspina..notice.admin_board', compact('notices','school', 'title'));
+		return view('inspina..notice.admin_board', compact('notices','school', 'title'));
 	}
 
 	/**
@@ -75,6 +78,12 @@ class NoticeController extends Controller {
 		return view('inspina..notice.board', compact('notices','school', 'title'));
 	}
 
+	public function adminIndex()
+	{
+		$title = 'Notice';
+		$groups = $this->groupsForUser();
+		return view('inspina.index.admin.notice', compact('title', 'groups'));
+	}
 	/**
 	 * Show the form for editing the specified resource.
 	 *

@@ -12,7 +12,7 @@ class School extends Model {
      *
      * @var array
      */
-    protected $fillable = ['schoolName','schoolMotto', 'username', 'password', 'url', 'email', 'telNumber'];
+    protected $fillable = ['name','description', 'username', 'email'];
 
 
     /**

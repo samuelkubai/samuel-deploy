@@ -16,12 +16,7 @@ class CreateClientTable extends Migration {
         {
             $table->increments('id');
             $table->string('firstName');
-            $table->string('middleName');
             $table->string('lastName');
-            $table->string('admNo');
-            $table->string('class');
-            $table->string('telNumber');
-            $table->string('gender');
 
             $table->integer('user_id')->unsigned();
             $table->string('username');

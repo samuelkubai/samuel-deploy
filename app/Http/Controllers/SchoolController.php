@@ -62,9 +62,12 @@ class SchoolController extends Controller {
     public function newUser($data)
     {
         return User::create([
-            'email' => $data['email'],
-            'password' => bcrypt($data['password']),
-        ]);
+                'email' => $data['email'],
+                'password' => bcrypt($data['password']),
+                'firstName' => $data['firstName'],
+                'lastName' => $data['lastName'],
+                'telNumber' => $data['telNumber'],
+            ]);
     }
     /**
      * Handle a registration request for the application.
@@ -78,6 +81,9 @@ class SchoolController extends Controller {
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
+            'firstName' => 'required',
+            'lastName' => 'required',
+            'telNumber' => 'required',
 
             ]);
 
@@ -205,39 +211,15 @@ class SchoolController extends Controller {
      */
     public function getSchools()
     {
-       return $this->view('school.inspina.schools','Schools');
+        $title = "Groups";
+        $schools = $this->groupsForUser();
+        return view('school.inspina.schools', compact('title', 'schools'));
     }
 
-    public function showSchool($school)
+    public function showSchool($group)
     {
-        $admins = $school->administrators()->get();
-        $user = \Auth::user();
-        $admin_schools = null;
-        $client_schools = null;
-        $administrator = \App\Administrator::where('user_id', $user->id)->first();
-        $clients = \App\Client::where('user_id' , $user->id)->get();
-        //$admin_schools = \App\School::where('id', $administrator->school->id )->first();
-        $counter = 0;
-        foreach($clients as $client)
-        {
-            if($counter == 0)
-            {
-                $client_schools = \App\School::where('id' , $client->school_id)->get()->toArray();
-                // dd($client);
-                $counter++;
-            }else{
-                $client_schools = array_merge(\App\School::where('id' , $client->school_id)->get()->toArray(), $client_schools);
-                $counter++;
-            }
-        }
-        if($administrator != null)
-        {
-            $admin_schools = \App\School::where('id', $administrator->school_id)->first();
-        }
-
-        //dd($client_schools);
-        $schools = \Auth::user()->schools()->get();
-        return view('school.account.admins' , compact('admins', 'school', 'schools', 'client_schools','clients','admin_schools'));
+        $title = $group->name;
+        return view('inspina.profile.school' , compact('title','group'));
     }
 
 
@@ -247,7 +229,7 @@ class SchoolController extends Controller {
         return $this->view('school.inspina.create', 'New School');
     }
 
-    public function postCreateSchool(CreateSchoolRequest $request)
+    public function postCreateSchool(CreateSchoolRequest $request, $school)
     {
         $user =\Auth::user();
         $user->schools()->create($request->all());
@@ -268,7 +250,7 @@ class SchoolController extends Controller {
     public function updateSchool($school, Request $request)
     {
         $school->fill($request->input())->save();
-        return redirect()->back();
+        return redirect($school->username);
     }
 
 /*_________________________________________________________________________________________________________*/
@@ -279,6 +261,11 @@ class SchoolController extends Controller {
         return view('school.account.messenger', compact('user', 'schools'));
     }
 
+    public function viewSchool($group)
+    {
+        $title = $group->name;
+        return view('inspina.update.school', compact('title', 'group'));
+    }
     public function postSchoolMessages()
     {
 

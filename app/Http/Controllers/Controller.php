@@ -42,7 +42,7 @@ abstract class Controller extends BaseController {
         return \App\Client::where('user_id', $this->user()->id)->get();
     }
 
-    public function schoolsForUser($user = null)
+    public function groupsForUser($user = null)
     {
         if($user != null)
         {

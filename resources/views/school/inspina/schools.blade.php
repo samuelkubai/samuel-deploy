@@ -1,4 +1,4 @@
-@extends('inspina')
+@extends('admin')
 
 @section('styles')
 
@@ -40,7 +40,13 @@
 @section('content')
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
+            <div class="col-lg-12"> <a href="{{url('/create/group')}}" class="col-lg-12 btn btn-info">Create New Group</a></div>
+            <br>
+            <br>
+            <br>
             <div class="col-lg-12">
+               
+
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>All your Schools</h5>
@@ -67,21 +73,19 @@
                         <table class="table table-striped table-bordered table-hover dataTables-example" >
                             <thead>
                             <tr>
-                                <th style="width:20%">School's Name</th>
-                                <th style="width:9%">portal url</th>
-                                <th style="width:10%">Main site URL</th>
-                                <th style="width:7%">Tel. Number</th>
+                                <th style="width:20%">Group Name</th>
+                                <th style="width:9%">Group Username</th>
+                                <th style="width:10%">Group Email</th>
+                                <th style="width:7%">Action</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach( $schools as $school )
                                 <tr class="gradeX">
-                                    <td class="v-align-middle">{{ $school->schoolName }} <br>
-                                        <span class="muted center">{{ $school->motto }}</span>
-                                    </td>
-                                    <td><span class="muted">{{ url($school->username) }}</span> </td>
-                                    <td class="v-align-middle"> {{ $school->url }} </td>
-                                    <td class="v-align-middle"> {{ $school->telNumber }} </td>
+                                    <td class="v-align-middle"><a href="{{url('/admin/'.$school->username)}}">{{ $school->name }}</a></td>
+                                    <td><span class="muted">{{ $school->username }}</span> </td>
+                                    <td class="v-align-middle"> {{ $school->email }} </td>
+                                    <td class="v-align-middle"> <a href="" class="btn btn-danger">Delete</a> </td>
                                 </tr>
                             @endforeach
                             </tbody>
@@ -90,7 +94,7 @@
                                 <th style="width:20%">School's Name</th>
                                 <th style="width:9%">portal url</th>
                                 <th style="width:10%">Main site URL</th>
-                                <th style="width:7%">Tel. Number</th>
+                                <th style="width:7%">Action</th>
                             </tr>
                             </tfoot>
                         </table>
