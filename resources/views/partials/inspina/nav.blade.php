@@ -25,75 +25,26 @@
             </li>
 
             <li>
-                <a href="{{ url('/noAccount') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
-                @if($clients->count() != 0)
-                    <ul class="nav nav-second-level">
-                    @if($clients->count() != 0)
-                                @foreach($clients as $client)
-                                    <li><a href="{{ url('/'. $client->username. '/client/mail/'. $client->id) }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
-                                @endforeach
-                    @endif
-                    </ul>
-                @endif
+                <a href="{{ url('/mail') }}"><i class="fa fa-envelope"></i> <span class="nav-label">Mailbox </span><span class="label label-warning pull-right">16/24</span></a>
             </li>
             <li>
-                <a href="{{ url('/noAccount') }}"><i class="fa fa-bullhorn"></i> <span class="nav-label">Forums</span></a>
-                @if($clients->count() != 0 )
-                    <ul class="nav nav-second-level">
-                        @if($clients->count() != 0)
-                            @foreach($clients as $client)
-                                <li><a href="{{ url('/community/'. $client->id) }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
-                            @endforeach           
-                        @endif
-                    </ul>
-                @endif
+                <a href="{{ url('/community') }}"><i class="fa fa-bullhorn"></i> <span class="nav-label">Community</span></a>
             </li>
             <li>
-                <a href="{{ url('/noAccount') }}"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span></a>
-                 @if($clients->count() != 0)
-                    <ul class="nav nav-second-level">
-                    @if($clients->count() != 0)
-                                @foreach($clients as $client)
-                                    <li><a href="{{ url('/'. $client->username. '/events/') }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
-                                @endforeach
-                    @endif
-                    </ul>
-                @endif
+                <a href="{{ url('/events') }}"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span></a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-info-circle"></i> <span class="nav-label">Notice Board</span></a>
-                @if($clients->count() != 0)
-                    <ul class="nav nav-second-level">
-                    @if($clients->count() != 0)
-                                @foreach($clients as $client)
-                                    <li><a href="{{ url('/'. $client->username. '/notice/') }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
-                                @endforeach
-                    @endif
-                    </ul>
-                @endif
-
+                <a href="{{url('/notice')}}"><i class="fa fa-info-circle"></i> <span class="nav-label">Notice Board</span></a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-comments-o"></i> <span class="nav-label">Chats</span></a>
-                @if($clients->count() != 0)
-                    <ul class="nav nav-second-level">
-                    @if($clients->count() != 0)
-                                @foreach($clients as $client)
-                                    <li><a href="{{ url('/chat/'. $client->id. '/home/') }}">{{ "- " .$client->firstName." ". $client->middleName }}</a> </li>
-                                @endforeach
-                    @endif
-                    </ul>
-                @endif
+                <a href="{{url('/chats')}}"><i class="fa fa-comments-o"></i> <span class="nav-label">Chats</span></a>
             </li>
              <li>
                 <a href="#"><i class="fa fa-laptop"></i> <span class="nav-label">Clients</span></a>
                 <ul class="nav nav-second-level">
                     <li > <a href="{{ url('/patch') }}"> Register New Client + </a> </li>
-                    @if($clients->count() != 0)
-                                @foreach($clients as $client)
-                                    <li><a href=""> {{"- " .$client->firstName . " ". $client->lastName }} </a> </li>
-                                @endforeach
-                    @endif
+                    <li > <a href="{{ url() }}"> All CLients </a> </li>
+
                 </ul>
             </li>
             <li>

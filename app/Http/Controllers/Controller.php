@@ -31,8 +31,25 @@ abstract class Controller extends BaseController {
         return \Auth::user();
     }
 
-    public function clientsForUser()
+    public function clientsForUser($user = null)
     {
+        if($user != null)
+        {
+            return \App\Client::where('user_id', $user()->id)->get();
+        }
+
+
         return \App\Client::where('user_id', $this->user()->id)->get();
+    }
+
+    public function schoolsForUser($user = null)
+    {
+        if($user != null)
+        {
+            return \App\School::where('user_id', $user()->id)->get();
+        }
+
+        
+        return \App\School::where('user_id', $this->user()->id)->get();
     }
 }

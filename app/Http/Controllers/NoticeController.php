@@ -26,11 +26,11 @@ class NoticeController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($school)
+	public function index()
 	{
-		$notices = $this->repo->pinsForSchool($school);
-
-		return $this->service->view('inspina..notice.board', 'Notice Board', $notices, $school);
+		$title = 'Notice';
+		$clients = $this->clientsForUser();
+		return view('inspina.index.notice', compact('clients','title'));
 	}
 
 	/**
@@ -40,9 +40,10 @@ class NoticeController extends Controller {
 	 */
 	public function admin($school)
 	{
+		$title = 'Notice Board';
 		$notices = $this->repo->pinsForSchool($school);
 
-		return $this->service->view('inspina..notice.admin_board', 'Notice Board', $notices, $school);
+		return $this->service->view('inspina..notice.admin_board', compact('notices','school', 'title'));
 	}
 
 	/**
@@ -67,9 +68,11 @@ class NoticeController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($school)
 	{
-		//
+		$title = 'Notice Board';
+		$notices = $this->repo->pinsForSchool($school);
+		return view('inspina..notice.board', compact('notices','school', 'title'));
 	}
 
 	/**

@@ -43,14 +43,18 @@ class ForumController extends Controller {
      *
      * @return Response
      */
-    public function clientIndex($client)
+    public function clientIndex()
     {
-
+        $title = "Forums";
+        $clients = $this->clientsForUser();
+        return view('inspina.forum.index', compact('clients', 'title'));
     }
 
-    public function clientShow($client)
+    public function clientShow($client, $subject)
     {
-        return $this->forumView('inspina.forum.index', 'Home', $client);
+        $title = "Forums";
+        $messages = $this->service->clientMessages($client, $subject);
+        return view('inspina.forum.view', compact('messages', 'title', 'client', 'subject'));
     }
     public function clientChat($client, $subject)
     {
@@ -80,16 +84,18 @@ class ForumController extends Controller {
 
 
 
-    public function adminIndex($school)
+    public function adminIndex()
     {
-        return $this->adminForumView('inspina.forum.admin.index', 'Home', $school);
+        $title = "Forums";
+        $schools = $this->schoolsForUser();
+        return view('inspina.forum.admin.index', compact('schools', 'title'));
     }
 
     public function adminChat($school, $subject)
     {
+        $title = "Forums";
         $messages = $this->service->messages($school, $subject);
-
-        return $this->adminForumView('inspina.forum.admin.view', 'DashBoard', $school, $subject, $messages);
+        return view('inspina.forum.admin.view', compact('title', 'messages', 'subject', 'school'));
     }
 
 
@@ -101,46 +107,6 @@ class ForumController extends Controller {
         $this->dispatch($message);
 
         return redirect()->back();
-    }
-
-
-
-    private function forumView($route, $title, $client, $subject=null, $messages=null )
-    {
-
-        $user = \Auth::user();
-        $admin_schools = null;
-        $client_schools = null;
-        $administrator = Administrator::where('user_id', $user->id)->first();
-        $clients = Client::where('user_id' , $user->id)->get();
-        if($administrator != null)
-        {
-            $admin_schools = School::where('id', $administrator->school_id)->first();
-        }
-
-        //dd($client_schools);
-        $schools = \Auth::user()->schools()->get();
-        //dd($schools->count());
-        return view($route, compact('admin_schools','schools','clients', 'title', 'client', 'subject', 'messages'));
-    }
-
-    private function adminForumView($route, $title, $school, $subject=null, $messages=null )
-    {
-
-        $user = \Auth::user();
-        $admin_schools = null;
-        $client_schools = null;
-        $administrator = Administrator::where('user_id', $user->id)->first();
-        $clients = Client::where('user_id' , $user->id)->get();
-        if($administrator != null)
-        {
-            $admin_schools = School::where('id', $administrator->school_id)->first();
-        }
-
-        //dd($client_schools);
-        $schools = \Auth::user()->schools()->get();
-        //dd($schools->count());
-        return view($route, compact('admin_schools','schools','clients', 'title', 'school', 'subject', 'messages'));
     }
 
 }

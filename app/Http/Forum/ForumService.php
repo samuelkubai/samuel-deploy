@@ -62,8 +62,5 @@ class ForumService {
         return Message::where('school_id', $school->id)->where('subject', $subject->id)->orderBy('created_at', 'DESC')->get();
     }
 
-    public function groupsForUser($user)
-    {
-        
-    }
+    
 }

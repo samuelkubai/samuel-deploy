@@ -26,10 +26,11 @@ class ChatController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($recipient)
+	public function index()
 	{
-
-		return $this->service->homeView('inspina.chat.home', 'Chat',  $recipient );
+		$title = 'Chat';
+		$clients = $this->clientsForUser();
+		return view('inspina.index.chat', compact('clients', 'title'));
 	}
 
 	/**
@@ -37,10 +38,12 @@ class ChatController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($recipient)
+	public function create($client ,$recipient)
 	{
-		
-		return $this->service->chatView('inspina.chat.index', 'Chat', $recipient);
+		$title = "Chat";
+		$members = $this->service->membersOf($client->username);
+		$messages = $this->service->messagesOf($client, $recipient);
+		return view('inspina.chat.chat', compact('title', 'members', 'client', 'recipient', 'messages'));
 	}
 
 	/**
@@ -48,11 +51,10 @@ class ChatController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function store( Request $request , $recipient)
+	public function store( Request $request ,$client, $recipient)
 	{
-		$user = \Auth::user();
 
-		$this->service->sendMessage($request, $recipient, $user);
+		$this->service->sendMessage($request, $recipient, $client);
 
 		return redirect()->back();
 	}
@@ -63,9 +65,11 @@ class ChatController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($client)
 	{
-		//
+		$title = "Chat";
+		$members = $this->service->membersOf($client->username);
+		return view('inspina.chat.home', compact('title', 'client', 'members'));
 	}
 
 	/**

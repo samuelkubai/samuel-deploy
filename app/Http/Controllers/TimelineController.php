@@ -26,11 +26,23 @@ class TimelineController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function index($school){
+	public function index(){
 	
-		$events = $this->repo->eventsForSchool($school);
+		$title = "Events";
+		$clients = $this->clientsForUser();
+		return view('inspina.index.events', compact('title' , 'clients'));
+	}
 
-		return $this->service->view('inspina.timeline.index', 'Timeline', $events);
+	/**
+	 * Display a listing of the administrator resource.
+	 *
+	 * @return Response
+	 */
+	public function admin(){
+	
+		$title = "Events";
+		$schools = $this->schoolsForUser();
+		return view('inspina.index.admin.events', compact('title' , 'schools'));
 	}
 
 	/**
@@ -66,9 +78,11 @@ class TimelineController extends Controller {
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function show($id)
+	public function show($school)
 	{
-		//
+		$title = "Events";
+		$events = $this->repo->eventsForSchool($school);
+		return view('inspina.timeline.index', compact('events','title','school'));
 	}
 
 	/**

@@ -133,6 +133,12 @@ class MailController extends Controller
 /*  Client Mail system  */
 
 
+    public function clientIndex()
+    {
+        $title = 'Mail';
+        $clients = $this->clientsForUser();
+        return view('inspina.index.mail', compact('title', 'clients'));
+    }
     public function getClientTrash($school, $client)
     {
         $title = "Trash";
