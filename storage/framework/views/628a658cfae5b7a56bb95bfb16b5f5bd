@@ -1,0 +1,16 @@
+<?php $__env->startSection('content'); ?>
+	<div class="wrapper wrapper-content">
+		<div class="row animated fadeInLeft">
+            <div class="col-lg-12">
+            	<button type="button" class="btn btn-info col-lg-12" data-toggle="modal" data-target="#myModal5"> Create a new Event</button>
+            </div>
+        </div>
+        <br/>
+		
+		<?php echo $__env->make('inspina.timeline.partials.timeline', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+		<?php echo $__env->make('inspina.timeline.partials.event-modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+	</div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

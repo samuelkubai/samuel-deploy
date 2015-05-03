@@ -1,0 +1,11 @@
+<ul class="notes">
+    <?php foreach($notices as $notice): ?>
+        <li>
+            <div>
+                <small><?php echo e($notice->updated_at); ?></small>
+                <h4><?php echo e($notice->title); ?></h4>
+                <p><?php echo e($notice->message); ?></p>
+             </div>
+        </li>
+    <?php endforeach; ?>           
+</ul>
