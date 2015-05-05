@@ -31,7 +31,7 @@ class HomeController extends Controller {
 	 */
 	public function index()
 	{
-        return $this->view('dashboard.index', 'Home');
+        return $this->view('inspina.home.index', 'Home');
 	}
 
     public function admin()

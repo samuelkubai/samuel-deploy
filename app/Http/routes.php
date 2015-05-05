@@ -55,6 +55,12 @@ Route::bind('subject' , function($name)
     return new App\Http\Forum\Subject($name);
 });
 
+Route::bind('recipient' , function($id)
+{
+    /** @var TYPE_NAME $id */
+    return App\User::where('id',$id)->first();
+});
+
 /**Route::bind('school' , function($school)
 {
      @var TYPE_NAME $id
@@ -102,6 +108,9 @@ Route::post('/admin/{username}/events',  ['middleware' => 'school', 'uses' => 'T
 Route::get('/{username}/notice',  ['middleware' => 'school', 'uses' => 'NoticeController@index']);
 Route::post('/{username}/notice',  ['middleware' => 'school', 'uses' => 'NoticeController@store']);
 Route::get('/admin/{username}/notice',  ['middleware' => 'school', 'uses' => 'NoticeController@admin']);
+Route::get('/chat/{recipient}', ['middleware' => 'school', 'uses' => 'ChatController@index']);
+Route::post('/chat/{recipient}', ['middleware' => 'school', 'uses' => 'ChatController@store']);
+
 
 
 
