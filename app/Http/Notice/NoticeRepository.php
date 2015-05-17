@@ -3,32 +3,32 @@
 use App\Notice;
 
 use App\School;
+use Illuminate\Support\Facades\Auth;
+use App\Http\Traits\Postable;
 
-/**
-* 
-*/
+
 class NoticeRepository
 {
-	
-	function __construct()
-	{
-		# code...
-	}
 
-	public function createEvent($request, $school)
+    use Postable;
+
+
+    public function createNotice ($request, $group)
 	{
-		//dd($this->school);
-		Notice::create(
+		$group->notices()->create(
 			[
 				'title' => $request->title,
 				'message' => $request->message,
-				'school_id' => $school->id,
 			]
 		);
+
+        $user = \Auth::user();
+        $message = $user->firstName.' ' .$user->lastName . ' created a new Pin on ' .$group->name ;
+        $this->post($message , $group);
 	}
 
-	public function pinsForSchool($school)
+	public function pinsForSchool($group)
 	{
-		return Notice::where('school_id', $school->id)->get();
+		return Notice::where('group_id', $group->id)->get();
 	}
 }

@@ -32,44 +32,33 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	protected $hidden = ['password', 'remember_token'];
 
 
-    /**
-     * One to many relationship with the clients
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function clients(){
-        return $this->hasMany('App\Client');
+    public function groups()
+    {
+        return $this->hasMany('App\Group');
     }
 
-    /**
-     * One to many relationships with the school's owner
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function schools(){
-        return $this->hasMany('App\School');
-    }
-
-    /**
-     * One to many relationship between the user and the administrators
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function administrators(){
-        return $this->hasMany('App\Administrator');
-    }
-
-    /**
-     * One to many relationship with the mail model
-     * @return \Illuminate\Database\Eloquent\Relations\HasMany
-     */
-    public function mail(){
-        return $this->hasMany('App\Mail');
-    }
 
     public function messages(){
         return $this->hasMany('App\Message');
     }
     
-    public function ChatMessages()
+    public function follows()
     {
-        return $this->hasMany('App\ChatMessage');
+        return $this->belongsToMany('App\Group', 'follows', 'user_id', 'group_id')->withTimestamps();
+    }
+
+    public function profile()
+    {
+        return $this->hasOne('App\Profile');
+    }
+
+    public function profileSource()
+    {
+
+        $profile = $this->hasOne('App\Profile')->first();
+        if($profile != null)
+            return $profile->source;
+
+        return 'inspina/img/a3.jpg';
     }
 }

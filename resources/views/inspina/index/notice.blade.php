@@ -31,9 +31,9 @@
                     </div>
            
                     <div class="col-md-1-offset-1 forum-info">
-                        <span class="views-number"> 0 </span>
+                        <span class="views-number"> {{$group->notices()->count()}} </span>
                         <div>
-                            <small>Pins</small>
+                            <small> Pins</small>
                         </div>
                     </div>
                 </div>

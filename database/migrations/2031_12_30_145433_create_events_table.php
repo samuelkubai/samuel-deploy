@@ -19,7 +19,7 @@ class CreateEventsTable extends Migration {
 			$table->string('title');
 			$table->text('description');
 			$table->string('category');
-			$table->integer('school_id');
+			$table->integer('group_id');
 			$table->timestamps();
 		});
 	}

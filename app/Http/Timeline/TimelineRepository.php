@@ -4,12 +4,16 @@
 * 
 */
 use App\Event;
+use App\Http\Traits\Postable;
 use App\School;
 
 
 
 class TimelineRepository
 {
+
+    use Postable;
+
 	protected $school;
 	
 	function __construct(School $school)
@@ -17,22 +21,23 @@ class TimelineRepository
 		$this->school = $school;
 	}
 
-	public function createEvent($request, $school)
+	public function createEvent($request, $group)
 	{
-		//dd($this->school);
-		Event::create(
+		$group->events()->create(
 			[
 				'title' => $request->title,
 				'description' => $request->description,
 				'date' => $request->date,
 				'category' => 'fa-briefcase',
-				'school_id' => $school->id,
 			]
 		);
+
+        $message =  'A new Event was created on ' .$group->name ;
+        $this->post($message , $group);
 	}
 
-	public function eventsForSchool($school)
+	public function eventsForGroup($group)
 	{
-		return Event::where('school_id', $school->id)->get();
+		return Event::where('group_id', $group->id)->get();
 	}
 }

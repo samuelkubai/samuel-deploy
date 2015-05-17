@@ -8,13 +8,13 @@
 
     <title>skoolspace</title>
 
-    <link href="http://localhost:8000/inspina/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://localhost:8000/inspina/font-awesome/css/font-awesome.css" rel="stylesheet">
+    <link href="{{ asset('inspina/css/bootstrap.min.css') }}" rel="stylesheet">
+    <link href="{{ asset('/inspina/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
 
     @yield('styles')
 
-    <link href="http://localhost:8000/inspina/css/animate.css" rel="stylesheet">
-    <link href="http://localhost:8000/inspina/css/style.css" rel="stylesheet">
+    <link href="{{asset('/inspina/css/animate.css')}}" rel="stylesheet">
+    <link href="{{ asset('/inspina/css/style.css') }}" rel="stylesheet">
 
 </head>
 
@@ -45,7 +45,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="" class="pull-left">
-                                        <img alt="image" class="img-circle" src="http://localhost:8000/inspina/img/a7.jpg">
+                                        <img alt="image" class="img-circle" src="{{asset('inspina/img/a7.jpg')}}">
                                     </a>
                                     <div class="media-body">
                                         <small class="pull-right">46h ago</small>
@@ -58,7 +58,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="" class="pull-left">
-                                        <img alt="image" class="img-circle" src="http://localhost:8000/inspina/img/a4.jpg">
+                                        <img alt="image" class="img-circle" src="{{asset('inspina/img/a4.jpg')}}">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right text-navy">5h ago</small>
@@ -71,7 +71,7 @@
                             <li>
                                 <div class="dropdown-messages-box">
                                     <a href="" class="pull-left">
-                                        <img alt="image" class="img-circle" src="http://localhost:8000/inspina/img/profile.jpg">
+                                        <img alt="image" class="img-circle" src="{{asset('inspina/img/profile.jpg')}}">
                                     </a>
                                     <div class="media-body ">
                                         <small class="pull-right">23h ago</small>
@@ -159,52 +159,52 @@
 
     </div>
 </div>
-
+{{ asset('') }}
 <!-- Mainly scripts -->
-<script src="http://localhost:8000/inspina/js/jquery-2.1.1.js"></script>
-<script src="http://localhost:8000/inspina/js/bootstrap.min.js"></script>
-<script src="http://localhost:8000/inspina/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-<script src="http://localhost:8000/inspina/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-<script src="http://localhost:8000/inspina/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="{{ asset('/inspina/js/jquery-2.1.1.js') }}"></script>
+<script src="{{ asset('/inspina/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/inspina/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+<script src="{{ asset('/inspina/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('/inspina/js/plugins/jeditable/jquery.jeditable.js') }}"></script>
 
 
 
  <!-- Flot -->
-    <script src="http://localhost:8000/inspina/js/plugins/flot/jquery.flot.js"></script>
-    <script src="http://localhost:8000/inspina/js/plugins/flot/jquery.flot.tooltip.min.js"></script>
-    <script src="http://localhost:8000/inspina/js/plugins/flot/jquery.flot.spline.js"></script>
-    <script src="http://localhost:8000/inspina/js/plugins/flot/jquery.flot.resize.js"></script>
-    <script src="http://localhost:8000/inspina/js/plugins/flot/jquery.flot.pie.js"></script>
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.spline.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.pie.js') }}"></script>
 
     <!-- Peity -->
-    <script src="http://localhost:8000/inspina/js/plugins/peity/jquery.peity.min.js"></script>
-    <script src="http://localhost:8000/inspina/js/demo/peity-demo.js"></script>
+    <script src="{{ asset('/inspina/js/plugins/peity/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('/inspina/js/demo/peity-demo.js') }}"></script>
 
     <!-- Custom and plugin javascript -->
-    <script src="http://localhost:8000/inspina/js/inspinia.js"></script>
-    <script src="http://localhost:8000/inspina/js/plugins/pace/pace.min.js"></script>
+    <script src="{{ asset('/inspina/js/inspinia.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/pace/pace.min.js') }}"></script>
 
     <!-- jQuery UI -->
-    <script src="http://localhost:8000/inspina/js/plugins/jquery-ui/jquery-ui.min.js"></script>
+    <script src="{{ asset('/inspina/js/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
     <!-- GITTER -->
-    <script src="http://localhost:8000/inspina/js/plugins/gritter/jquery.gritter.min.js"></script>
+    <script src="{{ asset('/inspina/js/plugins/gritter/jquery.gritter.min.js') }}"></script>
 
     <!-- Sparkline -->
-    <script src="http://localhost:8000/inspina/js/plugins/sparkline/jquery.sparkline.min.js"></script>
+    <script src="{{ asset('/inspina/js/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
 
     <!-- Sparkline demo data  -->
-    <script src="http://localhost:8000/inspina/js/demo/sparkline-demo.js"></script>
+    <script src="{{ asset('/inspina/js/demo/sparkline-demo.js') }}"></script>
 
     <!-- ChartJS-->
-    <script src="http://localhost:8000/inspina/js/plugins/chartJs/Chart.min.js"></script>
+    <script src="{{ asset('/inspina/js/plugins/chartJs/Chart.min.js') }}"></script>
 
     <!-- Toastr -->
-    <script src="http://localhost:8000/inspina/js/plugins/toastr/toastr.min.js"></script>
+    <script src="{{ asset('/inspina/js/plugins/toastr/toastr.min.js') }}"></script>
 
 <!-- Custom and plugin javascript -->
-<script src="http://localhost:8000/inspina/js/inspinia.js"></script>
-<script src="http://localhost:8000/inspina/js/plugins/pace/pace.min.js"></script>
+<script src="{{ asset('/inspina/js/inspinia.js') }}"></script>
+<script src="{{ asset('/inspina/js/plugins/pace/pace.min.js') }}"></script>
 
 @yield('scripts')
 </body>

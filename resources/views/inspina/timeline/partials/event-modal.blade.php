@@ -6,7 +6,7 @@
                         <h4 class="modal-title">Create a new Event.</h4>
                         <small class="font-bold">This event will be available for all of your group members to use.</small>
                     </div>
-                    <form action="{{ url('/admin/'. $school->username . '/events/') }}" method="post" >
+                    <form action="{{ url('/admin/'. $group->username . '/events/') }}" method="post" >
                         <div class="modal-body">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                     <div class="row form-group">

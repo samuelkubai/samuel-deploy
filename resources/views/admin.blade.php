@@ -8,43 +8,20 @@
 
     <title>skoolspace</title>
 
-    <link href="http://localhost:8000/inspina/css/bootstrap.min.css" rel="stylesheet">
-    <link href="http://localhost:8000/inspina/font-awesome/css/font-awesome.css" rel="stylesheet">
+        <link href="{{ asset('inspina/css/bootstrap.min.css') }}" rel="stylesheet">
+        <link href="{{ asset('/inspina/font-awesome/css/font-awesome.css') }}" rel="stylesheet">
 
-    @yield('styles')
+        @yield('styles')
 
-    
-    <link href="http://localhost:8000/inspina/css/plugins/chosen/chosen.css" rel="stylesheet">
-    <link href="http://localhost:8000/inspina/css/plugins/iCheck/custom.css" rel="stylesheet">
-
-    <link href="http://localhost:8000/inspina/css/plugins/chosen/chosen.css" rel="stylesheet">
-
-    <link href="http://localhost:8000/inspina/css/plugins/colorpicker/bootstrap-colorpicker.min.css" rel="stylesheet">
-
-    <link href="http://localhost:8000/inspina/css/plugins/cropper/cropper.min.css" rel="stylesheet">
-
-    <link href="http://localhost:8000/inspina/css/plugins/switchery/switchery.css" rel="stylesheet">
-
-    <link href="http://localhost:8000/inspina/css/plugins/jasny/jasny-bootstrap.min.css" rel="stylesheet">
-
-    <link href="http://localhost:8000/inspina/css/plugins/nouslider/jquery.nouislider.css" rel="stylesheet">
-
-    <link href="http://localhost:8000/inspina/css/plugins/datapicker/datepicker3.css" rel="stylesheet">
-
-    <link href="http://localhost:8000/inspina/css/plugins/ionRangeSlider/ion.rangeSlider.css" rel="stylesheet">
-    <link href="http://localhost:8000/inspina/css/plugins/ionRangeSlider/ion.rangeSlider.skinFlat.css" rel="stylesheet">
-
-
-
-    <link href="http://localhost:8000/inspina/css/animate.css" rel="stylesheet">
-    <link href="http://localhost:8000/inspina/css/style-admin.css" rel="stylesheet">
+        <link href="{{asset('/inspina/css/animate.css')}}" rel="stylesheet">
+        <link href="{{ asset('/inspina/css/style.css') }}" rel="stylesheet">
 
 </head>
 
 <body>
 
 <div id="wrapper" class="skin-3">
-    @include('partials.inspina.admin')
+    @include('partials.inspina.nav')
     <div id="page-wrapper" class="gray-bg">
         <div class="row border-bottom">
             <nav class="navbar navbar-static-top  " role="navigation" style="margin-bottom: 0">
@@ -66,93 +43,51 @@
                         </a>
                         <ul class="dropdown-menu dropdown-messages">
                             <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="" class="pull-left">
-                                        <img alt="image" class="img-circle" src="http://localhost:8000/inspina/img/a7.jpg">
-                                    </a>
-                                    <div class="media-body">
-                                        <small class="pull-right">46h ago</small>
-                                        <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
-                                        <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="" class="pull-left">
-                                        <img alt="image" class="img-circle" src="http://localhost:8000/inspina/img/a4.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right text-navy">5h ago</small>
-                                        <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
-                                        <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="dropdown-messages-box">
-                                    <a href="" class="pull-left">
-                                        <img alt="image" class="img-circle" src="http://localhost:8000/inspina/img/profile.jpg">
-                                    </a>
-                                    <div class="media-body ">
-                                        <small class="pull-right">23h ago</small>
-                                        <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
-                                        <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
-                                    </div>
-                                </div>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="">
-                                        <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
-                                    </a>
-                                </div>
-                            </li>
-                        </ul>
-                    </li>
-                    <li class="dropdown">
-                        <a class="dropdown-toggle count-info" data-toggle="dropdown" href="#">
-                            <i class="fa fa-bell"></i> 
-                        </a>
-                        <ul class="dropdown-menu dropdown-alerts">
-                            <li>
-                                <a href="">
-                                    <div>
-                                        <i class="fa fa-envelope fa-fw"></i> You have 16 messages
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="">
-                                    <div>
-                                        <i class="fa fa-twitter fa-fw"></i> 3 New Followers
-                                        <span class="pull-right text-muted small">12 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <a href="">
-                                    <div>
-                                        <i class="fa fa-upload fa-fw"></i> Server Rebooted
-                                        <span class="pull-right text-muted small">4 minutes ago</span>
-                                    </div>
-                                </a>
-                            </li>
-                            <li class="divider"></li>
-                            <li>
-                                <div class="text-center link-block">
-                                    <a href="">
-                                        <strong>See All Alerts</strong>
-                                        <i class="fa fa-angle-right"></i>
-                                    </a>
-                                </div>
-                            </li>
+                                                            <div class="dropdown-messages-box">
+                                                                <a href="" class="pull-left">
+                                                                    <img alt="image" class="img-circle" src="{{asset('inspina/img/a7.jpg')}}">
+                                                                </a>
+                                                                <div class="media-body">
+                                                                    <small class="pull-right">46h ago</small>
+                                                                    <strong>Mike Loreipsum</strong> started following <strong>Monica Smith</strong>. <br>
+                                                                    <small class="text-muted">3 days ago at 7:58 pm - 10.06.2014</small>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <div class="dropdown-messages-box">
+                                                                <a href="" class="pull-left">
+                                                                    <img alt="image" class="img-circle" src="{{asset('inspina/img/a4.jpg')}}">
+                                                                </a>
+                                                                <div class="media-body ">
+                                                                    <small class="pull-right text-navy">5h ago</small>
+                                                                    <strong>Chris Johnatan Overtunk</strong> started following <strong>Monica Smith</strong>. <br>
+                                                                    <small class="text-muted">Yesterday 1:21 pm - 11.06.2014</small>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <div class="dropdown-messages-box">
+                                                                <a href="" class="pull-left">
+                                                                    <img alt="image" class="img-circle" src="{{asset('inspina/img/profile.jpg')}}">
+                                                                </a>
+                                                                <div class="media-body ">
+                                                                    <small class="pull-right">23h ago</small>
+                                                                    <strong>Monica Smith</strong> love <strong>Kim Smith</strong>. <br>
+                                                                    <small class="text-muted">2 days ago at 2:30 am - 11.06.2014</small>
+                                                                </div>
+                                                            </div>
+                                                        </li>
+                                                        <li class="divider"></li>
+                                                        <li>
+                                                            <div class="text-center link-block">
+                                                                <a href="">
+                                                                    <i class="fa fa-envelope"></i> <strong>Read All Messages</strong>
+                                                                </a>
+                                                            </div>
+                                                        </li>
                         </ul>
                     </li>
 
@@ -189,49 +124,50 @@
 </div>
 
 <!-- Mainly scripts -->
-    <script src="http://localhost:8000/inspina/js/jquery-2.1.1.js"></script>
-    <script src="http://localhost:8000/inspina/js/bootstrap.min.js"></script>
-    <script src="http://localhost:8000/inspina/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-    <script src="http://localhost:8000/inspina/js/plugins/slimscroll/jquery.slimscroll.min.js"></script>
-    <script src="http://localhost:8000/inspina/js/plugins/jeditable/jquery.jeditable.js"></script>
+<script src="{{ asset('/inspina/js/jquery-2.1.1.js') }}"></script>
+<script src="{{ asset('/inspina/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/inspina/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
+<script src="{{ asset('/inspina/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
+<script src="{{ asset('/inspina/js/plugins/jeditable/jquery.jeditable.js') }}"></script>
 
-@yield('scripts')
+
+
+ <!-- Flot -->
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.spline.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.resize.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.pie.js') }}"></script>
+
+    <!-- Peity -->
+    <script src="{{ asset('/inspina/js/plugins/peity/jquery.peity.min.js') }}"></script>
+    <script src="{{ asset('/inspina/js/demo/peity-demo.js') }}"></script>
+
+    <!-- Custom and plugin javascript -->
+    <script src="{{ asset('/inspina/js/inspinia.js') }}"></script>
+    <script src="{{ asset('/inspina/js/plugins/pace/pace.min.js') }}"></script>
+
+    <!-- jQuery UI -->
+    <script src="{{ asset('/inspina/js/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
+
+    <!-- GITTER -->
+    <script src="{{ asset('/inspina/js/plugins/gritter/jquery.gritter.min.js') }}"></script>
+
+    <!-- Sparkline -->
+    <script src="{{ asset('/inspina/js/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
+
+    <!-- Sparkline demo data  -->
+    <script src="{{ asset('/inspina/js/demo/sparkline-demo.js') }}"></script>
+
+    <!-- ChartJS-->
+    <script src="{{ asset('/inspina/js/plugins/chartJs/Chart.min.js') }}"></script>
+
+    <!-- Toastr -->
+    <script src="{{ asset('/inspina/js/plugins/toastr/toastr.min.js') }}"></script>
+
 <!-- Custom and plugin javascript -->
-    <script src="http://localhost:8000/inspina/js/inspinia.js"></script>
-    <script src="http://localhost:8000/inspina/js/plugins/pace/pace.min.js"></script>
-
- <!-- Chosen -->
-    <script src="http://localhost:8000/inspina/js/plugins/chosen/chosen.jquery.js"></script>
-
-   <!-- JSKnob -->
-   <script src="http://localhost:8000/inspina/js/plugins/jsKnob/jquery.knob.js"></script>
-
-   <!-- Input Mask-->
-    <script src="http://localhost:8000/inspina/js/plugins/jasny/jasny-bootstrap.min.js"></script>
-
-   <!-- Data pichttp://localhost:8000/inspina/ker -->
-   <script src="http://localhost:8000/inspina/js/plugins/datapicker/bootstrap-datepicker.js"></script>
-
-   <!-- NouSlider -->
-   <script src="http://localhost:8000/inspina/js/plugins/nouslider/jquery.nouislider.min.js"></script>
-
-   <!-- Switchery -->
-   <script src="http://localhost:8000/inspina/js/plugins/switchery/switchery.js"></script>
-
-    <!-- IonRangeSlider -->
-    <script src="http://localhost:8000/inspina/js/plugins/ionRangeSlider/ion.rangeSlider.min.js"></script>
-
-    <!-- iCheck -->
-    <script src="http://localhost:8000/inspina/js/plugins/iCheck/icheck.min.js"></script>
-
-    <!-- MENU -->
-    <script src="http://localhost:8000/inspina/js/plugins/metisMenu/jquery.metisMenu.js"></script>
-
-    <!-- Color picker -->
-    <script src="http://localhost:8000/inspina/js/plugins/colorpicker/bootstrap-colorpicker.min.js"></script>
-
-    <!-- Image cropper -->
-    <script src="http://localhost:8000/inspina/js/plugins/cropper/cropper.min.js"></script>
+<script src="{{ asset('/inspina/js/inspinia.js') }}"></script>
+<script src="{{ asset('/inspina/js/plugins/pace/pace.min.js') }}"></script>
 
     <script>
         $(document).ready(function(){

@@ -86,7 +86,7 @@
                                         <td class="v-align-middle">{{ $group->name }}</td>
                                         <td><span class="muted">{{ $group->username }}</span> </td>
                                         <td class="v-align-middle"> {{ $group->email }} </td>
-                                        <td class="v-align-middle"> <a href="" class="btn btn-danger">Leave</a> </td>
+                                        <td class="v-align-middle"> <a href="{{ url($group->username.'/leave/group/') }}" class="btn btn-danger">Leave</a> </td>
                                     </tr>
                                 @endforeach
                             @endif

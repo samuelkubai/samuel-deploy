@@ -20,12 +20,10 @@
                 </div>
             </li>
             <li>
-                <a href="{{ url('/groups/') }}"><i class="fa fa-desktop"></i> <span class="nav-label">My Groups</span></a>
+                <a href="{{ url('/admin/groups/') }}"><i class="fa fa-desktop"></i> <span class="nav-label">My Groups</span></a>
             </li>
             <li class="divider"></li>
-            <li>
-                <a href="{{ url('/admin/community') }}"><i class="fa fa-bullhorn"></i> <span class="nav-label">Community</span></a>
-            </li>
+
             <li>
                 <a href="{{ url('admin/events')}}"><i class="fa fa-calendar"></i> <span class="nav-label">Events</span></a>
             </li>

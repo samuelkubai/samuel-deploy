@@ -13,11 +13,14 @@ class PinNoticeCommand extends Command implements SelfHandling {
 	private $request;
 
 	private $school;
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
+
+    /**
+     * Create a new command instance.
+     *
+     * @param $request
+     * @param $school
+     * @return \App\Commands\PinNoticeCommand
+     */
 	public function __construct($request, $school)
 	{
 		$this->request = $request;
@@ -33,7 +36,7 @@ class PinNoticeCommand extends Command implements SelfHandling {
 	public function handle(NoticeRepository $repo)
 	{
 		
-		$repo->createEvent($this->request, $this->school);
+		$repo->createNotice($this->request, $this->school);
 	}
 
 

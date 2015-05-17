@@ -37,84 +37,65 @@ class NoticeController extends Controller {
 		return view('inspina.index.notice', compact('title', 'groups'));
 	}
 
-	/**
-	 * Show the form for creating a new resource.
-	 *
-	 * @return Response
-	 */
-	public function admin($school)
-	{
-		$title = 'Notice Board';
-		$notices = $this->repo->pinsForSchool($school);
-		return view('inspina..notice.admin_board', compact('notices','school', 'title'));
-	}
+
 
 	/**
 	 * Store a newly created resource in storage.
 	 *
 	 * @return Response
 	 */
-	public function store(Request $request, $school)
+	public function store(Request $request, $group)
 	{
 		
 		$this->dispatch(
 				/* Returns a command for the Controller to dispatch */
-				$this->service->storeNoticeCommand($request, $school)
+				$this->service->storeNoticeCommand($request, $group)
 			);
 
 		return redirect()->back();
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($school)
+    /**
+     * Display the specified resource.
+     *
+     * @param $group
+     * @internal param int $id
+     * @return Response
+     */
+	public function show($group)
 	{
 		$title = 'Notice Board';
-		$notices = $this->repo->pinsForSchool($school);
-		return view('inspina..notice.board', compact('notices','school', 'title'));
+		$notices = $this->repo->pinsForSchool($group);
+		return view('inspina..notice.board', compact('notices','group', 'title'));
 	}
 
+    /**
+     * @param $event
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function destroy($event)
+    {
+        $event->delete();
+        return redirect()->back();
+    }
 	public function adminIndex()
 	{
 		$title = 'Notice';
 		$groups = $this->groupsForUser();
 		return view('inspina.index.admin.notice', compact('title', 'groups'));
 	}
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
+    /**
+     * Show the form for creating a new resource.
+     *
+     * @return Response
+     */
+    public function admin($group)
+    {
+        $title = 'Notice Board';
+        $notices = $this->repo->pinsForSchool($group);
+        return view('inspina..notice.admin_board', compact('notices','group', 'title'));
+    }
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
-	{
-		//
-	}
 
 }

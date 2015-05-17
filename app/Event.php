@@ -6,9 +6,9 @@ class Event extends Model {
 
 	protected $fillable =['title', 'description', 'category', 'date', 'school_id'];
 
-	public function school()
-	{
-		return $this->belongsTo('App\School');
+	public function group(){
+
+		return $this->belongsTo('App\Group')->first();
 	}
 
 }

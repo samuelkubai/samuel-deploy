@@ -53,72 +53,85 @@ class TimelineController extends Controller {
 	 *
 	 * @return Response
 	 */
-	public function create($school)
+	public function create($group)
 	{
-		$events = $this->repo->eventsForSchool($school);
+        $title = "Events";
 
-		return $this->service->view('inspina.timeline.admin-index', 'Timeline' , $events, $school);
+		$events = $this->repo->eventsForGroup($group);
+
+		return view('inspina.timeline.admin-index',compact('title' , 'events', 'group') );
 	}
 
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store( Request $request, $school)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param Request $request
+     * @param $group
+     * @return Response
+     */
+	public function store( Request $request, $group)
 	{
 		$this->dispatch(
 				/* Returns a command for the Controller to dispatch */
-				$this->service->storeEventCommand($request, $school)
+				$this->service->storeEventCommand($request, $group)
 			);
 
 		return redirect()->back();
 	}
 
-	/**
-	 * Display the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function show($school)
+    /**
+     * Display the specified resource.
+     *
+     * @param $group
+     * @internal param $school
+     * @internal param int $id
+     * @return Response
+     */
+	public function show($group)
 	{
 		$title = "Events";
-		$events = $this->repo->eventsForSchool($school);
-		return view('inspina.timeline.index', compact('events','title','school'));
+		$events = $this->repo->eventsForGroup($group);
+        //dd($group->user()->first());
+		return view('inspina.timeline.index', compact('events','title','group'));
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
+    /**
+     * Show the form for editing the specified resource.
+     *
+     * @param $event
+     * @internal param int $id
+     * @return Response
+     */
+	public function edit($event)
 	{
-		//
+        $title = 'Update Your '. $event->group()->username . ' event';
+        return view('inspina.update.event', compact('title','event'));
 	}
 
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
+    /**
+     * Update the specified resource in storage.
+     *
+     * @param $event
+     * @internal param int $id
+     * @return Response
+     */
+	public function update(Request $request, $event)
 	{
-		//
+        $event->fill($request->input())->save();
+        return redirect('/admin/'.$event->group()->username.'/events');
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function destroy($id)
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param $event
+     * @internal param int $id
+     * @return Response
+     */
+	public function destroy($event)
 	{
-		//
+        $event->delete();
+        return redirect()->back();
 	}
 
 }

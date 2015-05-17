@@ -12,10 +12,7 @@
                                 <i class="fa fa-wrench"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#">Config option 1</a>
-                                </li>
-                                <li><a href="#">Config option 2</a>
-                                </li>
+
                             </ul>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
@@ -31,7 +28,7 @@
                                     <i class="fa {{ $event->category }}"></i>
                                     {{ $event->date }}
                                     <br/>
-                                    <small class="text-navy">2 hour ago</small>
+                                    <small class="text-navy">Created: <br> 2 hour ago</small>
                                 </div>
                                 <div class="col-xs-7 content no-top-border">
                                     <p class="m-b-xs"><strong>{{ $event->title }}</strong></p>

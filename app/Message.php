@@ -6,8 +6,8 @@ class Message extends Model {
 
     protected $fillable = ['subject', 'title', 'name', 'message', 'user_id','client_id','admin_id', 'school_id',  'role', 'class'];
 
-    public function school(){
-        return $this->belongsTo('App\School');
+    public function group(){
+        return $this->belongsTo('App\Group');
     }
 
     public function user(){

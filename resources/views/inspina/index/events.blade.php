@@ -30,7 +30,7 @@
                         <div class="forum-sub-title">{{$group->description }}.</div>
                     </div>
                         <div class="col-md-1-offset-1 forum-info">
-                        <span class="views-number"> 0 </span>
+                        <span class="views-number"> {{ $group->events()->count() }} </span>
                         <div>
                             <small>Events</small>
                         </div>

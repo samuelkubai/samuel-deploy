@@ -33,32 +33,50 @@ Route::bind('id' , function($id)
 
 Route::bind('username' , function($name)
 {
-    /** @var TYPE_NAME $id */
-    return App\School::where('username',$name)->first();
+    /** @var int $id */
+    return App\Group::where('username',$name)->first();
 });
 
 Route::bind('mail' , function($id)
 {
-    /** @var TYPE_NAME $id */
+    /** @var int $id */
     return App\Mail::where('id',$id)->first();
 });
 
 Route::bind('client' , function($id)
 {
-    /** @var TYPE_NAME $id */
+    /** @var int $id */
     return App\Client::where('id',$id)->first();
 });
 
 Route::bind('subject' , function($name)
 {
-    /** @var TYPE_NAME $id */
+    /** @var string $id */
     return new App\Http\Forum\Subject($name);
 });
 
 Route::bind('recipient' , function($id)
 {
-    /** @var TYPE_NAME $id */
+    /** @var int $id */
     return App\Client::where('id',$id)->first();
+});
+
+Route::bind('event' , function($id)
+{
+    /** @var int $id */
+    return App\Event::where('id',$id)->first();
+});
+
+Route::bind('notice' , function($id)
+{
+    /** @var int $id */
+    return App\Notice::where('id',$id)->first();
+});
+
+Route::bind('group' , function($username)
+{
+    /** @var int $id */
+    return App\Group::where('username', $username)->first();
 });
 
 /**Route::bind('school' , function($school)
@@ -72,9 +90,8 @@ Route::bind('recipient' , function($id)
 
 
 
-Route::get('/test', function(){
-    return view('test');
-});
+Route::get('/test',['uses' => 'HomeController@createFile'] );
+Route::post('/test',['uses' => 'HomeController@uploadFile'] );
 
 
 
@@ -109,7 +126,21 @@ Route::get('/test', function(){
 
 /* End Chat Routes */
 
+/* File Manager Routes */
+    /* Client Routes */
+        Route::get('/manager',
+            [ 'middleware' => 'school', 'uses' => 'FileController@index' ]);
+        Route::get('/manager/{group}',
+            [ 'middleware' => 'school', 'uses' => 'FileController@show' ]);
+        Route::get('/manager/upload',
+            [ 'middleware' => 'school', 'uses' => 'FileController@create' ]);
+        Route::post('/manager/upload',
+            [ 'middleware' => 'school', 'uses' => 'FileController@store' ]);
+    /* End Client Routes */
 
+    /* School Routes */
+
+    /* End School Routes */
 
 
 /* Events Routes */
@@ -117,6 +148,9 @@ Route::get('/test', function(){
         Route::get('/admin/events',  ['middleware' => 'school', 'uses' => 'TimelineController@admin']);
         Route::get('/admin/{username}/events',  ['middleware' => 'school', 'uses' => 'TimelineController@create']);
         Route::post('/admin/{username}/events',  ['middleware' => 'school', 'uses' => 'TimelineController@store']);
+        Route::get('/events/update/{event}',  ['middleware' => 'school', 'uses' => 'TimelineController@edit']);
+        Route::post('/events/update/{event}',  ['middleware' => 'school', 'uses' => 'TimelineController@update']);
+        Route::get('/events/destroy/{event}',  ['middleware' => 'school', 'uses' => 'TimelineController@destroy']);
 
     /* End School Routes */
 
@@ -130,6 +164,7 @@ Route::get('/test', function(){
 /* Notice Routes */
     /* School Routes */
         Route::get('/admin/notice',  ['middleware' => 'school', 'uses' => 'NoticeController@adminIndex']);
+        Route::get('/notices/destroy/{notice}',  ['middleware' => 'school', 'uses' => 'NoticeController@destroy']);
         Route::get('/admin/{username}/notice',  ['middleware' => 'school', 'uses' => 'NoticeController@admin']);
     /* End School Routes */
 
@@ -150,6 +185,7 @@ Route::get('/test', function(){
         Route::get('/groups',  ['middleware' => 'school', 'uses' => 'ClientController@index']);
         Route::get('/join/group',  ['middleware' => 'school', 'uses' => 'ClientController@create']);
         Route::get('{username}/join/group',  ['middleware' => 'school', 'uses' => 'ClientController@store']);
+        Route::get('{username}/leave/group',  ['middleware' => 'school', 'uses' => 'ClientController@destroy']);
 
     /* End Client Routes */
 /* End Group Routes */
@@ -162,6 +198,8 @@ Route::get('/test', function(){
     Route::post('/register', 'SchoolController@postRegister');
     Route::post('/login', 'SchoolController@postLogin');
     Route::get('/logout', 'SchoolController@getLogout');
+    Route::get('/profile/update', 'ClientController@edit');
+    Route::post('/profile/update', 'ClientController@update');
     Route::get('/patch/', 'ClientController@getPatchClient');
     Route::post('/patch/', 'ClientController@postPatchClient');
     Route::get('/', ['middleware' => 'school', 'uses' => 'HomeController@index']);
@@ -171,14 +209,13 @@ Route::get('/test', function(){
 
 
 /* Group Routes: Create, Update, Read/Show and Delete */
-    Route::get('/create/group',  ['middleware' => 'school', 'uses' => 'SchoolController@getCreateSchool']);
-    Route::post('/create/group',  ['middleware' => 'school', 'uses' => 'SchoolController@postCreateSchool']);
-    Route::get('/groups',  ['middleware' => 'school', 'uses' => 'SchoolController@getSchools']);
-    Route::get('/admin/{username}/',  ['middleware' => 'school', 'uses' => 'SchoolController@showSchool']);
-    Route::get('/{username}/update/',  ['middleware' => 'school', 'uses' => 'SchoolController@viewSchool']);
-    Route::post('/{username}/update/',  ['middleware' => 'school', 'uses' => 'SchoolController@updateSchool']);
-    Route::get('/{username}/delete/',  ['middleware' => 'school', 'uses' => 'SchoolController@deleteSchool']);
-
+    Route::get('/create/group',  ['middleware' => 'school', 'uses' => 'GroupController@create']);
+    Route::post('/create/group',  ['middleware' => 'school', 'uses' => 'GroupController@store']);
+    Route::get('/admin/groups',  ['middleware' => 'school', 'uses' => 'GroupController@index']);
+    Route::get('/admin/{username}/',  ['middleware' => 'school', 'uses' => 'GroupController@show']);
+    Route::get('/{username}/update/',  ['middleware' => 'school', 'uses' => 'GroupController@edit']);
+    Route::post('/{username}/update/',  ['middleware' => 'school', 'uses' => 'GroupController@update']);
+    Route::get('/{username}/delete/',  ['middleware' => 'school', 'uses' => 'GroupController@destroy']);
 /*End of Group CRUD Routes */
 
 

@@ -80,7 +80,7 @@
                             </tr>
                             </thead>
                             <tbody>
-                            @foreach( $schools as $school )
+                            @foreach( $groups as $school )
                                 <tr class="gradeX">
                                     <td class="v-align-middle"><a href="{{url('/admin/'.$school->username)}}">{{ $school->name }}</a></td>
                                     <td><span class="muted">{{ $school->username }}</span> </td>

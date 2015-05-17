@@ -11,7 +11,7 @@
                         </div>
                         <div>
                             <div class="ibox-content no-padding border-left-right">
-                                <img alt="image" class="img-responsive" src="{{asset('inspina/img/profile_big.jpg')}}">
+                                <img alt="image" class="img-responsive" src="{{ 'uploads/images/profile/6s.jpg'}}">
                             </div>
                             <div class="ibox-content profile-content">
                                 <h4><strong>{{$group->name}}</strong></h4>

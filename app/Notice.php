@@ -6,9 +6,9 @@ class Notice extends Model {
 
 	protected $fillable = [ 'title', 'message', 'school_id'];
 
-	public function school()
+	public function group()
 	{
-		return $this->belongsTo('App\School');
+		return $this->belongsTo('App\Group');
 	}
 
 }

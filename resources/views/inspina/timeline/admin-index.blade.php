@@ -9,7 +9,7 @@
         </div>
         <br/>
 		
-		@include('inspina.timeline.partials.timeline')
+		@include('inspina.timeline.partials.admin_timeline')
 
 		@include('inspina.timeline.partials.event-modal')
 

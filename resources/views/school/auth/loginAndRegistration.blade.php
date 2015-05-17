@@ -8,16 +8,16 @@
     <meta content="" name="description" />
     <meta content="" name="author" />
     <!-- BEGIN CORE CSS FRAMEWORK -->
-    <link href="http://localhost:8000/assets/plugins/pace/pace-theme-flash.css" rel="stylesheet" type="text/css" media="screen"/>
-    <link href="http://localhost:8000/assets/plugins/boostrapv3/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
-    <link href="http://localhost:8000/assets/plugins/boostrapv3/css/bootstrap-theme.min.css" rel="stylesheet" type="text/css"/>
-    <link href="http://localhost:8000/assets/plugins/font-awesome/css/font-awesome.css" rel="stylesheet" type="text/css"/>
-    <link href="http://localhost:8000/assets/css/animate.min.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset("/assets/plugins/pace/pace-theme-flash.css") }}" rel="stylesheet" type="text/css" media="screen"/>
+    <link href="{{ asset("/assets/plugins/boostrapv3/css/bootstrap.min.css" ) }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset("/assets/plugins/boostrapv3/css/bootstrap-theme.min.css") }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset("/assets/plugins/font-awesome/css/font-awesome.css") }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset("/assets/css/animate.min.css") }}" rel="stylesheet" type="text/css"/>
     <!-- END CORE CSS FRAMEWORK -->
     <!-- BEGIN CSS TEMPLATE -->
-    <link href="http://localhost:8000/assets/css/style.css" rel="stylesheet" type="text/css"/>
-    <link href="http://localhost:8000/assets/css/responsive.css" rel="stylesheet" type="text/css"/>
-    <link href="http://localhost:8000/assets/css/custom-icon-set.css" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset("/assets/css/style.css") }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset("/assets/css/responsive.css") }}" rel="stylesheet" type="text/css"/>
+    <link href="{{ asset("/assets/css/custom-icon-set.css") }}" rel="stylesheet" type="text/css"/>
     <!-- END CSS TEMPLATE -->
 </head>
 <!-- END HEAD -->
@@ -110,12 +110,13 @@
 </div>
 <!-- END CONTAINER -->
 <!-- BEGIN CORE JS FRAMEWORK-->
-<script src="http://localhost:8000/assets/plugins/jquery-1.8.3.min.js" type="text/javascript"></script>
-<script src="http://localhost:8000/assets/plugins/boostrapv3/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="http://localhost:8000/assets/plugins/pace/pace.min.js" type="text/javascript"></script>
-<script src="http://localhost:8000/assets/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
-<script src="http://localhost:8000/assets/plugins/jquery-lazyload/jquery.lazyload.min.js" type="text/javascript"></script>
-<script src="http://localhost:8000/assets/js/login_v2.js" type="text/javascript"></script>
+
+<script src="{{ asset('/assets/plugins/jquery-1.8.3.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/assets/plugins/boostrapv3/js/bootstrap.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/assets/plugins/pace/pace.min.js') }}http://localhost:8000" type="text/javascript"></script>
+<script src="{{ asset('/assets/plugins/jquery-validation/js/jquery.validate.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/assets/plugins/jquery-lazyload/jquery.lazyload.min.js') }}" type="text/javascript"></script>
+<script src="{{ asset('/assets/js/login_v2.js') }}" type="text/javascript"></script>
 <!-- BEGIN CORE TEMPLATE JS -->
 <!-- END CORE TEMPLATE JS -->
 </body>

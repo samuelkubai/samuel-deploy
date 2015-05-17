@@ -38,12 +38,63 @@ class ClientController extends Controller {
         $this->repo->clientJoin($group, $this->user());
         return redirect('/groups');
    }
-    /**
-     * Get the failed login message.
-     *
-     * @return string
-     */
 
+    /**
+     * Destroys the relationship between the use and group.
+     * @param $group
+     * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function destroy($group)
+    {
+        //$this->repo->clientLeave($group, $this->user());
+        return redirect('/groups');
+    }
+
+    public function show()
+    {
+        $title = "User Profile";
+        $user = $this->user();
+
+        return view('inspina.profile.user', compact('title','user' ));
+    }
+
+    public function edit()
+    {
+        $title = 'Profile Update';
+        $user = $this->user();
+
+        return view('inspina.update.user', compact('title', 'user'));
+    }
+
+    public function update(Request $request)
+    {
+        if ($request->file('profile') != null)
+        {
+            $name = $_FILES['profile']['name'];
+            $tmpName = $_FILES['profile']['tmp_name'];
+            $location = 'uploads/images/profile/';
+            $type = $request->file('profile')->getClientOriginalExtension();
+            $destination = $location . $name;
+            $user = $this->user();
+            //dd($user->profile());
+            if (move_uploaded_file($tmpName, $destination)) {
+
+                $user->fill($request->input())->save();
+                $user->profile()->delete();
+                $user->profile()->create([
+                    'name' => $name,
+                    'type' => $type,
+                    'source' => $destination
+                ]);
+
+                return redirect('/')->with('success', 'Profile successfully updated');
+            }
+                return redirect('/')->with('error', 'File has not been uploaded');
+        }
+
+        $this->user()->fill($request->input())->save();
+        return redirect('/')->with('success','Profile Successfully updated');
+    }
     /*
     protected function getFailedLoginMessage()
     {

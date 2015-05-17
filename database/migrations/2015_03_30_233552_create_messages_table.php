@@ -24,7 +24,7 @@ class CreateMessagesTable extends Migration {
             $table->integer('role');
 
             $table->integer('user_id');
-            $table->integer('school_id');
+            $table->integer('group_id');
             $table->integer('client_id')->nullable();
             $table->integer('admin_id')->nullable();
 

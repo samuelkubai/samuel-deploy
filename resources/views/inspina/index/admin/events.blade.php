@@ -26,7 +26,7 @@
                         <div class="forum-icon">
                             <i class="fa fa-shield"></i>
                         </div>
-                        <a href="{{ url('/admin/'. $group->username.'/events') }}" class="forum-item-title">{{$group->username}}</a>
+                        <a href="{{ url('/admin/'. $group->username.'/events') }}" class="forum-item-title">{{$group->name}}</a>
                         <div class="forum-sub-title">{{$group->description }}.</div>
                     </div>
                     <div class="col-md-1-offset-1 forum-info">

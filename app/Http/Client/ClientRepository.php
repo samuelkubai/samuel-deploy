@@ -4,6 +4,7 @@
 
 
 use App\Client;
+use App\Group;
 use App\School;
 
 /**
@@ -21,42 +22,44 @@ class ClientRepository
 	{
 		return Client::where('username', $school->username)->where('user_id', $user->id)->first();
 	}
-	
-	public function allGroups()
+
+    /**
+     *  Returns all the groups in the system.
+     * @return \Illuminate\Database\Eloquent\Collection|static[]
+     */
+    public function allGroups()
 	{
-		return School::all();
+		return Group::all();
 	}
 
-	public function groupsForUser($user)
+    /**
+     * Returns all the groups the user has joined.
+     * @param $user
+     * @return mixed
+     */
+    public function groupsForUser($user)
 	{
-		$clients = $this->clientsForUser($user);
-		$counter = 1;
-		$school = null;
-		foreach ($clients as $client) {
-			if($counter == 1){
-				$school = School::where('username', $client->username)->get();
-			}
-			if ($counter != 1){
-				$school->merge(School::where('username', $client->username)->get());
-			}
-		}
-		return $school;
+        $groupIds = $user->follows()->lists('group_id');
+
+        $groups = Group::whereIn('id', $groupIds)->get();
+
+        return $groups;
 	}
 
 	public function clientJoin($group, $user)
 	{
-		return Client::create( [
-			'firstName' => $user->firstName,
-			'lastName' => $user->lastName,
-			'user_id' => $user->id,
-			'username' => $group->username,
-			] );
+		return $user->follows()->attach($group->id);
 	}
 
 	public function clientsForUser($user)
 	{
 		return Client::where('user_id', $user->id)->get();
 	}
+
+    public function clientLeave($group, $user)
+    {
+        $user->follows()->dettach($group->id);
+    }
 
 
 }

@@ -1,4 +1,4 @@
-            <form action="{{ url('/'.$school->username.'/notice') }}" method="post">
+            <form action="{{ url('/'.$group->username.'/notice') }}" method="post">
                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
                     <div class="modal-body">
                          <div class="row form-group">

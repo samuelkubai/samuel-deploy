@@ -11,28 +11,33 @@ class CreateEventCommand extends Command implements SelfHandling {
 
 	private $request;
 
-	private $school;
-	/**
-	 * Create a new command instance.
-	 *
-	 * @return void
-	 */
-	public function __construct($request, $school )
+	private $group;
+
+    /**
+     * Create a new command instance.
+     *
+     * @param $request
+     * @param $group
+     * @internal param $school
+     * @return \App\Commands\CreateEventCommand
+     */
+	public function __construct($request, $group )
 	{
 		$this->request = $request;
 
-		$this->school = $school;
+		$this->group = $group;
 	}
 
-	/**
-	 * Execute the command.
-	 *
-	 * @return void
-	 */
+    /**
+     * Execute the command.
+     *
+     * @param TimelineRepository $repo
+     * @return void
+     */
 	public function handle(TimelineRepository $repo)
 	{
 		
-		$repo->createEvent($this->request, $this->school);
+		$repo->createEvent($this->request, $this->group);
 	}
 
 }

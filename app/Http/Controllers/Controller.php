@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Group;
 use Illuminate\Foundation\Bus\DispatchesCommands;
 use Illuminate\Routing\Controller as BaseController;
 use Illuminate\Foundation\Validation\ValidatesRequests;
@@ -35,21 +36,25 @@ abstract class Controller extends BaseController {
     {
         if($user != null)
         {
-            return \App\Client::where('user_id', $user()->id)->get();
+            return \App\Client::where('user_id', $user->id)->get();
         }
 
 
         return \App\Client::where('user_id', $this->user()->id)->get();
     }
 
+    /**
+     * @param null $user
+     * @return mixed
+     */
     public function groupsForUser($user = null)
     {
         if($user != null)
         {
-            return \App\School::where('user_id', $user()->id)->get();
+            return Group::where('user_id', $user->id)->get();
         }
 
         
-        return \App\School::where('user_id', $this->user()->id)->get();
+        return Group::where('user_id', $this->user()->id)->get();
     }
 }
