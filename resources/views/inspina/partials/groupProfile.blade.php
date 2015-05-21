@@ -20,14 +20,17 @@
                 @if(\Auth::user()->id == $group->user_id)
                 <div class="user-button">
                     <div class="row">
-                        <div class="col-md-6">
-                            <a href="{{url($group->username. '/update/')}}" class="btn btn-default btn-sm btn-block"><i class="fa fa-text"></i> Edit Group</a>
-                        </div>
-                        <div class="col-md-6">
-                            <a href="{{url($group->username, 'delete')}}" class="btn btn-danger btn-sm btn-block"><i class="fa fa-"></i> Delete Group</a>
+                        <div class="col-md-12">
+                            <a href="{{url($group->username. '/update/')}}" class="btn btn-info btn-sm btn-block"><i class="fa fa-text"></i> Edit Group</a>
                         </div>
                     </div>
                 </div>
+                @else
+                    <div class="row">
+                        <div class="col-md-12">
+                            Administrated By <b>{{ $group->user()->first()->firstName }} {{ $group->user()->first()->lastName }}</b>
+                        </div>
+                    </div>
                 @endif
             </div>
         </div>

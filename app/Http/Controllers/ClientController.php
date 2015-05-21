@@ -48,7 +48,7 @@ class ClientController extends Controller
      */
     public function destroy($group)
     {
-        //$this->repo->clientLeave($group, $this->user());
+        $this->repo->clientLeave($group, $this->user());
         return redirect('/groups');
     }
 
@@ -73,7 +73,13 @@ class ClientController extends Controller
         $user = $this->user();
         // This checks of there's a need to upload the picture and saves the rest of the information if not.
         if ($request->file('profile') == null) {
-            $user->fill($request->input())->save();
+            $user->fill([
+                'email' => $request->email,
+                'password' => bcrypt($request->password),
+                'firstName' =>$request->firstName,
+                'lastName' => $request->lastName,
+                'telNumber' => $request->telNumber,
+            ])->save();
             return redirect('/')->with('success', 'Profile Successfully updated');
         }
 

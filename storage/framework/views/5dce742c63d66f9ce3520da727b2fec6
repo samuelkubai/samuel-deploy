@@ -24,20 +24,11 @@
                                     </a>
                                 </div>
                             </div>
+
                             <div class="ibox-content">
                                <form action="<?php echo e(url( $group->username . '/update/')); ?>" method="POST" enctype="multipart/form-data" >
                                           <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                           <div>
-                                          <?php if(count($errors) > 0): ?>
-                                              <div class="alert alert-danger">
-                                                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                                  <ul>
-                                                      <?php foreach($errors->all() as $error): ?>
-                                                          <li><?php echo e($error); ?></li>
-                                                      <?php endforeach; ?>
-                                                  </ul>
-                                              </div>
-                                          <?php endif; ?>
                                               <div class=" row form-group ">
                                                    <div class="col-md-12">
                                                        <label class="">Change Group Profile Picture:</label>
@@ -69,13 +60,18 @@
                                               </div>
                                           </div>
                                           <div class="modal-footer">
-                                              <a href="<?php echo e(url('admin',$group->username)); ?>" class="btn btn-default">Close</a>
+                                              <a href="<?php echo e(url($group->username)); ?>" class="btn btn-default">Close</a>
                                               <button type="submit" class="btn btn-info">Update</button>
                                           </div>
                                       </form>
                             </div>
-                        </div>
 
+
+                        </div>
+                        <?php echo $__env->make('inspina.update.partials.administrator', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <div class="col-md-12">
+                            <a href="<?php echo e(url($group->username, 'delete')); ?>" class="btn btn-danger btn-sm btn-block"><i class="fa fa-"></i> Delete Group</a>
+                        </div>
                     </div>
                 </div>
             </div>

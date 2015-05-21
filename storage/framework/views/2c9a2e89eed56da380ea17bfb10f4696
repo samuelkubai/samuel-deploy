@@ -12,8 +12,8 @@
                                 </div>
 
                                 <div class="ibox-content">
-                                   <form action="{{ url( $group->username . '/update/administrator') }}" method="POST" >
-                                              <input type="hidden" name="_token" value="{{ csrf_token() }}">
+                                   <form action="<?php echo e(url( $group->username . '/update/administrator')); ?>" method="POST" >
+                                              <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                               <div>
                                                   <div class="row form-group">
                                                       <div class="col-md-12">
@@ -22,7 +22,7 @@
                                                   </div>
                                               </div>
                                               <div class="modal-footer">
-                                                  <a href="{{url($group->username)}}" class="btn btn-default">Close</a>
+                                                  <a href="<?php echo e(url($group->username)); ?>" class="btn btn-default">Close</a>
                                                   <button type="submit" class="btn btn-info">Register New Administrator</button>
                                               </div>
                                           </form>

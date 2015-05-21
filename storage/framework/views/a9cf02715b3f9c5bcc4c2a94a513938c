@@ -40,7 +40,7 @@
                 <ul class="nav navbar-top-links navbar-right">
                     <li>
                         <div class="btn-group">
-                          <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                          <button type="button" class="btn btn-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
                             Followed Groups <span class="caret"></span>
                           </button>
                           <ul class="dropdown-menu" role="menu">

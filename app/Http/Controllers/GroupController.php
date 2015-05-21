@@ -1,24 +1,39 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\CLient\ClientRepository;
+use App\Http\Group\GroupRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CreateSchoolRequest;
+use App\Http\User\UserRepository;
+use App\User;
 use Illuminate\Http\Request;
 
 
 class GroupController extends Controller {
 
     protected $clientRepo;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
+    /**
+     * @var ClientRepository|GroupRepository
+     */
+    private $repo;
 
 
     /**
-     * @param ClientRepository $repo
+     * @param ClientRepository $clientRepository
+     * @param UserRepository $userRepository
+     * @param ClientRepository|GroupRepository $repo
      */
-    function __construct(ClientRepository $repo)
+    function __construct(ClientRepository $clientRepository, UserRepository $userRepository, GroupRepository $repo)
     {
-        $this->clientRepo = $repo;
+        $this->clientRepo = $clientRepository;
+        $this->userRepository = $userRepository;
+        $this->repo = $repo;
     }
 
 	/**
@@ -55,8 +70,10 @@ class GroupController extends Controller {
 	public function store(CreateSchoolRequest $request)
 	{
 
-        $this->user()->groups()->create($request->all());
-        return redirect('/admin/groups');
+        $user = $this->user();
+        $group = $user->groups()->create($request->all());
+        $this->clientRepo->clientJoin($group, $user);
+        return redirect($group->username);
 	}
 
     /**
@@ -138,5 +155,28 @@ class GroupController extends Controller {
         $title = "Your Groups";
         $groups = $this->clientRepo->groupsForUser($this->user());
         return view('inspina.index.allGroups', compact('title', 'groups'));
+    }
+
+    /**
+     * @param $group
+     * @param Request $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function updateAdministrator($group, Request $request)
+    {
+        $user = $this->userRepository->FindByEmail($request->email);
+
+        #Checks whether the user is a member of skoolspace
+        if(!$user)
+            return redirect()->back()->withErrors('This is not a member of skoolspace');
+
+        #Checks whether the user is a member of the group
+        if(!$this->repo->isFollowerOf($group, $user))
+            return redirect()->back()->withErrors('This is not a member of '. $group->name);
+
+        #Changes the administrator to the new user.
+        $group->user_id = $user->id;
+        $group->save();
+        return redirect($group->username);
     }
 }

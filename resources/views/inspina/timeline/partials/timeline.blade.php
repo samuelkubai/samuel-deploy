@@ -1,6 +1,6 @@
 
-            <div class="row animated fadeInRight">
-                <div class="col-lg-12">
+
+                <div class="col-lg-8">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Groups Planned Events</h5>
@@ -40,5 +40,4 @@
                     @endforeach
                     </div>
                 </div>
-            </div>
             </div>

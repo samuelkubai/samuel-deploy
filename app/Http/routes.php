@@ -224,6 +224,7 @@ Route::post('/test',['uses' => 'HomeController@uploadFile'] );
     Route::get('/{username}/',  ['middleware' => 'school', 'uses' => 'GroupController@show']);
     Route::get('/{username}/update/',  ['middleware' => 'school', 'uses' => 'GroupController@edit']);
     Route::post('/{username}/update/',  ['middleware' => 'school', 'uses' => 'GroupController@update']);
+    Route::post('/{username}/update/administrator',  ['middleware' => 'school', 'uses' => 'GroupController@updateAdministrator']);
     Route::get('/{username}/delete/',  ['middleware' => 'school', 'uses' => 'GroupController@destroy']);
 /*End of Group CRUD Routes */
 

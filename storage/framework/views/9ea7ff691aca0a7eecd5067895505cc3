@@ -80,7 +80,13 @@
                                         <td class="v-align-middle"><?php echo e($group->name); ?></td>
                                         <td><span class="muted"><?php echo e($group->username); ?></span> </td>
                                         <td class="v-align-middle"> <?php echo e($group->email); ?> </td>
-                                        <td class="v-align-middle"> <a href="<?php echo e(url($group->username.'/join/group')); ?>" class="btn btn-primary">Join</a> </td>
+                                        <td class="v-align-middle">
+                                        <?php if($group->isFollowedBy(\Auth::user())): ?>
+                                            <b>Joined</b>
+                                        <?php else: ?>
+                                         <a href="<?php echo e(url($group->username.'/join/group')); ?>" class="btn btn-primary">Join</a>
+                                        <?php endif; ?>
+                                        </td>
                                     </tr>
                                 <?php endforeach; ?>
                             <?php endif; ?>
@@ -96,6 +102,8 @@
                         </table>
                     </div>
                 </div>
+
+                <?php echo $__env->make('inspina.partials.back_button', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             </div>
         </div>
     </div>

@@ -82,7 +82,13 @@
                                         <td class="v-align-middle">{{ $group->name }}</td>
                                         <td><span class="muted">{{ $group->username }}</span> </td>
                                         <td class="v-align-middle"> {{ $group->email }} </td>
-                                        <td class="v-align-middle"> <a href="{{url($group->username.'/join/group')}}" class="btn btn-primary">Join</a> </td>
+                                        <td class="v-align-middle">
+                                        @if($group->isFollowedBy(\Auth::user()))
+                                            <b>Joined</b>
+                                        @else
+                                         <a href="{{url($group->username.'/join/group')}}" class="btn btn-primary">Join</a>
+                                        @endif
+                                        </td>
                                     </tr>
                                 @endforeach
                             @endif
@@ -98,6 +104,8 @@
                         </table>
                     </div>
                 </div>
+
+                @include('inspina.partials.back_button')
             </div>
         </div>
     </div>

@@ -97,6 +97,8 @@
                         </table>
                     </div>
                 </div>
+
+                @include('inspina.partials.back_button')
             </div>
         </div>
     </div>

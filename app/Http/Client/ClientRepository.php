@@ -58,7 +58,7 @@ class ClientRepository
 
     public function clientLeave($group, $user)
     {
-        $user->follows()->dettach($group->id);
+        $user->follows()->detach($group->id);
     }
 
 

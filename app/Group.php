@@ -21,6 +21,21 @@ class Group extends Model {
     {
         return $this->followers()->get()->count();
     }
+    public function isFollowedBy($user)
+    {
+        $followersId = $this->followers()->lists('user_id');
+
+        foreach($followersId as $followerId)
+        {
+            if($user->id == $followerId)
+            {
+                return true;
+            }
+        }
+
+        return false;
+    }
+
     public function events()
     {
         return $this->hasMany('App\Event');
