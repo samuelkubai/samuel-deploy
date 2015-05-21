@@ -1,4 +1,4 @@
-@extends('inspina')
+@extends('inspina.layouts.main')
 
 @section('styles')
 
@@ -93,9 +93,9 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th style="width:20%">School's Name</th>
-                                <th style="width:9%">portal url</th>
-                                <th style="width:10%">Main site URL</th>
+                                <th style="width:20%">Group Name</th>
+                                <th style="width:9%">Group Username</th>
+                                <th style="width:10%">Group Email</th>
                                 <th style="width:7%">Action</th>
                             </tr>
                             </tfoot>

@@ -1,12 +1,25 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\CLient\ClientRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CreateSchoolRequest;
 use Illuminate\Http\Request;
 
+
 class GroupController extends Controller {
+
+    protected $clientRepo;
+
+
+    /**
+     * @param ClientRepository $repo
+     */
+    function __construct(ClientRepository $repo)
+    {
+        $this->clientRepo = $repo;
+    }
 
 	/**
 	 * Display a listing of the resource.
@@ -99,9 +112,9 @@ class GroupController extends Controller {
                     'source' => $destination
                 ]);
 
-                return redirect('admin/'.$group->username)->with('success', 'Profile successfully updated');
+                return redirect($group->username)->with('success', 'Profile successfully updated');
             }
-            return redirect('admin/'.$group->username)->with('error', 'File has not been uploaded');
+            return redirect($group->username)->with('error', 'File has not been uploaded');
         }
         $group->fill($request->input())->save();
         return redirect($group->username);
@@ -120,4 +133,10 @@ class GroupController extends Controller {
         return redirect('/admin/groups');
 	}
 
+    public function  allGroups()
+    {
+        $title = "Your Groups";
+        $groups = $this->clientRepo->groupsForUser($this->user());
+        return view('inspina.index.allGroups', compact('title', 'groups'));
+    }
 }

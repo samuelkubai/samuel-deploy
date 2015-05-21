@@ -1,48 +1,21 @@
-@extends('inspina')
+@extends('inspina.layouts.main')
 
 @section('content')
         <!-- Content starts here -->
         <div class="wrapper wrapper-content">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                            <div class="file-manager">
-                                <h5>Show:</h5>
-                                <a href="" class="file-control active">Ale</a>
-                                <a href="" class="file-control">Documents</a>
-                                <a href="" class="file-control">Audio</a>
-                                <a href="" class="file-control">Images</a>
-                                <div class="hr-line-dashed"></div>
-                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Upload Files</button>
-                                <div class="hr-line-dashed"></div>
-                                @include('inspina.file.partials.upload')
-                                <h5>My Groups</h5>
-                                <ul class="folder-list" style="padding: 0">
-                                @foreach($groups as $group)
-                                    <li><a href="{{'/manager/'.$group->username}}"><i class="fa fa-folder"></i> {{$group->name}}</a></li>
-                                @endforeach
-                                </ul>
-                                <h5 class="tag-title">Tags</h5>
-                                <ul class="tag-list" style="padding: 0">
-                                    <li><a href="">Family</a></li>
-                                    <li><a href="">Work</a></li>
-                                    <li><a href="">Home</a></li>
-                                    <li><a href="">Children</a></li>
-                                    <li><a href="">Holidays</a></li>
-                                    <li><a href="">Music</a></li>
-                                    <li><a href="">Photography</a></li>
-                                    <li><a href="">Film</a></li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-9 animated fadeInRight">
-                    <div class="row">
+            <div class="row animated fadeInRight">
+        @include('inspina.partials.groupProfile')
+            <div class="">
+
+                <div class="col-lg-8 animated fadeInRight">
+                    <div class="">
                         <div class="col-lg-12">
-                        @if(isset($documents))
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload New File</button>
+                        </div>
+                        <br> <br><br>
+                        @include('inspina.file.partials.upload')
+                        @if($documents->count() != 0)
                             @foreach($documents as $document)
                                 <div class="file-box">
                                     <div class="file">
@@ -63,7 +36,7 @@
                                 </div>
                             @endforeach
                         @else
-                            <h2 align="center">Select a group to view documents<br> <br> THERE ARE NO DOCUMENTS FOR YOU HERE!!
+                            <h2 align="center"><br> <br> <br>THERE ARE NO DOCUMENTS UPLOADED YET!!
 
                             </h2>
                         @endif
@@ -71,6 +44,7 @@
                         </div>
                     </div>
                     </div>
+                </div>
                 </div>
                 </div>
         <!-- Content ends Here! -->

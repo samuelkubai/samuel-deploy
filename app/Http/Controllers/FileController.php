@@ -1,8 +1,10 @@
 <?php namespace App\Http\Controllers;
 
+use App\Folder;
 use App\Group;
 use App\Http\CLient\ClientRepository;
 use App\Http\File\FileRepository;
+use App\Http\File\FolderRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
@@ -14,15 +16,21 @@ class FileController extends Controller
     protected $client;
 
     protected $repo;
+    /**
+     * @var FolderRepository
+     */
+    private $folderRepository;
 
     /**
      * @param FileRepository $repo
      * @param ClientRepository $client
+     * @param FolderRepository $folderRepository
      */
-    function __construct(FileRepository $repo, ClientRepository $client)
+    function __construct(FileRepository $repo, ClientRepository $client, FolderRepository $folderRepository)
     {
         $this->repo = $repo;
         $this->client = $client;
+        $this->folderRepository = $folderRepository;
     }
 
 	/**
@@ -57,10 +65,22 @@ class FileController extends Controller
      */
 	public function store(Request $request)
 	{
+        $allowedTypes = [
+          'txt', 'pdf', 'docx', 'jpg', 'png', 'ppt', 'doc'
+        ];
+
         $type = $request->file('file')->getClientOriginalExtension();
-        $group = Group::find($request->group);
-        $this->repo->uploadGroupDocument($_FILES, 'documents', $group  ,$type);
-		return redirect()->back();
+        $folder = Folder::find($request->folder);
+        if($request->file('file')->getClientSize() > 10000000)
+        {
+            return redirect()->back()->with('error', 'The file must be under 10Mb in size.');
+        }
+
+        if(!$this->repo->authenticateType($request->file('file')->getClientOriginalExtension(), $allowedTypes))
+            return redirect()->back()->with('error', 'This file extension is not supported.');
+
+        $this->repo->uploadGroupDocument($_FILES, 'documents', $folder  ,$type);
+		return redirect()->back()->with('success', 'File Successfully Uploaded');
 	}
 
     /**
@@ -70,12 +90,11 @@ class FileController extends Controller
      * @internal param int $id
      * @return Response
      */
-	public function show($group)
+	public function show($group, $folder)
 	{
         $title = 'File Manager';
-        $documents = $group->groupDocuments();
-        $groups = $this->client->groupsForUser($this->user());
-        return view('inspina.file.manager', compact('title', 'groups', 'documents'));
+        $documents = $folder->files()->get();
+        return view('inspina.file.manager', compact('title','group','groups', 'documents'));
 	}
 
 	/**
@@ -111,4 +130,10 @@ class FileController extends Controller
 		//
 	}
 
+    public function storeFolder(Request $request, $group)
+    {
+        $this->folderRepository->create($request->name, $group);
+
+        return redirect()->back();
+    }
 }

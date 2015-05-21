@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('inspina.layouts.main')
 
 @section('styles')
 
@@ -58,10 +58,7 @@
                                 <i class="fa fa-wrench"></i>
                             </a>
                             <ul class="dropdown-menu dropdown-user">
-                                <li><a href="#">Config option 1</a>
-                                </li>
-                                <li><a href="#">Config option 2</a>
-                                </li>
+
                             </ul>
                             <a class="close-link">
                                 <i class="fa fa-times"></i>
@@ -91,9 +88,9 @@
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th style="width:20%">School's Name</th>
-                                <th style="width:9%">portal url</th>
-                                <th style="width:10%">Main site URL</th>
+                                <th style="width:20%">Group Name</th>
+                                <th style="width:9%">Group Username</th>
+                                <th style="width:10%">Group Email</th>
                                 <th style="width:7%">Action</th>
                             </tr>
                             </tfoot>

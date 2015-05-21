@@ -8,7 +8,9 @@
                         </div>
                         <div>
                             <div class="ibox-content no-padding border-left-right">
-                                <img alt="image" class="img-responsive img-container" src="<?php echo e(asset($user->profileSource())); ?>">
+                                <a href="<?php echo e(url('/profile/update')); ?>">
+                                    <img alt="image" class="img-responsive img-container" src="<?php echo e(asset($user->profileSource())); ?>">
+                                </a>
                             </div>
                             <div class="ibox-content profile-content">
                                 <p>
@@ -36,34 +38,18 @@
                     </div>
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                             <h5>To-Do List</h5>
+                             <h5>Followed Groups:</h5>
                         </div>
                         <div>
                         <ul class="list-group ">
+                        <?php foreach($user->followedGroups() as $group): ?>
                             <li class="list-group-item fist-item">
-                                <span class="pull-right">
-                                    09:00 pm
+                                <span class="pull-right badge badge-info">
+                                    <?php echo e($group->followersCount()); ?> Followers
                                 </span>
-                                <span class="label label-success">1</span> Please contact me
+                                <span class="label label-success">1</span> &nbsp;<a href="<?php echo e(url($group->username)); ?>"><?php echo e($group->name); ?></a>
                             </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    10:16 am
-                                </span>
-                                <span class="label label-info">2</span> Sign a contract
-                            </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    10:16 am
-                                </span>
-                                <span class="label label-danger">3</span> Attend the IBM training camp.
-                            </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    10:16 am
-                                </span>
-                                <span class="label label-success">4</span> Refresh the application source code.
-                            </li>
+                         <?php endforeach; ?>
                         </ul>
                     </div>
                     </div>
@@ -94,23 +80,10 @@
 
                             <div>
                                 <div class="feed-activity-list">
-                                        <?php foreach($statuses as $status): ?>
-
-                                                <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
-                                                        <img alt="image" class="img-circle" src="http://localhost:8000/inspina/img/profile.jpg">
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right"><?php echo e($status->updated_at); ?></small>
-                                                        <strong><?php echo e($status->title); ?></strong><br>
-                                                        <span class="text-muted"><?php echo e($status->message); ?></span>
-
-                                                    </div>
-                                                </div>
-                                        <?php endforeach; ?>
+                                        <?php echo $__env->make('inspina.partials.status', ['statuses' => $statuses], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                 </div>
 
-                                <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> Show More</button>
+                                <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> More Post</button>
 
                             </div>
 
@@ -121,4 +94,4 @@
             </div>
         </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('inspina', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

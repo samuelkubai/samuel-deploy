@@ -9,6 +9,6 @@ class PostRepository {
     {
         $groupIds = $user->follows()->lists('group_id');
 
-        return Post::whereIn('group_id', $groupIds)->get();
+        return Post::whereIn('group_id', $groupIds)->latest()->get();
     }
 } 

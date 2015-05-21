@@ -1,0 +1,22 @@
+                    <?php if(count($errors) > 0): ?>
+						<div class=" col-md-10 col-md-offset-1 alert alert-danger">
+
+							<ul>
+								<?php foreach($errors->all() as $error): ?>
+									<li><?php echo e($error); ?></li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
+					<?php endif; ?>
+					<?php if(isset($inputs)): ?>
+                        <?php if(count($inputs) > 0): ?>
+                            <div class="alert alert-danger">
+                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                <ul>
+                                    <?php foreach($inputs->all() as $input): ?>
+                                        <li><?php echo e($input); ?></li>
+                                    <?php endforeach; ?>
+                                </ul>
+                            </div>
+                        <?php endif; ?>
+					<?php endif; ?>

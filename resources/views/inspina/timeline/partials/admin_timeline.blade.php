@@ -1,5 +1,5 @@
-   <div class="row animated fadeInRight">
-                <div class="col-lg-12">
+
+                <div class="col-lg-8">
                 <div class="ibox float-e-margins">
                     <div class="ibox-title">
                         <h5>Groups Planned Events</h5>
@@ -38,13 +38,16 @@
                                     <p>{{$event->description}}</p>
                                 </div>
                                 <div class="col-xs-2">
-                                    <a href="{{ url('/events/destroy/' .$event->id) }}" class="btn btn-sm btn-danger pull-right">Delete</a>
-                                    <a href="{{ url('/events/update/' .$event->id) }}" class="btn btn-sm btn-primary pull-left">Update</a>
+                                    <div>
+                                        <a href="{{ url('/events/destroy/' .$event->id) }}" class="btn btn-sm btn-block btn-danger pull-right">Delete</a>
+                                    </div>
+                                    <div>
+                                        <a href="{{ url('/events/update/' .$event->id) }}" class="btn btn-sm btn-block btn-primary pull-right">Update</a>
+                                    </div>
                                 </div>
                             </div>
                         </div>
                     @endforeach
                     </div>
                 </div>
-            </div>
             </div>

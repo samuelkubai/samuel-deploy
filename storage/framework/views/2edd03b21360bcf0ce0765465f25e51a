@@ -37,10 +37,10 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="reset" class="btn btn-default">Close</button>
+                <a href="<?php echo e(url('/admin/groups')); ?>" class="btn btn-default">Close</a>
                 <button type="submit" class="btn btn-info">Create</button>
             </div>
         </form>
     </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

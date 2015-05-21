@@ -37,6 +37,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         return $this->hasMany('App\Group');
     }
 
+    public function userGroups()
+    {
+        return $this->groups()->get();
+    }
+
 
     public function messages(){
         return $this->hasMany('App\Message');
@@ -45,6 +50,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function follows()
     {
         return $this->belongsToMany('App\Group', 'follows', 'user_id', 'group_id')->withTimestamps();
+    }
+
+    public function followedGroups()
+    {
+        return $this->follows()->get();
     }
 
     public function profile()

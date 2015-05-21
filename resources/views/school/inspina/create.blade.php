@@ -1,4 +1,4 @@
-@extends('admin')
+@extends('inspina.layouts.main')
 
 @section('content')
     <div class="wrapper wrapper-content">
@@ -39,7 +39,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <button type="reset" class="btn btn-default">Close</button>
+                <a href="{{url('/admin/groups')}}" class="btn btn-default">Close</a>
                 <button type="submit" class="btn btn-info">Create</button>
             </div>
         </form>

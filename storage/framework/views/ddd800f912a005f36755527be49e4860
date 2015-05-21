@@ -1,46 +1,19 @@
 <?php $__env->startSection('content'); ?>
         <!-- Content starts here -->
         <div class="wrapper wrapper-content">
-            <div class="row">
-                <div class="col-lg-3">
-                    <div class="ibox float-e-margins">
-                        <div class="ibox-content">
-                            <div class="file-manager">
-                                <h5>Show:</h5>
-                                <a href="" class="file-control active">Ale</a>
-                                <a href="" class="file-control">Documents</a>
-                                <a href="" class="file-control">Audio</a>
-                                <a href="" class="file-control">Images</a>
-                                <div class="hr-line-dashed"></div>
-                                <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">Upload Files</button>
-                                <div class="hr-line-dashed"></div>
-                                <?php echo $__env->make('inspina.file.partials.upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                <h5>My Groups</h5>
-                                <ul class="folder-list" style="padding: 0">
-                                <?php foreach($groups as $group): ?>
-                                    <li><a href="<?php echo e('/manager/'.$group->username); ?>"><i class="fa fa-folder"></i> <?php echo e($group->name); ?></a></li>
-                                <?php endforeach; ?>
-                                </ul>
-                                <h5 class="tag-title">Tags</h5>
-                                <ul class="tag-list" style="padding: 0">
-                                    <li><a href="">Family</a></li>
-                                    <li><a href="">Work</a></li>
-                                    <li><a href="">Home</a></li>
-                                    <li><a href="">Children</a></li>
-                                    <li><a href="">Holidays</a></li>
-                                    <li><a href="">Music</a></li>
-                                    <li><a href="">Photography</a></li>
-                                    <li><a href="">Film</a></li>
-                                </ul>
-                                <div class="clearfix"></div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-                <div class="col-lg-9 animated fadeInRight">
-                    <div class="row">
+            <div class="row animated fadeInRight">
+        <?php echo $__env->make('inspina.partials.groupProfile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <div class="">
+
+                <div class="col-lg-8 animated fadeInRight">
+                    <div class="">
                         <div class="col-lg-12">
-                        <?php if(isset($documents)): ?>
+                        <div class="col-sm-12">
+                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload New File</button>
+                        </div>
+                        <br> <br><br>
+                        <?php echo $__env->make('inspina.file.partials.upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <?php if($documents->count() != 0): ?>
                             <?php foreach($documents as $document): ?>
                                 <div class="file-box">
                                     <div class="file">
@@ -62,7 +35,7 @@
                                 </div>
                             <?php endforeach; ?>
                         <?php else: ?>
-                            <h2 align="center">Select a group to view documents<br> <br> THERE ARE NO DOCUMENTS FOR YOU HERE!!
+                            <h2 align="center"><br> <br> <br>THERE ARE NO DOCUMENTS UPLOADED YET!!
 
                             </h2>
                         <?php endif; ?>
@@ -72,6 +45,7 @@
                     </div>
                 </div>
                 </div>
+                </div>
         <!-- Content ends Here! -->
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('inspina', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

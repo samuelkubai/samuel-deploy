@@ -18,7 +18,7 @@ class CreateFilesTable extends Migration {
             $table->string('name');
             $table->string('type');
             $table->string('source');
-            $table->integer('group_id');
+            $table->integer('folder_id');
 			$table->timestamps();
 		});
 	}

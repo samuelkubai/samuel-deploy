@@ -17,6 +17,10 @@ class Group extends Model {
         return $this->belongsToMany('App\User', 'follows', 'group_id', 'user_id')->withTimestamps();
     }
 
+    public function followersCount()
+    {
+        return $this->followers()->get()->count();
+    }
     public function events()
     {
         return $this->hasMany('App\Event');
@@ -33,15 +37,7 @@ class Group extends Model {
         return $this->hasMany('App\Post');
     }
 
-    public function documents()
-    {
-        return $this->hasMany('App\File');
-    }
 
-    public function groupDocuments()
-    {
-        return $this->documents()->get();
-    }
 
     public function profile()
     {
@@ -55,5 +51,10 @@ class Group extends Model {
 
             return $profile->source;
         return 'inspina/img/profile_big.jpg';
+    }
+
+    public function folders()
+    {
+        return $this->hasMany('App\Folder');
     }
 }

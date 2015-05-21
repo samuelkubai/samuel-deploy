@@ -1,55 +1,83 @@
 <?php $__env->startSection('content'); ?>
-    <div class="wrapper wrapper-content">
-        <form action="<?php echo e(url( $group->username . '/update/')); ?>" method="post" enctype="multipart/form-data" >
-            <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-            <div>
-            <?php if(count($errors) > 0): ?>
-                <div class="alert alert-danger">
-                    <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                    <ul>
-                        <?php foreach($errors->all() as $error): ?>
-                            <li><?php echo e($error); ?></li>
-                        <?php endforeach; ?>
-                    </ul>
-                </div>
-            <?php endif; ?>
-                <div class="i  ">
-                    <div class="col-md-6">
-                        <img alt="image" class="img-responsive" src="<?php echo e(asset($group->profileSource())); ?>">
-                    </div>
-                    <div class=" row form-group ">
-                        <h4>Change Profile Picture:</h4>
-                        <input type="file" name="profile" class="form-group" />
-                    </div>
-                </div><br><br>
-                <div class="row form-group">
-                    <div class="col-md-6">
-                        <input name="email" type="email" class="form-control" placeholder="Group's Email" value="<?php echo e($group->email); ?>" required = "required">
-                    </div>
-                    <div class="col-md-6">
-                        <input name="username" type="text" class="form-control" disabled="true" placeholder="Unique Username" value="<?php echo e($group->username); ?>" required = "required">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-md-12">
-                        <input name="name" type="text" class="form-control" placeholder="Group Name" value="<?php echo e($group->name); ?>" required = "required">
-                    </div>
-                </div>
-                <div class="row form-group">
-                    <div class="col-md-12">
-                        <div class="chat-message-form">
-                            <div class="form-group">
-                                <textarea class="form-control message-input" name="description" placeholder="Brief Description" value="<?php echo e($group->description); ?>" required = "required"><?php echo e($group->description); ?></textarea>
+ <div class="wrapper wrapper-content">
+    <div class="row animated fadeInRight">
+        <?php echo $__env->make('inspina.partials.groupProfile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <div class="col-md-8">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-title">
+                                <h5>Group Profile</h5>
+                                <div class="ibox-tools">
+                                    <a class="collapse-link">
+                                        <i class="fa fa-chevron-up"></i>
+                                    </a>
+                                    <a class="dropdown-toggle" data-toggle="dropdown" href="#">
+                                        <i class="fa fa-wrench"></i>
+                                    </a>
+                                    <ul class="dropdown-menu dropdown-user">
+                                        <li><a href="#">Config option 1</a>
+                                        </li>
+                                        <li><a href="#">Config option 2</a>
+                                        </li>
+                                    </ul>
+                                    <a class="close-link">
+                                        <i class="fa fa-times"></i>
+                                    </a>
+                                </div>
+                            </div>
+                            <div class="ibox-content">
+                               <form action="<?php echo e(url( $group->username . '/update/')); ?>" method="POST" enctype="multipart/form-data" >
+                                          <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                          <div>
+                                          <?php if(count($errors) > 0): ?>
+                                              <div class="alert alert-danger">
+                                                  <strong>Whoops!</strong> There were some problems with your input.<br><br>
+                                                  <ul>
+                                                      <?php foreach($errors->all() as $error): ?>
+                                                          <li><?php echo e($error); ?></li>
+                                                      <?php endforeach; ?>
+                                                  </ul>
+                                              </div>
+                                          <?php endif; ?>
+                                              <div class=" row form-group ">
+                                                   <div class="col-md-12">
+                                                       <label class="">Change Group Profile Picture:</label>
+                                                       <input type="file" name="profile" class="form-control" />
+                                                   </div>
+                                               </div>
+
+                                              <div class="row form-group">
+                                                  <div class="col-md-6">
+                                                      <input name="email" type="email" class="form-control" placeholder="Group's Email" value="<?php echo e($group->email); ?>" required = "required">
+                                                  </div>
+                                                  <div class="col-md-6">
+                                                      <input name="username" type="text" class="form-control" disabled="true" placeholder="Unique Username" value="<?php echo e($group->username); ?>" required = "required">
+                                                  </div>
+                                              </div>
+                                              <div class="row form-group">
+                                                  <div class="col-md-12">
+                                                      <input name="name" type="text" class="form-control" placeholder="Group Name" value="<?php echo e($group->name); ?>" required = "required">
+                                                  </div>
+                                              </div>
+                                              <div class="row form-group">
+                                                  <div class="col-md-12">
+                                                      <div class="chat-message-form">
+                                                          <div class="form-group">
+                                                              <textarea class="form-control message-input" name="description" placeholder="Brief Description" value="<?php echo e($group->description); ?>" required = "required"><?php echo e($group->description); ?></textarea>
+                                                          </div>
+                                                      </div>
+                                                  </div>
+                                              </div>
+                                          </div>
+                                          <div class="modal-footer">
+                                              <a href="<?php echo e(url('admin',$group->username)); ?>" class="btn btn-default">Close</a>
+                                              <button type="submit" class="btn btn-info">Update</button>
+                                          </div>
+                                      </form>
                             </div>
                         </div>
+
                     </div>
                 </div>
             </div>
-            <div class="modal-footer">
-                <a href="<?php echo e(url('admin',$group->username)); ?>" class="btn btn-default">Close</a>
-                <button type="submit" class="btn btn-info">Create</button>
-            </div>
-        </form>
-    </div>
 <?php $__env->stopSection(); ?>
-<?php echo $__env->make('admin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+<?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

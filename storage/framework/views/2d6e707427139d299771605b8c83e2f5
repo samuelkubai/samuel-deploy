@@ -1,0 +1,91 @@
+<div class="col-md-4">
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Group Detail</h5>
+        </div>
+        <div>
+            <div class="ibox-content no-padding border-left-right">
+               <a href="<?php echo e(url($group->username)); ?>">
+                    <img alt="image" class="img-responsive img-container" src="<?php echo e(asset($group->profileSource())); ?>">
+               </a>
+            </div>
+            <div class="ibox-content profile-content">
+                <h4><strong><?php echo e($group->name); ?></strong></h4>
+                <h5>
+
+                </h5>
+                <p>
+                    <?php echo e($group->description); ?>
+
+                </p>
+                <?php if(\Auth::user()->id == $group->user_id): ?>
+                <div class="user-button">
+                    <div class="row">
+                        <div class="col-md-6">
+                            <a href="<?php echo e(url($group->username. '/update/')); ?>" class="btn btn-default btn-sm btn-block"><i class="fa fa-text"></i> Edit Group</a>
+                        </div>
+                        <div class="col-md-6">
+                            <a href="<?php echo e(url($group->username, 'delete')); ?>" class="btn btn-danger btn-sm btn-block"><i class="fa fa-"></i> Delete Group</a>
+                        </div>
+                    </div>
+                </div>
+                <?php endif; ?>
+            </div>
+        </div>
+    </div>
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        File Manager
+    </div>
+                            <div class="ibox-content">
+                                <div class="file-manager">
+                                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">New Folder</button>
+                                    <div class="hr-line-dashed"></div>
+                                    <?php echo $__env->make('inspina.file.partials.createFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                    <h5>Group Folder</h5>
+                                    <ul class="folder-list" style="padding: 0">
+                                    <?php if($group->folders()->get()->count() != 0): ?>
+                                    <?php foreach($group->folders()->get() as $folder): ?>
+                                        <li><a href="<?php echo e('/manager/'.$group->username.'/'.$folder->id); ?>"><i class="fa fa-folder"></i> <?php echo e($folder->name); ?></a></li>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <li><b> <span align="center">No Folders for this group.</span></b></li>
+                                    <?php endif; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+    <div class="ibox float-e-margins">
+        <div class="ibox-title">
+            <h5>Group Features:</h5>
+        </div>
+        <div>
+            <ul class="list-group ">
+                <li class="list-group-item fist-item">
+                                    <span class="pull-right badge badge-info">
+                                        <?php echo e($group->followersCount()); ?>
+
+                                    </span>
+                    <span class="label label-success">1</span> &nbsp;<a href="<?php echo e(url($group->username)); ?>">Followers</a>
+                </li>
+                <li class="list-group-item fist-item">
+                                    <span class="pull-right badge badge-info">
+                                        <?php echo e($group->events()->count()); ?>
+
+                                    </span>
+                    <span class="label label-info">2</span> &nbsp;<a href="<?php echo e(url($group->username, 'events')); ?>">Events</a>
+                </li>
+                <li class="list-group-item fist-item">
+                                    <span class="pull-right badge badge-info">
+                                        <?php echo e($group->notices()->count()); ?>
+
+                                    </span>
+                    <span class="label label-info">3</span> &nbsp;<a href="<?php echo e(url($group->username,'notice')); ?>">Notices</a>
+                </li>
+
+            </ul>
+        </div>
+    </div>
+
+
+</div>

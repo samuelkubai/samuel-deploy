@@ -1,4 +1,4 @@
-@extends('inspina')
+@extends('inspina.layouts.main')
 
 
 @section('content')
@@ -11,7 +11,9 @@
                         </div>
                         <div>
                             <div class="ibox-content no-padding border-left-right">
-                                <img alt="image" class="img-responsive img-container" src="{{asset($user->profileSource())}}">
+                                <a href="{{ url('/profile/update') }}">
+                                    <img alt="image" class="img-responsive img-container" src="{{asset($user->profileSource())}}">
+                                </a>
                             </div>
                             <div class="ibox-content profile-content">
                                 <p>
@@ -37,34 +39,18 @@
                     </div>
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
-                             <h5>To-Do List</h5>
+                             <h5>Followed Groups:</h5>
                         </div>
                         <div>
                         <ul class="list-group ">
+                        @foreach($user->followedGroups() as $group)
                             <li class="list-group-item fist-item">
-                                <span class="pull-right">
-                                    09:00 pm
+                                <span class="pull-right badge badge-info">
+                                    {{ $group->followersCount() }} Followers
                                 </span>
-                                <span class="label label-success">1</span> Please contact me
+                                <span class="label label-success">1</span> &nbsp;<a href="{{ url($group->username) }}">{{ $group->name }}</a>
                             </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    10:16 am
-                                </span>
-                                <span class="label label-info">2</span> Sign a contract
-                            </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    10:16 am
-                                </span>
-                                <span class="label label-danger">3</span> Attend the IBM training camp.
-                            </li>
-                            <li class="list-group-item">
-                                <span class="pull-right">
-                                    10:16 am
-                                </span>
-                                <span class="label label-success">4</span> Refresh the application source code.
-                            </li>
+                         @endforeach
                         </ul>
                     </div>
                     </div>
@@ -95,23 +81,10 @@
 
                             <div>
                                 <div class="feed-activity-list">
-                                        @foreach($statuses as $status)
-
-                                                <div class="feed-element">
-                                                    <a href="profile.html" class="pull-left">
-                                                        <img alt="image" class="img-circle" src="http://localhost:8000/inspina/img/profile.jpg">
-                                                    </a>
-                                                    <div class="media-body ">
-                                                        <small class="pull-right">{{ $status->updated_at }}</small>
-                                                        <strong>{{ $status->title }}</strong><br>
-                                                        <span class="text-muted">{{ $status->message }}</span>
-
-                                                    </div>
-                                                </div>
-                                        @endforeach
+                                        @include('inspina.partials.status', ['statuses' => $statuses])
                                 </div>
 
-                                <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> Show More</button>
+                                <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> More Post</button>
 
                             </div>
 

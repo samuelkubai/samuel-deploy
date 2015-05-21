@@ -79,6 +79,12 @@ Route::bind('group' , function($username)
     return App\Group::where('username', $username)->first();
 });
 
+Route::bind('folder' , function($id)
+{
+    /** @var int $id */
+    return App\Folder::find($id);
+});
+
 /**Route::bind('school' , function($school)
 {
      @var TYPE_NAME $id
@@ -130,12 +136,14 @@ Route::post('/test',['uses' => 'HomeController@uploadFile'] );
     /* Client Routes */
         Route::get('/manager',
             [ 'middleware' => 'school', 'uses' => 'FileController@index' ]);
-        Route::get('/manager/{group}',
+        Route::get('/manager/{group}/{folder}',
             [ 'middleware' => 'school', 'uses' => 'FileController@show' ]);
         Route::get('/manager/upload',
             [ 'middleware' => 'school', 'uses' => 'FileController@create' ]);
         Route::post('/manager/upload',
             [ 'middleware' => 'school', 'uses' => 'FileController@store' ]);
+        Route::post('/manager/{group}/folder',
+            [ 'middleware' => 'school', 'uses' => 'FileController@storeFolder' ]);
     /* End Client Routes */
 
     /* School Routes */
@@ -186,6 +194,7 @@ Route::post('/test',['uses' => 'HomeController@uploadFile'] );
         Route::get('/join/group',  ['middleware' => 'school', 'uses' => 'ClientController@create']);
         Route::get('{username}/join/group',  ['middleware' => 'school', 'uses' => 'ClientController@store']);
         Route::get('{username}/leave/group',  ['middleware' => 'school', 'uses' => 'ClientController@destroy']);
+        Route::get('/mygroups',  ['middleware' => 'school', 'uses' => 'GroupController@allGroups']);
 
     /* End Client Routes */
 /* End Group Routes */
@@ -212,7 +221,7 @@ Route::post('/test',['uses' => 'HomeController@uploadFile'] );
     Route::get('/create/group',  ['middleware' => 'school', 'uses' => 'GroupController@create']);
     Route::post('/create/group',  ['middleware' => 'school', 'uses' => 'GroupController@store']);
     Route::get('/admin/groups',  ['middleware' => 'school', 'uses' => 'GroupController@index']);
-    Route::get('/admin/{username}/',  ['middleware' => 'school', 'uses' => 'GroupController@show']);
+    Route::get('/{username}/',  ['middleware' => 'school', 'uses' => 'GroupController@show']);
     Route::get('/{username}/update/',  ['middleware' => 'school', 'uses' => 'GroupController@edit']);
     Route::post('/{username}/update/',  ['middleware' => 'school', 'uses' => 'GroupController@update']);
     Route::get('/{username}/delete/',  ['middleware' => 'school', 'uses' => 'GroupController@destroy']);

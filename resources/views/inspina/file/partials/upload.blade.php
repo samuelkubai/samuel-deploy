@@ -1,5 +1,5 @@
 
-                                <div class="modal inmodal" id="myModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                <div class="modal inmodal" id="uploadModal" tabindex="-1" role="dialog" aria-hidden="true">
                                     <div class="modal-dialog">
                                     <div class="modal-content animated bounceInRight">
                                             <div class="modal-header">
@@ -14,10 +14,10 @@
                                                    <div class="row form-group"><label>Upload a file:</label> <input type="file" name="file" placeholder="Select a file to upload" class="form-control col-sm-12"></div>
                                                    <div class=" row form-group pull-right">
                                                    <label>Select a group</label>
-                                                        <select name="group">
+                                                        <select name="folder">
                                                             <option value="">--Choose a group--</option>
-                                                            @foreach($groups as $group)
-                                                                <option value="{{ $group->id }}">{{ $group->name }}</option>
+                                                            @foreach($group->folders()->get() as $folder)
+                                                                <option value="{{ $folder->id }}">{{ $folder->name }}</option>
                                                             @endforeach
                                                         </select>
                                                    </div>
