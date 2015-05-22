@@ -3,6 +3,7 @@
 use App\Http\Client\ClientRepository;
 use App\Http\File\FileRepository;
 use App\Http\Requests;
+use App\Http\Requests\UpdateUserProfileRequest;
 use Illuminate\Contracts\Auth\Guard;
 use Illuminate\Http\Request;
 
@@ -68,18 +69,19 @@ class ClientController extends Controller
         return view('inspina.update.user', compact('title', 'user'));
     }
 
-    public function update(Request $request)
+
+
+    /**
+     * @param UpdateUserProfileRequest $request
+     * @return $this|\Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
+     */
+    public function update( UpdateUserProfileRequest $request)
     {
+
         $user = $this->user();
         // This checks of there's a need to upload the picture and saves the rest of the information if not.
         if ($request->file('profile') == null) {
-            $user->fill([
-                'email' => $request->email,
-                'password' => bcrypt($request->password),
-                'firstName' =>$request->firstName,
-                'lastName' => $request->lastName,
-                'telNumber' => $request->telNumber,
-            ])->save();
+            $this->repo->updateUser($request, $user);
             return redirect('/')->with('success', 'Profile Successfully updated');
         }
 
@@ -88,7 +90,7 @@ class ClientController extends Controller
             return redirect()->back()->withErrors( 'Profile Was Not Updated, Check if below 10mb or right extension.');
 
         //Persists the rest of the data.
-        $user->fill($request->input())->save();
+        $this->repo->updateUser($request, $user);
 
         return redirect('/');
 

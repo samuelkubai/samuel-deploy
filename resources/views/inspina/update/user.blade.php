@@ -91,7 +91,7 @@
 
                                                <div class="row form-group">
                                                    <div class="col-md-12">
-                                                       <input name="email" type="email" class="form-control" placeholder="Group Name" value="{{$user->email}}" required = "required">
+                                                       <input name="email" type="email" class="form-control" placeholder="Group Name" disabled="true" value="{{$user->email}}" required = "required">
                                                    </div>
                                                </div>
                                                <div class="row form-group">
@@ -110,7 +110,7 @@
 
                                                <div class="row form-group">
                                                    <div class="col-md-12">
-                                                       <input name="password" type="text" class="form-control" placeholder="New Password" >
+                                                       <input name="password" type="password" class="form-control" placeholder="New Password" >
                                                    </div>
                                                </div>
 

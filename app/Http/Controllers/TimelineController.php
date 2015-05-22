@@ -3,6 +3,8 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\CreateEventRequest;
+use App\Http\Requests\UpdateEventRequest;
 use Illuminate\Http\Request;
 
 use App\Http\Timeline\TimelineService;
@@ -65,11 +67,11 @@ class TimelineController extends Controller {
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param CreateEventRequest|Request $request
      * @param $group
      * @return Response
      */
-	public function store( Request $request, $group)
+	public function store(CreateEventRequest $request, $group)
 	{
 		$this->dispatch(
 				/* Returns a command for the Controller to dispatch */
@@ -111,14 +113,15 @@ class TimelineController extends Controller {
     /**
      * Update the specified resource in storage.
      *
+     * @param UpdateEventRequest $request
      * @param $event
      * @internal param int $id
      * @return Response
      */
-	public function update(Request $request, $event)
+	public function update(UpdateEventRequest $request, $event)
 	{
         $event->fill($request->input())->save();
-        return redirect('/admin/'.$event->group()->username.'/events');
+        return redirect($event->group()->username.'/events');
 	}
 
     /**

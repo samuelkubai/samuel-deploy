@@ -26,6 +26,9 @@
                                             <div class="file-name">
                                                 <?php echo e($document->name); ?>
 
+                                                <?php if($group->isOwner(\Auth::user())): ?>
+                                                <span class="pull-right"><a href="<?php echo e('/manager/delete/'.$folder->id.'/'.$document->id); ?> " class="pull-right"><i class="glyphicon glyphicon-remove pull-right"></i></a></span>
+                                                <?php endif; ?>
                                                 <br/>
                                                 <small>Added: <?php echo e($document->created_at); ?></small>
                                             </div>
@@ -37,11 +40,20 @@
                         <?php else: ?>
                             <h2 align="center"><br> <br> <br>THERE ARE NO DOCUMENTS UPLOADED YET!!
 
-                            </h2>
+                            </h2><br> <br> <br><br> <br> <br>
                         <?php endif; ?>
 
                         </div>
-                    </div>
+                        <?php if($group->isOwner(\Auth::user())): ?>
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-info btn-block col-sm-3" data-toggle="modal" data-target="#updateModal">Rename Folder <i class="glyphicon glyphicon-pencil"></i></button>
+                                <?php echo $__env->make('inspina.file.partials.updateFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="<?php echo e('/manager/'.$folder->id.'/delete/'); ?>" class="btn btn-danger btn-block col-sm-3">Delete Folder <i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
+                        <?php endif; ?>
+                        </div>
                     </div>
                 </div>
                 </div>

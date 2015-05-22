@@ -8,6 +8,8 @@ use App\Http\File\FolderRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\CreateFileRequest;
+use App\Http\Requests\CreateFolderRequest;
 use Illuminate\Http\Request;
 
 class FileController extends Controller
@@ -60,17 +62,16 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
-     * @param Request $request
+     * @param CreateFileRequestRequest|CreateFileRequest|Request $request
      * @return Response
      */
-	public function store(Request $request)
+	public function store($folder ,CreateFileRequest $request)
 	{
         $allowedTypes = [
           'txt', 'pdf', 'docx', 'jpg', 'png', 'ppt', 'doc'
         ];
 
         $type = $request->file('file')->getClientOriginalExtension();
-        $folder = Folder::find($request->folder);
         if($request->file('file')->getClientSize() > 10000000)
         {
             return redirect()->back()->with('error', 'The file must be under 10Mb in size.');
@@ -92,9 +93,9 @@ class FileController extends Controller
      */
 	public function show($group, $folder)
 	{
-        $title = 'File Manager';
+        $title = 'File Manager: '.$folder->name;
         $documents = $folder->files()->get();
-        return view('inspina.file.manager', compact('title','group','groups', 'documents'));
+        return view('inspina.file.manager', compact('title','group','folder', 'documents'));
 	}
 
 	/**
@@ -125,15 +126,36 @@ class FileController extends Controller
 	 * @param  int  $id
 	 * @return Response
 	 */
-	public function destroy($id)
+	public function destroy($folder, $file)
 	{
-		//
+        $file->delete();
+		return redirect('manager/'.$folder->group()->first()->username.'/'.$folder->id);
 	}
 
-    public function storeFolder(Request $request, $group)
+    /**
+     * @param CreateFolderRequest $request
+     * @param $group
+     * @return \Illuminate\Http\RedirectResponse
+     */
+    public function storeFolder(CreateFolderRequest $request, $group)
     {
-        $this->folderRepository->create($request->name, $group);
+        $folder = $this->folderRepository->create($request->name, $group);
+
+        return redirect('manager/'.$folder->group()->first()->username.'/'.$folder->id);
+    }
+
+    public function updateFolder($folder, CreateFolderRequest $request)
+    {
+        $this->folderRepository->update($request->name, $folder);
 
         return redirect()->back();
+    }
+
+    public function destroyFolder($folder)
+    {
+        $group = $folder->group()->first();
+        $this->folderRepository->destroy($folder);
+
+        return redirect($group->username);
     }
 }

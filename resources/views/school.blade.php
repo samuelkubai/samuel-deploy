@@ -89,7 +89,7 @@
                         <a data-toggle="dropdown" class="dropdown-toggle  pull-right " href="#" id="user-options">
                             <div class="iconset top-settings-dark "></div>
                         </a>
-                        <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
+                            <ul class="dropdown-menu  pull-right" role="menu" aria-labelledby="user-options">
                             <li><a href="">Profile</a>
                             </li>
                             <li><a href="">Contacts</a>

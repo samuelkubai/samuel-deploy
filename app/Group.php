@@ -72,4 +72,11 @@ class Group extends Model {
     {
         return $this->hasMany('App\Folder');
     }
+
+    public function isOwner($user)
+    {
+        if($this->user()->first()->id == $user->id)
+            return true;
+        return false;
+    }
 }

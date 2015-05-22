@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class CreateSchoolRequest extends Request {
+class CreateEventRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -22,11 +22,9 @@ class CreateSchoolRequest extends Request {
 	public function rules()
 	{
 		return [
-            'name' => 'required',
+			'title' => 'required',
             'description' => 'required',
-            'username' => 'required | unique:groups,username',
-            'email' => 'email| unique:groups,email',
-           // 'url' => 'required',
+            'date' => 'required',
 		];
 	}
 

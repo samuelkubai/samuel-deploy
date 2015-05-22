@@ -84,6 +84,7 @@ class SchoolController extends Controller {
             'firstName' => 'required',
             'lastName' => 'required',
             'telNumber' => 'required',
+            'terms' => 'required',
 
             ]);
 

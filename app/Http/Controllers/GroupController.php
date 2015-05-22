@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CreateSchoolRequest;
+use App\Http\Requests\UpdateGroupRequest;
 use App\Http\User\UserRepository;
 use App\User;
 use Illuminate\Http\Request;
@@ -105,12 +106,12 @@ class GroupController extends Controller {
     /**
      * Update the specified resource in storage.
      *
-     * @param Request $request
+     * @param UpdateGroupRequest|Request $request
      * @param $group
      * @internal param int $id
      * @return Response
      */
-	public function update(Request $request, $group)
+	public function update(UpdateGroupRequest $request, $group)
 	{
         if ($request->file('profile') != null)
         {

@@ -85,6 +85,12 @@ Route::bind('folder' , function($id)
     return App\Folder::find($id);
 });
 
+Route::bind('file' , function($id)
+{
+    /** @var int $id */
+    return App\File::find($id);
+});
+
 /**Route::bind('school' , function($school)
 {
      @var TYPE_NAME $id
@@ -136,14 +142,21 @@ Route::post('/test',['uses' => 'HomeController@uploadFile'] );
     /* Client Routes */
         Route::get('/manager',
             [ 'middleware' => 'school', 'uses' => 'FileController@index' ]);
-        Route::get('/manager/{group}/{folder}',
-            [ 'middleware' => 'school', 'uses' => 'FileController@show' ]);
+
         Route::get('/manager/upload',
             [ 'middleware' => 'school', 'uses' => 'FileController@create' ]);
-        Route::post('/manager/upload',
+        Route::post('/manager/upload/{folder}',
             [ 'middleware' => 'school', 'uses' => 'FileController@store' ]);
+        Route::get('/manager/{folder}/delete',
+            [ 'middleware' => 'school', 'uses' => 'FileController@destroyFolder' ]);
         Route::post('/manager/{group}/folder',
             [ 'middleware' => 'school', 'uses' => 'FileController@storeFolder' ]);
+        Route::post('/manager/{folder}/folder/update',
+            [ 'middleware' => 'school', 'uses' => 'FileController@updateFolder' ]);
+        Route::get('/manager/delete/{folder}/{file}',
+            [ 'middleware' => 'school', 'uses' => 'FileController@destroy' ]);
+        Route::get('/manager/{group}/{folder}',
+            [ 'middleware' => 'school', 'uses' => 'FileController@show' ]);
     /* End Client Routes */
 
     /* School Routes */

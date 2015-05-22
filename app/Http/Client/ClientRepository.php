@@ -62,4 +62,14 @@ class ClientRepository
     }
 
 
+    public  function updateUser($request, $user)
+    {
+        $user->fill([
+            'email' => $request->email,
+            'password' => ($request->password)? bcrypt($request->password):$user->password,
+            'firstName' =>$request->firstName,
+            'lastName' => $request->lastName,
+            'telNumber' => $request->telNumber,
+        ])->save();
+    }
 }

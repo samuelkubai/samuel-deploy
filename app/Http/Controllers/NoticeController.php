@@ -3,6 +3,7 @@
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\CreateNoticeRequest;
 use Illuminate\Http\Request;
 use App\Http\Notice\NoticeService;
 use App\Http\Notice\NoticeRepository;
@@ -38,13 +39,14 @@ class NoticeController extends Controller {
 	}
 
 
-
-	/**
-	 * Store a newly created resource in storage.
-	 *
-	 * @return Response
-	 */
-	public function store(Request $request, $group)
+    /**
+     * Store a newly created resource in storage.
+     *
+     * @param CreateNoticeRequest $request
+     * @param $group
+     * @return Response
+     */
+	public function store(CreateNoticeRequest $request, $group)
 	{
 		
 		$this->dispatch(
@@ -66,7 +68,7 @@ class NoticeController extends Controller {
 	{
 		$title = 'Notice Board';
 		$notices = $this->repo->pinsForSchool($group);
-		return view('inspina..notice.board', compact('notices','group', 'title'));
+		return view('inspina.notice.board', compact('notices','group', 'title'));
 	}
 
     /**

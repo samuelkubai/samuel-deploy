@@ -27,6 +27,9 @@
                                             </div>
                                             <div class="file-name">
                                                 {{ $document->name }}
+                                                @if($group->isOwner(\Auth::user()))
+                                                <span class="pull-right"><a href="{{ '/manager/delete/'.$folder->id.'/'.$document->id }} " class="pull-right"><i class="glyphicon glyphicon-remove pull-right"></i></a></span>
+                                                @endif
                                                 <br/>
                                                 <small>Added: {{ $document->created_at }}</small>
                                             </div>
@@ -38,11 +41,20 @@
                         @else
                             <h2 align="center"><br> <br> <br>THERE ARE NO DOCUMENTS UPLOADED YET!!
 
-                            </h2>
+                            </h2><br> <br> <br><br> <br> <br>
                         @endif
 
                         </div>
-                    </div>
+                        @if($group->isOwner(\Auth::user()))
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-info btn-block col-sm-3" data-toggle="modal" data-target="#updateModal">Rename Folder <i class="glyphicon glyphicon-pencil"></i></button>
+                                @include('inspina.file.partials.updateFolder')
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="{{'/manager/'.$folder->id.'/delete/'}}" class="btn btn-danger btn-block col-sm-3">Delete Folder <i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
+                        @endif
+                        </div>
                     </div>
                 </div>
                 </div>

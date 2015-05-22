@@ -3,7 +3,7 @@
 <head>
     <meta http-equiv="content-type" content="text/html;charset=UTF-8" />
     <meta charset="utf-8" />
-    <title>skoolspace | Login</title>
+    <title>SS+ | Login</title>
     <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no" />
     <meta content="" name="description" />
     <meta content="" name="author" />
@@ -56,9 +56,10 @@
                     </div>
                     <div class="row p-t-10 m-l-20 m-r-20 xs-m-l-10 xs-m-r-10">
                         <div class="control-group  col-md-9">
-                            <div class="checkbox checkbox check-success"> <a href="login_v2.html#">Trouble login in?</a>&nbsp;&nbsp;
+                            <div class="control-box col-md-9"> <a href="">Trouble login in?</a>&nbsp;&nbsp;
+                                Remember me
                                 <input name="remember" type="checkbox" id="checkbox1" value="1">
-                                <label for="checkbox1">Keep me reminded </label>
+
                             </div>
 
                         </div>

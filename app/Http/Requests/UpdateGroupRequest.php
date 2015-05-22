@@ -2,7 +2,7 @@
 
 use App\Http\Requests\Request;
 
-class CreateSchoolRequest extends Request {
+class UpdateGroupRequest extends Request {
 
 	/**
 	 * Determine if the user is authorized to make this request.
@@ -23,10 +23,8 @@ class CreateSchoolRequest extends Request {
 	{
 		return [
             'name' => 'required',
-            'description' => 'required',
-            'username' => 'required | unique:groups,username',
-            'email' => 'email| unique:groups,email',
-           // 'url' => 'required',
+            'email' => 'required',
+            'description'  => 'required',
 		];
 	}
 

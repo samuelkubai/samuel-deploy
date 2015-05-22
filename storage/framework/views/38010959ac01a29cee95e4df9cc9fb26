@@ -9,17 +9,18 @@
                     <form action="<?php echo e(url('/admin/'. $group->username . '/events/')); ?>" method="post" >
                         <div class="modal-body">
                                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
-                                    <div class="row form-group">
+                                    <div class="row">
                                         <div class="col-md-10">
                                             <div class="form-group" id="data_1">
                                                 <label class="font-noraml">Select the Date of the Event</label>
-
                                                 <div class="input-group date">
                                                     <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="date" value="03/04/2014">
                                                 </div>
                                             </div>
+
                                         </div>
                                     </div>
+
                                     <div class="row form-group">
                                         <div class="col-md-12">
                                             <input name="title" type="text" class="form-control" placeholder="Event title">

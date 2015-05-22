@@ -2,6 +2,8 @@
   <dictionary name="nanoy">
     <words>
       <w>csrf</w>
+      <w>datapicker</w>
+      <w>datepicker</w>
       <w>docx</w>
       <w>dropzone</w>
       <w>flot</w>
