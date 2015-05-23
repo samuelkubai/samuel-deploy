@@ -106,7 +106,7 @@
             <div class="col-sm-12 ">
 
                 <h2 align="center">{{ $title }}</h2>
-                <span><div  class="text-muted" align="center" style="color: wheat">Share, notify, be informed, This is <b>skoolspace</b>.</div></span>
+                <span><div  class="text-muted" align="center" style="color: wheat">Share, Notify, Be informed, This is <b>skoolspace</b>.</div></span>
             </div>
         </div>
             <br>

@@ -77,7 +77,7 @@
                             <tbody>
                             <?php foreach( $groups as $school ): ?>
                                 <tr class="gradeX">
-                                    <td class="v-align-middle"><a href="<?php echo e(url('/admin/'.$school->username)); ?>"><?php echo e($school->name); ?></a></td>
+                                    <td class="v-align-middle"><a href="<?php echo e(url($school->username)); ?>"><?php echo e($school->name); ?></a></td>
                                     <td><span class="muted"><?php echo e($school->username); ?></span> </td>
                                     <td class="v-align-middle"> <?php echo e($school->email); ?> </td>
                                     <td class="v-align-middle"> <a href="" class="btn btn-danger">Delete</a> </td>
@@ -95,7 +95,7 @@
                         </table>
                     </div>
                 </div>
-
+                <?php echo $__env->make('inspina.partials.pagination', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                 <?php echo $__env->make('inspina.partials.back_button', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             </div>
         </div>

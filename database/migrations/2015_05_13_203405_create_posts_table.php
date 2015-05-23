@@ -18,6 +18,7 @@ class CreatePostsTable extends Migration {
             $table->integer('group_id');
             $table->string('title');
             $table->text('message');
+            $table->string('url');
 			$table->timestamps();
 		});
 	}

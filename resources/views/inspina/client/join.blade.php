@@ -104,7 +104,7 @@
                         </table>
                     </div>
                 </div>
-
+                @include('inspina.partials.pagination')
                 @include('inspina.partials.back_button')
             </div>
         </div>

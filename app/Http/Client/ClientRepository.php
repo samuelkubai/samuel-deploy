@@ -25,23 +25,25 @@ class ClientRepository
 
     /**
      *  Returns all the groups in the system.
+     * @param int $howMany
      * @return \Illuminate\Database\Eloquent\Collection|static[]
      */
-    public function allGroups()
+    public function allGroups($howMany =10)
 	{
-		return Group::all();
+		return Group::simplePaginate($howMany);
 	}
 
     /**
      * Returns all the groups the user has joined.
      * @param $user
+     * @param int $howMany
      * @return mixed
      */
-    public function groupsForUser($user)
+    public function groupsForUser($user, $howMany = 10)
 	{
         $groupIds = $user->follows()->lists('group_id');
 
-        $groups = Group::whereIn('id', $groupIds)->get();
+        $groups = Group::whereIn('id', $groupIds)->simplePaginate($howMany);
 
         return $groups;
 	}
@@ -65,7 +67,6 @@ class ClientRepository
     public  function updateUser($request, $user)
     {
         $user->fill([
-            'email' => $request->email,
             'password' => ($request->password)? bcrypt($request->password):$user->password,
             'firstName' =>$request->firstName,
             'lastName' => $request->lastName,

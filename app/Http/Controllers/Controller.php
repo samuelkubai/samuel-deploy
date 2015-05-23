@@ -45,16 +45,17 @@ abstract class Controller extends BaseController {
 
     /**
      * @param null $user
+     * @param int $howMany
      * @return mixed
      */
-    public function groupsForUser($user = null)
+    public function groupsForUser($user = null, $howMany = 1)
     {
         if($user != null)
         {
-            return Group::where('user_id', $user->id)->get();
+            return Group::where('user_id', $user->id)->simplePaginate($howMany);
         }
 
         
-        return Group::where('user_id', $this->user()->id)->get();
+        return Group::where('user_id', $this->user()->id)->simplePaginate($howMany);
     }
 }

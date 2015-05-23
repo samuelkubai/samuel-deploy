@@ -28,10 +28,10 @@
 
                             <div>
                                 <div class="feed-activity-list">
-                                    @include('inspina.partials.status', ['statuses' => $group->posts()->get(    )])
+                                    @include('inspina.partials.status', ['statuses' => $group->paginatedPosts()])
                                 </div>
 
-                                <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> Previous Posts</button>
+                                @include('inspina.partials.previous_feed_button', ['statuses' => $group->paginatedPosts()])
 
                             </div>
 

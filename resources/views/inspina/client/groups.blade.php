@@ -106,9 +106,11 @@
                             </tr>
                             </tfoot>
                         </table>
+
                     </div>
                 </div>
-                @include('inspina.partials.back_button')
+                        @include('inspina.partials.pagination')
+                        @include('inspina.partials.back_button')
             </div>
         </div>
     </div>

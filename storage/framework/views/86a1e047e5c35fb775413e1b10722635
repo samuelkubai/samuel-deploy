@@ -11,13 +11,18 @@
             <br/>
 
             <?php echo $__env->make('inspina.timeline.partials.admin_timeline', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-
+            <div class="col-lg-8">
+                <?php echo $__env->make('inspina.partials.previous_events', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            </div>
             <?php echo $__env->make('inspina.timeline.partials.event-modal', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
         </div>
 
         <?php else: ?>
     	<?php echo $__env->make('inspina.timeline.partials.timeline', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-    	<?php endif; ?>
+            <div class="col-lg-8">
+                <?php echo $__env->make('inspina.partials.previous_events', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            </div>
+        <?php endif; ?>
     </div>
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

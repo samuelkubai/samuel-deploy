@@ -2,7 +2,7 @@
 
 use App\Folder;
 use App\Group;
-use App\Http\CLient\ClientRepository;
+use App\Http\Client\ClientRepository;
 use App\Http\File\FileRepository;
 use App\Http\File\FolderRepository;
 use App\Http\Requests;
@@ -68,19 +68,20 @@ class FileController extends Controller
 	public function store($folder ,CreateFileRequest $request)
 	{
         $allowedTypes = [
-          'txt', 'pdf', 'docx', 'jpg', 'png', 'ppt', 'doc'
+          'txt', 'pdf', 'docx', 'jpg', 'png', 'ppt', 'doc', 'jpeg', 'jpe'
         ];
 
         $type = $request->file('file')->getClientOriginalExtension();
+        $name = $request->name;
         if($request->file('file')->getClientSize() > 10000000)
         {
             return redirect()->back()->with('error', 'The file must be under 10Mb in size.');
         }
 
-        if(!$this->repo->authenticateType($request->file('file')->getClientOriginalExtension(), $allowedTypes))
+        if(!$this->repo->authenticateType($type, $allowedTypes))
             return redirect()->back()->with('error', 'This file extension is not supported.');
 
-        $this->repo->uploadGroupDocument($_FILES, 'documents', $folder  ,$type);
+        $this->repo->uploadGroupDocument($_FILES, 'documents', $folder  ,$type, $name);
 		return redirect()->back()->with('success', 'File Successfully Uploaded');
 	}
 
@@ -120,12 +121,14 @@ class FileController extends Controller
 		//
 	}
 
-	/**
-	 * Remove the specified resource from storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
+    /**
+     * Remove the specified resource from storage.
+     *
+     * @param $folder
+     * @param $file
+     * @internal param int $id
+     * @return Response
+     */
 	public function destroy($folder, $file)
 	{
         $file->delete();

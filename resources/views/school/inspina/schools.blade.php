@@ -79,7 +79,7 @@
                             <tbody>
                             @foreach( $groups as $school )
                                 <tr class="gradeX">
-                                    <td class="v-align-middle"><a href="{{url('/admin/'.$school->username)}}">{{ $school->name }}</a></td>
+                                    <td class="v-align-middle"><a href="{{url($school->username)}}">{{ $school->name }}</a></td>
                                     <td><span class="muted">{{ $school->username }}</span> </td>
                                     <td class="v-align-middle"> {{ $school->email }} </td>
                                     <td class="v-align-middle"> <a href="" class="btn btn-danger">Delete</a> </td>
@@ -97,7 +97,7 @@
                         </table>
                     </div>
                 </div>
-
+                @include('inspina.partials.pagination')
                 @include('inspina.partials.back_button')
             </div>
         </div>

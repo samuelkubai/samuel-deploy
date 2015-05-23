@@ -102,8 +102,6 @@ Route::bind('file' , function($id)
 
 
 
-Route::get('/test',['uses' => 'HomeController@createFile'] );
-Route::post('/test',['uses' => 'HomeController@uploadFile'] );
 
 
 
@@ -178,7 +176,7 @@ Route::post('/test',['uses' => 'HomeController@uploadFile'] );
     /* Client Routes */
         Route::get('/{username}/events',  ['middleware' => 'school', 'uses' => 'TimelineController@Show']);
         Route::get('/events',  ['middleware' => 'school', 'uses' => 'TimelineController@Index']);
-    /* End Client ROutes */
+    /* End Client Routes */
     
 /* End Event Routes */
 

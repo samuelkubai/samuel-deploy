@@ -1,7 +1,7 @@
 <?php namespace App;
 
 use Illuminate\Database\Eloquent\Model;
-
+use App\Post;
 class Group extends Model {
 
 	protected $fillable = [ 'user_id',  'group_id', 'username', 'name', 'description', 'email'];
@@ -78,5 +78,10 @@ class Group extends Model {
         if($this->user()->first()->id == $user->id)
             return true;
         return false;
+    }
+
+    public function paginatedPosts($howMany = 10)
+    {
+        return Post::where('group_id', $this->id)->latest()->simplePaginate();
     }
 }

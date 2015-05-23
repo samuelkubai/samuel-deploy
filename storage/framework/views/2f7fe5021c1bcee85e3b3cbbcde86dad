@@ -8,6 +8,7 @@
                                                         <small class="pull-right"><?php echo e($status->updated_at); ?></small>
                                                         <strong><?php echo e($status->title); ?></strong><br>
                                                         <span class="text-muted"><?php echo e($status->message); ?></span>
+                                                        <span class="pull-right"><a href="<?php echo e(url($status->url)); ?>"><i class="glyphicon glyphicon-play-circle"></i></a></span>
 
                                                     </div>
                                                 </div>

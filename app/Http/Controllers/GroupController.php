@@ -1,6 +1,6 @@
 <?php namespace App\Http\Controllers;
 
-use App\Http\CLient\ClientRepository;
+use App\Http\Client\ClientRepository;
 use App\Http\Group\GroupRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -46,6 +46,7 @@ class GroupController extends Controller {
 	{
         $title = "Groups";
         $groups = $this->groupsForUser();
+
         return view('school.inspina.schools', compact('title', 'groups'));
 	}
 

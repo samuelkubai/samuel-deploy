@@ -25,10 +25,10 @@
 
                             <div>
                                 <div class="feed-activity-list">
-                                    <?php echo $__env->make('inspina.partials.status', ['statuses' => $group->posts()->get(    )], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                    <?php echo $__env->make('inspina.partials.status', ['statuses' => $group->paginatedPosts()], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                 </div>
 
-                                <button class="btn btn-primary btn-block m"><i class="fa fa-arrow-down"></i> Previous Posts</button>
+                                <?php echo $__env->make('inspina.partials.previous_feed_button', ['statuses' => $group->paginatedPosts()], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
                             </div>
 

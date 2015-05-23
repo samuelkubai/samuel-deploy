@@ -24,11 +24,12 @@ class NoticeRepository
 
         $user = \Auth::user();
         $message = $user->firstName.' ' .$user->lastName . ' created a new Pin on ' .$group->name ;
-        $this->post($message , $group);
+        $url = $group->username . '/notice';
+        $this->post($message , $group, $url);
 	}
 
-	public function pinsForSchool($group)
+	public function pinsForSchool($group, $howMany = 8)
 	{
-		return Notice::where('group_id', $group->id)->get();
+		return Notice::where('group_id', $group->id)->latest()->paginate($howMany);
 	}
 }

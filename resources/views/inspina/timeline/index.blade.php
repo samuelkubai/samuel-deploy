@@ -13,12 +13,17 @@
             <br/>
 
             @include('inspina.timeline.partials.admin_timeline')
-
+            <div class="col-lg-8">
+                @include('inspina.partials.previous_events')
+            </div>
             @include('inspina.timeline.partials.event-modal')
         </div>
 
         @else
     	@include('inspina.timeline.partials.timeline')
-    	@endif
+            <div class="col-lg-8">
+                @include('inspina.partials.previous_events')
+            </div>
+        @endif
     </div>
 @endsection

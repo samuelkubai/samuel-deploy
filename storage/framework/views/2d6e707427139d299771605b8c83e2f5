@@ -1,7 +1,7 @@
 <div class="col-md-4">
     <div class="ibox float-e-margins">
         <div class="ibox-title">
-            <h5>Group Detail</h5>
+            <h5><strong><?php echo e($group->name); ?></strong></h5>
         </div>
         <div>
             <div class="ibox-content no-padding border-left-right">
@@ -10,7 +10,7 @@
                </a>
             </div>
             <div class="ibox-content profile-content">
-                <h4><strong><?php echo e($group->name); ?></strong></h4>
+                <h4>Description:</h4>
                 <h5>
 
                 </h5>

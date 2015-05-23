@@ -8,14 +8,17 @@ class FileRepository
     use Postable;
 
     protected $profileTypes = [
-        'png', 'jpg'
+        'png', 'jpg', 'jpeg', 'jpe'
     ];
 
-    public function uploadGroupDocument($file, $location, $folder, $type)
+    public function uploadGroupDocument($file, $location, $folder, $type, $requestName)
     {
 
         $group = $folder->group()->first();
-        $name = $file['file']['name'];
+        if($requestName == null)
+            $name = $file['file']['name'];
+        else
+            $name = $requestName.'.'.$type;
         $tmpName = $file['file']['tmp_name'];
         $destination = 'uploads/' . $location . '/' . $name;
 
@@ -29,8 +32,9 @@ class FileRepository
             'source' => $destination,
         ]);
 
-        $message = 'New document: ' . $name . ' uploaded to ' . $folder->name . ' in ' . $group->name . ' File Manager ';
-        $this->post($message, $group);
+        $message = 'New document: ' . $name . ' uploaded to Folder: ' . $folder->name .' by '.$group->user()->first()->firstName.' '.$group->user()->first()->lastName. ' in Group: ' . $group->name;
+        $url = '/manager/'.$group->username.'/'.$folder->id;
+        $this->post($message, $group, $url);
         return true;
 
     }

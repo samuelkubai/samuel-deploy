@@ -12,7 +12,7 @@
                                                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                                 <div class="modal-body">
                                                    <div class="row form-group"><input type="file" name="file" placeholder="Select a file to upload" class="form-control col-sm-12"></div>
-
+                                                   <div class="row form-group"><input type="text" name="name" placeholder="Rename File if you wish.." class="form-control col-sm-12"></div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>

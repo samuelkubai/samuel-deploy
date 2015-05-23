@@ -41,7 +41,6 @@ class HomeController extends Controller {
         $title = 'News Feed';
         $statuses = $this->postRepository->feedForUser($this->user());
         $user = $this->user();
-        //dd($user->follows()->get());
         return view('inspina.home.feed', compact('title','user', 'statuses'));
 	}
 

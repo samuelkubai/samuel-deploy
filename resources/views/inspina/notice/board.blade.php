@@ -6,8 +6,17 @@
                 @include('inspina.partials.groupProfile')
                 <div class="col-md-8">
                     @include('inspina.notice.partials.board')
-                    @include('inspina.notice.partials.pin')
+                    <br>
+
                 </div>
-            </div>
+                @if($notices==null)
+                    <div class="row col-md-8" >
+                    @include('inspina.partials.previous_pins')
+                    </div>
+                @endif
+                    <div class="row col-md-8" >
+                    @include('inspina.notice.partials.pin')
+                    </div>
+             </div>
     </div>
 @endsection

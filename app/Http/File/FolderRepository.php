@@ -2,14 +2,22 @@
 
 
 use App\Folder;
+use App\Http\Traits\Postable;
 
 class FolderRepository {
+    use Postable;
 
     public function create($name, $group)
     {
-        return $group->folders()->create([
+        $folder = $group->folders()->create([
             'name' => $name
         ]);
+
+        $message = 'New Folder: ' . $name . ' created in ' . $group->name ;
+        $url = '/manager/'.$group->username.'/'.$folder->id;
+        $this->post($message, $group, $url);
+
+        return $folder;
     }
 
     public function update($name, $folder)
