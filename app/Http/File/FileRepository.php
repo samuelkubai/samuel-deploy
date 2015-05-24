@@ -30,6 +30,7 @@ class FileRepository
             'name' => $name,
             'type' => $type,
             'source' => $destination,
+            'user_id' => \Auth::user()->id,
         ]);
 
         $message = 'New document: ' . $name . ' uploaded to Folder: ' . $folder->name .' by '.$group->user()->first()->firstName.' '.$group->user()->first()->lastName. ' in Group: ' . $group->name;

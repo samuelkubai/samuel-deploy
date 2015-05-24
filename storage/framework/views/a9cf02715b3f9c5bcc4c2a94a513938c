@@ -402,8 +402,7 @@
         });
 
 
-    </script>
-    <script>
+
         $(document).ready(function() {
 
 
@@ -491,7 +490,13 @@
             var myNewChart = new Chart(ctx).Line(lineData, lineOptions);
 
         });
-    </script>
+
+           $(document).ready(function(){
+               $('.file-box').each(function() {
+                   animationHover(this, 'pulse');
+               });
+           });
+       </script>
 
 </body>
 

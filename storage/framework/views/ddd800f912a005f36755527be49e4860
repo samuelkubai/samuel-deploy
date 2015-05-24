@@ -3,16 +3,15 @@
         <div class="wrapper wrapper-content">
             <div class="row animated fadeInRight">
         <?php echo $__env->make('inspina.partials.groupProfile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-            <div class="">
-
-                <div class="col-lg-8 animated fadeInRight">
-                    <div class="">
-                        <div class="col-lg-12">
-                        <div class="col-sm-12">
+            <div class="col-md-8">
+                        <div class="col-sm-12 col-md-">
                             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload New File</button>
                         </div>
-                        <br> <br><br>
                         <?php echo $__env->make('inspina.file.partials.upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <div class="col-lg-8 animated fadeInRight">
+
+                       <br> <br><br>
+                        <div class="col-lg-12">
                         <?php if($documents->count() != 0): ?>
                             <?php foreach($documents as $document): ?>
                                 <div class="file-box">
@@ -20,9 +19,15 @@
                                         <a href="<?php echo e(url($document->source)); ?>">
                                             <span class="corner"></span>
 
+                                        <?php if($document->isImage()): ?>
+                                            <div class="image">
+                                                <img src="<?php echo e(asset($document->source)); ?>" alt="<?php echo e($document->name); ?>" class="img-responsive"/>
+                                            </div>
+                                        <?php else: ?>
                                             <div class="icon">
                                                 <i class="fa fa-file"></i>
                                             </div>
+                                        <?php endif; ?>
                                             <div class="file-name">
                                                 <?php echo e($document->name); ?>
 
@@ -31,6 +36,8 @@
                                                 <?php endif; ?>
                                                 <br/>
                                                 <small>Added: <?php echo e($document->created_at); ?></small>
+                                                <br>
+                                                <small>Uploaded By: <?php echo e($document->user()->first()->firstName . ' ' . $document->user()->first()->lastName); ?></small>
                                             </div>
                                         </a>
                                     </div>
@@ -57,7 +64,11 @@
                     </div>
                 </div>
                 </div>
-                </div>
+
         <!-- Content ends Here! -->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

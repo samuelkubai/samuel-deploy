@@ -16,6 +16,7 @@ class CreateNoticesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('group_id');
+			$table->integer('user_id');
 			$table->string('title');
 			$table->string('message');
 			$table->timestamps();

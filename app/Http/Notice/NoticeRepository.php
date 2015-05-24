@@ -19,6 +19,7 @@ class NoticeRepository
 			[
 				'title' => $request->title,
 				'message' => $request->message,
+                'user_id' => \Auth::user()->id,
 			]
 		);
 

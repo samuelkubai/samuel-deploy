@@ -68,6 +68,7 @@ class NoticeController extends Controller {
 	{
 		$title = 'Notice Board';
 		$notices = $this->repo->pinsForSchool($group);
+
 		return view('inspina.notice.board', compact('notices','group', 'title'));
 	}
 

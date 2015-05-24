@@ -5,16 +5,15 @@
         <div class="wrapper wrapper-content">
             <div class="row animated fadeInRight">
         @include('inspina.partials.groupProfile')
-            <div class="">
-
-                <div class="col-lg-8 animated fadeInRight">
-                    <div class="">
-                        <div class="col-lg-12">
-                        <div class="col-sm-12">
+            <div class="col-md-8">
+                        <div class="col-sm-12 col-md-">
                             <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload New File</button>
                         </div>
-                        <br> <br><br>
                         @include('inspina.file.partials.upload')
+                        <div class="col-lg-8 animated fadeInRight">
+
+                       <br> <br><br>
+                        <div class="col-lg-12">
                         @if($documents->count() != 0)
                             @foreach($documents as $document)
                                 <div class="file-box">
@@ -22,9 +21,15 @@
                                         <a href="{{ url($document->source) }}">
                                             <span class="corner"></span>
 
+                                        @if($document->isImage())
+                                            <div class="image">
+                                                <img src="{{ asset($document->source)}}" alt="{{ $document->name }}" class="img-responsive"/>
+                                            </div>
+                                        @else
                                             <div class="icon">
                                                 <i class="fa fa-file"></i>
                                             </div>
+                                        @endif
                                             <div class="file-name">
                                                 {{ $document->name }}
                                                 @if($group->isOwner(\Auth::user()))
@@ -32,6 +37,8 @@
                                                 @endif
                                                 <br/>
                                                 <small>Added: {{ $document->created_at }}</small>
+                                                <br>
+                                                <small>Uploaded By: {{ $document->user()->first()->firstName . ' ' . $document->user()->first()->lastName }}</small>
                                             </div>
                                         </a>
                                     </div>
@@ -58,6 +65,10 @@
                     </div>
                 </div>
                 </div>
-                </div>
+
         <!-- Content ends Here! -->
 @endsection
+
+@section('scripts')
+
+@stop
