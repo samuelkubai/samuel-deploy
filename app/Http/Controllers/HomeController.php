@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\course;
+use App\Http\Mail\UserMailer;
 use App\Http\Post\PostRepository;
 use Illuminate\Http\Request;
 
@@ -20,15 +21,21 @@ class HomeController extends Controller {
      * @var PostRepository
      */
     private $postRepository;
+    /**
+     * @var UserMailer
+     */
+    private $mailer;
 
     /**
      * Create a new controller instance.
      * @param PostRepository $postRepository
+     * @param UserMailer $mailer
      */
-	public function __construct(PostRepository $postRepository)
+	public function __construct(PostRepository $postRepository, UserMailer $mailer)
 	{
 		//$this->middleware('auth');
         $this->postRepository = $postRepository;
+        $this->mailer = $mailer;
     }
 
 	/**
@@ -73,6 +80,11 @@ class HomeController extends Controller {
             return redirect()->back()->with('message', 'File has already been uploaded');
         }
 
+    }
+
+    public function sendMail(UserMailer $mailer)
+    {
+       $mailer->sendConfirmationMailTo($this->user(), str_random(60));
     }
 
 }

@@ -29,6 +29,7 @@ class School {
      */
     public function handle($request, Closure $next)
     {
+
         if ($this->auth->guest())
         {
             if ($request->ajax())
@@ -40,6 +41,8 @@ class School {
                 return redirect('/login');
             }
         }
+
+
         return $next($request);
     }
 

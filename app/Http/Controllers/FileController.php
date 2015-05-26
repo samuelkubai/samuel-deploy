@@ -62,11 +62,13 @@ class FileController extends Controller
     /**
      * Store a newly created resource in storage.
      *
+     * @param $folder
      * @param CreateFileRequestRequest|CreateFileRequest|Request $request
      * @return Response
      */
 	public function store($folder ,CreateFileRequest $request)
 	{
+
         $allowedTypes = [
           'txt', 'pdf', 'docx', 'jpg', 'png', 'ppt', 'doc', 'jpeg', 'jpe'
         ];
@@ -99,36 +101,16 @@ class FileController extends Controller
         return view('inspina.file.manager', compact('title','group','folder', 'documents'));
 	}
 
-	/**
-	 * Show the form for editing the specified resource.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function edit($id)
-	{
-		//
-	}
-
-	/**
-	 * Update the specified resource in storage.
-	 *
-	 * @param  int  $id
-	 * @return Response
-	 */
-	public function update($id)
-	{
-		//
-	}
-
     /**
-     * Remove the specified resource from storage.
-     *
-     * @param $folder
-     * @param $file
-     * @internal param int $id
-     * @return Response
+     * @internal param $file_name
+     * @return \Illuminate\Http\RedirectResponse
+     * @internal param Request $request
      */
+    public function download()
+    {
+        $this->repo->downloadFile($_GET['download_file']);
+       return redirect()->back();
+    }
 	public function destroy($folder, $file)
 	{
         $file->delete();

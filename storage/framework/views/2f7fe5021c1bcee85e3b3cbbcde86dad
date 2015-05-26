@@ -1,3 +1,4 @@
+                                     <?php if($statuses->count() != 0): ?>
                                         <?php foreach($statuses as $status): ?>
 
                                                 <div class="feed-element">
@@ -13,3 +14,8 @@
                                                     </div>
                                                 </div>
                                         <?php endforeach; ?>
+                                     <?php else: ?>
+                                        <div class="feed-element">
+                                            <h2 align="center"> No Activities :( </h2>
+                                        </div>
+                                     <?php endif; ?>

@@ -7,7 +7,7 @@
             @if($group->user()->first()->id == \Auth::user()->id)
 
             <div class="col-lg-8">
-                <button type="button" class="btn btn-info col-lg-12" data-toggle="modal" data-target="#myModal5"> Create a new Event</button>
+                <button type="button" class="btn btn-primary col-lg-12" data-toggle="modal" data-target="#myModal5"> Create a new Event</button>
             </div>
 
             <br/>

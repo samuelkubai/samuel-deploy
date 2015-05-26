@@ -91,6 +91,12 @@ Route::bind('file' , function($id)
     return App\File::find($id);
 });
 
+Route::bind('code' , function($code)
+{
+    /** @var int $code */
+    return App\User::where('code', $code)->first();
+});
+
 /**Route::bind('school' , function($school)
 {
      @var TYPE_NAME $id
@@ -101,10 +107,13 @@ Route::bind('file' , function($id)
 /* The testing route */
 
 
+Route::get('/notActivated', function(){
+    return view('inspina.account.notActivated');
+});
+Route::get('/test/mail','HomeController@sendMail');
 
-
-
-
+Route::get('/download/',
+    [ 'middleware' => 'school', 'uses' => 'FileController@download' ]);
 /* Testing Route Ends */
 
 
@@ -155,6 +164,7 @@ Route::bind('file' , function($id)
             [ 'middleware' => 'school', 'uses' => 'FileController@destroy' ]);
         Route::get('/manager/{group}/{folder}',
             [ 'middleware' => 'school', 'uses' => 'FileController@show' ]);
+
     /* End Client Routes */
 
     /* School Routes */
@@ -224,6 +234,8 @@ Route::bind('file' , function($id)
     Route::post('/patch/', 'ClientController@postPatchClient');
     Route::get('/', ['middleware' => 'school', 'uses' => 'HomeController@index']);
     Route::get('/noAccount', ['middleware' => 'school', 'uses' => 'HomeController@noAccount']);
+    Route::get('/profile/activate/{code}',  'SchoolController@getActivate');
+
  /*End of Login and Registration */
 
 

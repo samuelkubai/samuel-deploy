@@ -32,13 +32,13 @@ class TimelineRepository
 			]
 		);
 
-        $message =  'A new Event was created on ' .$group->name ;
+        $message =  'A new Event was created on ' .$group->name . ' Titled: ' . $request->title ;
         $url = $group->username . '/events';
         $this->post($message , $group, $url);
 	}
 
 	public function eventsForGroup($group, $howMany = 10)
 	{
-		return Event::where('group_id', $group->id)->simplePaginate($howMany);
+		return Event::where('group_id', $group->id)->orderBy('date', 'desc')->simplePaginate($howMany);
 	}
 }

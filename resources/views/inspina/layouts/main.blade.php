@@ -18,6 +18,9 @@
 
             <link href="{{asset('inspina/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
 
+            <link href="{{asset('inspina/css/plugins/jasny/jasny-bootstrap.min.css')}}" rel="stylesheet">
+
+
 
 </head>
 
@@ -176,11 +179,11 @@
     <!-- Toastr -->
     <script src="{{ asset('/inspina/js/plugins/toastr/toastr.min.js') }}"></script>
 
-    <!-- Data picker -->
-    <script src="{{ asset('/inspina/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
 
-    <!-- Data picker -->
-    <script src="{{ asset('/inspina/js/plugins/datapicker/bootstrap-datepicker.js')}}"></script>
+       <!-- Input Mask-->
+        <script src="{{ asset('/inspina/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
+        <!-- Data picker -->
+        <script src="{{ asset('/inspina/js/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
 
  <script>
         $(document).ready(function(){

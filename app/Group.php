@@ -65,7 +65,7 @@ class Group extends Model {
         if($profile != null)
 
             return $profile->source;
-        return 'inspina/img/profile_big.jpg';
+        return 'uploads/images/default/prof3.png';
     }
 
     public function folders()

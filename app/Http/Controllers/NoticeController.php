@@ -48,13 +48,18 @@ class NoticeController extends Controller {
      */
 	public function store(CreateNoticeRequest $request, $group)
 	{
-		
-		$this->dispatch(
-				/* Returns a command for the Controller to dispatch */
-				$this->service->storeNoticeCommand($request, $group)
-			);
+		if(\Auth::user()->id == $group->id)
+        {
+            $this->dispatch(
+            /* Returns a command for the Controller to dispatch */
+                $this->service->storeNoticeCommand($request, $group)
+            );
 
-		return redirect()->back();
+            return redirect()->back();
+        }
+
+        return redirect()->withErrors('You are not a member if this group, You can not Pin anything here.');
+
 	}
 
     /**

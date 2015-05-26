@@ -1,0 +1,64 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+    <title>Actionable emails e.g. reset password</title>
+    <link href="{{asset('inspina/email_templates/styles.css')}}" media="all" rel="stylesheet" type="text/css" />
+</head>
+
+<body>
+
+<table class="body-wrap">
+    <tr>
+        <td></td>
+        <td class="container" width="600">
+            <div class="content">
+                <table class="main" width="100%" cellpadding="0" cellspacing="0">
+                    <tr>
+                        <td class="content-wrap">
+                            <table  cellpadding="0" cellspacing="0">
+                                <!--<tr>
+                                    <td>
+                                        <img class="img-responsive" src="{{ asset('inspina/email_templates/img/header.jpg') }}"/>
+                                    </td>
+                                </tr> -->
+                                <tr>
+                                    <td class="content-block">
+                                        <h3>Welcome to skoolspace.com, {{ $name }}</h3>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content-block">
+                                        We are happy to welcome you to the skoolspace community, we are aimed at bridging the gap between the school mates in to facilitate for easy file sharing and communication effortlessly.
+                                        Welcome and do not hesitate to share your feed back to us through info@skoolspace.com.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content-block">
+                                        We may need to send you critical information about our service and it is important that we have an accurate email address.
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="content-block aligncenter">
+                                        <a href="{{ $link }}" class="btn-primary">Confirm email address</a>
+                                    </td>
+                                </tr>
+                              </table>
+                        </td>
+                    </tr>
+                </table>
+                <div class="footer">
+                    <table width="100%">
+                        <tr>
+                            <td class="aligncenter content-block">Verify skoolspace account from <a href="{{ url('/') }}"> info@skoolspace.com</a></td>
+                        </tr>
+                    </table>
+                </div></div>
+        </td>
+        <td></td>
+    </tr>
+</table>
+
+</body>
+</html>

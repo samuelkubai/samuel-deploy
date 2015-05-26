@@ -1,3 +1,4 @@
+                                     @if($statuses->count() != 0)
                                         @foreach($statuses as $status)
 
                                                 <div class="feed-element">
@@ -13,3 +14,8 @@
                                                     </div>
                                                 </div>
                                         @endforeach
+                                     @else
+                                        <div class="feed-element">
+                                            <h2 align="center"> No Activities :( </h2>
+                                        </div>
+                                     @endif

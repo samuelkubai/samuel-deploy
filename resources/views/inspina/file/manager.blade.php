@@ -18,7 +18,7 @@
                             @foreach($documents as $document)
                                 <div class="file-box">
                                     <div class="file">
-                                        <a href="{{ url($document->source) }}">
+                                        <a href="{{ url('/download/?download_file='.$document->name) }}">
                                             <span class="corner"></span>
 
                                         @if($document->isImage())

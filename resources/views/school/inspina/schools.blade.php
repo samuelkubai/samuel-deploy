@@ -70,28 +70,28 @@
                         <table class="table table-striped table-bordered table-hover dataTables-example" >
                             <thead>
                             <tr>
-                                <th style="width:20%">Group Name</th>
-                                <th style="width:9%">Group Username</th>
-                                <th style="width:10%">Group Email</th>
-                                <th style="width:7%">Action</th>
+                                <th>Action</th>
+                                <th>Group Name</th>
+                                <th>Group Username</th>
+                                <th>Group Email</th>
                             </tr>
                             </thead>
                             <tbody>
                             @foreach( $groups as $school )
                                 <tr class="gradeX">
+                                     <td class="v-align-middle"> <a href="{{url($school->username)}}" class="btn btn-primary">Manage</a> </td>
                                     <td class="v-align-middle"><a href="{{url($school->username)}}">{{ $school->name }}</a></td>
                                     <td><span class="muted">{{ $school->username }}</span> </td>
                                     <td class="v-align-middle"> {{ $school->email }} </td>
-                                    <td class="v-align-middle"> <a href="" class="btn btn-danger">Delete</a> </td>
                                 </tr>
                             @endforeach
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th style="width:20%">Group Name</th>
-                                <th style="width:9%">Group Username</th>
-                                <th style="width:10%">Group Email</th>
-                                <th style="width:7%">Action</th>
+                                <th>Action</th>
+                                <th>Group Name</th>
+                                <th>Group Username</th>
+                                <th>Group Email</th>
                             </tr>
                             </tfoot>
                         </table>

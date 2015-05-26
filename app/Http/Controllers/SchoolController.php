@@ -1,5 +1,6 @@
 <?php namespace App\Http\Controllers;
 
+use App\Http\Mail\UserMailer;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\CreateSchoolRequest;
@@ -33,19 +34,25 @@ class SchoolController extends Controller {
     protected $redirectTo = '/';
 
     public $schools ;
+    /**
+     * @var UserMailer
+     */
+    private $mailer;
 
     /**
      * Create a new authentication controller instance.
      *
      * @param  \Illuminate\Contracts\Auth\Guard $auth
      * @param  \Illuminate\Contracts\Auth\Registrar $registrar
+     * @param UserMailer $mailer
      */
-    public function __construct(Guard $auth, Registrar $registrar)
+    public function __construct(Guard $auth, Registrar $registrar, UserMailer $mailer)
     {
         $this->auth = $auth;
         $this->registrar = $registrar;
 
         //$this->middleware('guest', ['except' => 'getLogout, getHome']);
+        $this->mailer = $mailer;
     }
 
     /**
@@ -59,7 +66,7 @@ class SchoolController extends Controller {
     }
 
 
-    public function newUser($data)
+    public function newUser($data, $activationCode)
     {
         return User::create([
                 'email' => $data['email'],
@@ -67,6 +74,8 @@ class SchoolController extends Controller {
                 'firstName' => $data['firstName'],
                 'lastName' => $data['lastName'],
                 'telNumber' => $data['telNumber'],
+                'active' => 1,
+                'code' => $activationCode,
             ]);
     }
     /**
@@ -77,7 +86,8 @@ class SchoolController extends Controller {
      */
     public function postRegister(Request $request)
     {
-        //dd();
+        $activationCode = str_random(90);
+
         $validator = Validator::make($request->all(), [
             'email' => 'required|email|max:255|unique:users',
             'password' => 'required|confirmed|min:6',
@@ -94,10 +104,14 @@ class SchoolController extends Controller {
                 $request, $validator
             );
         }
+        $user  = $this->newUser($request->all(), $activationCode);
 
-        $this->auth->login($this->newUser($request->all()));
 
-        return redirect($this->redirectPath());
+        $this->auth->login($user);
+
+        $this->mailer->sendConfirmationMailTo($this->user(), $activationCode);
+
+        return redirect('/notActivated');
     }
 
     /**
@@ -122,10 +136,22 @@ class SchoolController extends Controller {
             'email' => 'required|email', 'password' => 'required',
         ]);
 
+        $user = User::where('email', $request->email)->where('password',  bcrypt($request->password))->first();
+
+
+
+
+
         $credentials = $request->only('email', 'password');
 
         if ($this->auth->attempt($credentials, $request->has('remember')))
         {
+            $active = \Auth::user()->active;
+
+            if($active != 1){
+                $this->auth->logout();
+                return redirect('/notActivated');
+            }
             return redirect()->intended($this->redirectPath());
         }
 
@@ -254,6 +280,17 @@ class SchoolController extends Controller {
         return redirect($school->username);
     }
 
+    public function getActivate($user)
+    {
+        if(!$user)
+            return redirect('/login')->withErrors('Could not activate your account. Wrong code or account has already been activated.');
+
+        $user->active = 1;
+        $user->code = '';
+        $user->save();
+
+        return redirect('/login');
+    }
 /*_________________________________________________________________________________________________________*/
 /* School Messenger Routes */
     public function getSchoolMessages()

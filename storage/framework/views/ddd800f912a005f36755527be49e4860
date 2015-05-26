@@ -16,7 +16,7 @@
                             <?php foreach($documents as $document): ?>
                                 <div class="file-box">
                                     <div class="file">
-                                        <a href="<?php echo e(url($document->source)); ?>">
+                                        <a href="<?php echo e(url('/download/?download_file='.$document->name)); ?>">
                                             <span class="corner"></span>
 
                                         <?php if($document->isImage()): ?>

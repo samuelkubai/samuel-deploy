@@ -69,36 +69,38 @@
                         <table class="table table-striped table-bordered table-hover dataTables-example" >
                             <thead>
                             <tr>
-                                <th style="width:20%">Group Name</th>
-                                <th style="width:9%">Group Username</th>
-                                <th style="width:10%">Group Email</th>
-                                <th style="width:7%">Action</th>
+                                <th>Action</th>
+                                <th>Group Name</th>
+                                <th>Group Username</th>
+                                <th>Group Email</th>
+
                             </tr>
                             </thead>
                             <tbody>
                              @if($groups != null)
                                 @foreach($groups as $group)
                                     <tr class="gradeX">
-                                        <td class="v-align-middle">{{ $group->name }}</td>
-                                        <td><span class="muted">{{ $group->username }}</span> </td>
-                                        <td class="v-align-middle"> {{ $group->email }} </td>
                                         <td class="v-align-middle">
-                                        @if($group->isFollowedBy(\Auth::user()))
-                                            <b>Joined</b>
-                                        @else
-                                         <a href="{{url($group->username.'/join/group')}}" class="btn btn-primary">Join</a>
-                                        @endif
+                                            @if($group->isFollowedBy(\Auth::user()))
+                                                <b>Joined</b>
+                                            @else
+                                             <a href="{{url($group->username.'/join/group')}}" class="btn btn-primary">Join</a>
+                                            @endif
                                         </td>
+                                        <td class="v-align-middle">{{ $group->name }}</td>
+                                        <td class="v-align-middle"><span class="muted">{{ $group->username }}</span> </td>
+                                        <td class="v-align-middle"> {{ $group->email }} </td>
+
                                     </tr>
                                 @endforeach
                             @endif
                             </tbody>
                             <tfoot>
                             <tr>
-                                <th style="width:20%">Group Name</th>
-                                <th style="width:9%">Group Username</th>
-                                <th style="width:10%">Group Email</th>
-                                <th style="width:7%">Action</th>
+                                <th >Group Name</th>
+                                <th>Group Username</th>
+                                <th>Group Email</th>
+                                <th>Action</th>
                             </tr>
                             </tfoot>
                         </table>

@@ -9,18 +9,22 @@
                     <form action="{{ url('/admin/'. $group->username . '/events/') }}" method="post" >
                         <div class="modal-body">
                                 <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                                    <div class="row">
-                                        <div class="col-md-10">
-                                            <div class="form-group" id="data_1">
-                                                <label class="font-noraml">Select the Date of the Event</label>
-                                                <div class="input-group date">
-                                                    <span class="input-group-addon"><i class="fa fa-calendar"></i></span><input type="text" class="form-control" name="date" value="03/04/2014">
-                                                </div>
-                                            </div>
 
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="font-noraml">&nbsp; &nbsp;&nbsp; <i class="fa fa-calendar"></i> Select the Date of the Event</label>
+                                            <br>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="date" class="form-control" data-mask="99/99/9999" placeholder="">
+                                                <span class="help-block text-muted">(dd/mm/yyyy)</span>
+                                            </div>
                                         </div>
                                     </div>
-
+                                    <br>
+                                    <div class="col-md-12">
+                                    <h3> Event Details</h3>
+                                        <hr/>
+                                    </div>
                                     <div class="row form-group">
                                         <div class="col-md-12">
                                             <input name="title" type="text" class="form-control" placeholder="Event title">

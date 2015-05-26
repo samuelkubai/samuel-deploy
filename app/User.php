@@ -22,7 +22,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 	 *
 	 * @var array
 	 */
-	protected $fillable = ['name', 'email', 'password', 'firstName', 'lastName', 'telNumber'];
+	protected $fillable = ['name', 'email', 'password', 'firstName', 'lastName', 'telNumber', 'code', 'active'];
 
 	/**
 	 * The attributes excluded from the model's JSON form.
@@ -79,6 +79,6 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
         if($profile != null)
             return $profile->source;
 
-        return 'inspina/img/a3.jpg';
+        return 'uploads/images/default/prof3.png';
     }
 }
