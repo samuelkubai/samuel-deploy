@@ -4,6 +4,7 @@ use App\course;
 use App\Http\Mail\UserMailer;
 use App\Http\Post\PostRepository;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Mail;
 
 class HomeController extends Controller {
 
@@ -84,7 +85,11 @@ class HomeController extends Controller {
 
     public function sendMail(UserMailer $mailer)
     {
-       $mailer->sendConfirmationMailTo($this->user(), str_random(60));
+        Mail::raw('Laravel with Mailgun is easy!', function($message)
+        {
+            $message->to('kamausamuel11@gmail.com');
+        });
+       #$mailer->sendConfirmationMailTo($this->user(), str_random(60));
     }
 
 }
