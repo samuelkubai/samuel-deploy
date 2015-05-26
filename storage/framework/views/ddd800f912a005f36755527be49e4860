@@ -37,7 +37,7 @@
                                                 <br/>
                                                 <small>Added: <?php echo e($document->created_at); ?></small>
                                                 <br>
-                                                <small>Uploaded By: <?php echo e($document->user()->first()->firstName . ' ' . $document->user()->first()->lastName); ?></small>
+                                                <small>Uploaded By: <?php echo $__env->make('inspina.partials.name_tag',['user' => $document->user()->first()], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?></small>
                                             </div>
                                         </a>
                                     </div>

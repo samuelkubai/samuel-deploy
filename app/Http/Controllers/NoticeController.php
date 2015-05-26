@@ -4,6 +4,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CreateNoticeRequest;
+use App\Http\User\UserRepository;
 use Illuminate\Http\Request;
 use App\Http\Notice\NoticeService;
 use App\Http\Notice\NoticeRepository;
@@ -19,13 +20,24 @@ class NoticeController extends Controller {
 	protected $repo;
 
 	protected $client;
+    /**
+     * @var UserRepository
+     */
+    private $userRepository;
 
-	function __construct(NoticeService $service, NoticeRepository $repo, ClientRepository $client)
+    /**
+     * @param NoticeService $service
+     * @param NoticeRepository $repo
+     * @param ClientRepository $client
+     * @param UserRepository $userRepository
+     */
+    function __construct(NoticeService $service, NoticeRepository $repo, ClientRepository $client, UserRepository $userRepository)
 	{
 		$this->service = $service;
 		$this->client = $client;
 		$this->repo = $repo;
-	}
+        $this->userRepository = $userRepository;
+    }
 	/**
 	 * Display a listing of the resource.
 	 *
@@ -48,7 +60,8 @@ class NoticeController extends Controller {
      */
 	public function store(CreateNoticeRequest $request, $group)
 	{
-		if(\Auth::user()->id == $group->id)
+
+		if($this->userRepository->isAMemberOf($group, \Auth::user()))
         {
             $this->dispatch(
             /* Returns a command for the Controller to dispatch */
@@ -58,7 +71,7 @@ class NoticeController extends Controller {
             return redirect()->back();
         }
 
-        return redirect()->withErrors('You are not a member if this group, You can not Pin anything here.');
+        return redirect()->back()->withErrors('You are not a member of this group, You can not Pin anything here.');
 
 	}
 

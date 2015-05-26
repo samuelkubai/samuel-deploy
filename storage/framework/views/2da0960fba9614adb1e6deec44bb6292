@@ -5,7 +5,7 @@
                 <small><?php echo e($notice->updated_at); ?></small>
                 <h4><?php echo e($notice->title); ?></h4>
                 <p><?php echo e($notice->message); ?></p>
-                <p> - <?php echo e($notice->user()->first()->firstName . ' ' . $notice->user()->first()->lastName); ?></p>
+                <p> - <?php echo $__env->make('inspina.partials.name_tag', ['user' => $notice->user()->first()], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?></p>
                 <?php if($group->user()->first()->id == \Auth::user()->id): ?>
                     <a href="<?php echo e(url('/notices/destroy/'. $notice->id)); ?>"><i class="fa fa-trash-o"></i></a>
                 <?php endif; ?>

@@ -107,13 +107,10 @@ Route::bind('code' , function($code)
 /* The testing route */
 
 
-Route::get('/notActivated', function(){
-    return view('inspina.account.notActivated');
-});
+
 Route::get('/test/mail','HomeController@sendMail');
 
-Route::get('/download/',
-    [ 'middleware' => 'school', 'uses' => 'FileController@download' ]);
+
 /* Testing Route Ends */
 
 
@@ -164,7 +161,8 @@ Route::get('/download/',
             [ 'middleware' => 'school', 'uses' => 'FileController@destroy' ]);
         Route::get('/manager/{group}/{folder}',
             [ 'middleware' => 'school', 'uses' => 'FileController@show' ]);
-
+        Route::get('/download/',
+            [ 'middleware' => 'school', 'uses' => 'FileController@download' ]);
     /* End Client Routes */
 
     /* School Routes */
@@ -235,7 +233,9 @@ Route::get('/download/',
     Route::get('/', ['middleware' => 'school', 'uses' => 'HomeController@index']);
     Route::get('/noAccount', ['middleware' => 'school', 'uses' => 'HomeController@noAccount']);
     Route::get('/profile/activate/{code}',  'SchoolController@getActivate');
-
+    Route::get('/notActivated', function(){
+        return view('inspina.account.notActivated');
+    });
  /*End of Login and Registration */
 
 

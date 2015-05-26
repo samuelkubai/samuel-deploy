@@ -38,7 +38,7 @@
                                                 <br/>
                                                 <small>Added: {{ $document->created_at }}</small>
                                                 <br>
-                                                <small>Uploaded By: {{ $document->user()->first()->firstName . ' ' . $document->user()->first()->lastName }}</small>
+                                                <small>Uploaded By: @include('inspina.partials.name_tag',['user' => $document->user()->first()])</small>
                                             </div>
                                         </a>
                                     </div>
