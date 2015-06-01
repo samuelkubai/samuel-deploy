@@ -66,7 +66,7 @@ class Group extends Model {
         if($profile != null)
 
             return $profile->source;
-        return 'uploads/images/default/prof3.png';
+        return 'uploads/images/default/pic4.jpg';
     }
 
     public function folders()
