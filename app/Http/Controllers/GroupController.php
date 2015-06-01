@@ -1,6 +1,7 @@
 <?php namespace App\Http\Controllers;
 
 use App\Http\Client\ClientRepository;
+use App\Http\File\FileRepository;
 use App\Http\Group\GroupRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
@@ -24,18 +25,24 @@ class GroupController extends Controller {
      * @var ClientRepository|GroupRepository
      */
     private $repo;
+    /**
+     * @var FileRepository
+     */
+    private $fileRepository;
 
 
     /**
      * @param ClientRepository $clientRepository
+     * @param FileRepository $fileRepository
      * @param UserRepository $userRepository
      * @param ClientRepository|GroupRepository $repo
      */
-    function __construct(ClientRepository $clientRepository, UserRepository $userRepository, GroupRepository $repo)
+    function __construct(ClientRepository $clientRepository,FileRepository $fileRepository, UserRepository $userRepository, GroupRepository $repo)
     {
         $this->clientRepo = $clientRepository;
         $this->userRepository = $userRepository;
         $this->repo = $repo;
+        $this->fileRepository = $fileRepository;
     }
 
 	/**
@@ -122,7 +129,10 @@ class GroupController extends Controller {
             $tmpName = $_FILES['profile']['tmp_name'];
             $location = 'uploads/images/profile/';
             $type = $request->file('profile')->getClientOriginalExtension();
-            $destination = $location . $name;
+            $rand = $this->fileRepository->randomFileName();
+
+            $destination = $location . $rand . '.' . $type;
+
             if (move_uploaded_file($tmpName, $destination)) {
 
                 $group->fill($request->input())->save();

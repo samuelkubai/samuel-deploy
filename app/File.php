@@ -6,7 +6,7 @@ class File extends Model {
 
     public $imageTypes = ['png', 'jpg', 'jpeg', 'jpe'];
 
-	protected $fillable = ['name', 'type', 'source', 'folder_id', 'user_id'];
+	protected $fillable = ['name', 'type', 'source', 'folder_id', 'user_id','rand'];
 
     public function folder()
     {

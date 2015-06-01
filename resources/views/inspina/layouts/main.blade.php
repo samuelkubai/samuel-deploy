@@ -16,7 +16,7 @@
             <link href="{{asset('/inspina/css/animate.css')}}" rel="stylesheet">
             <link href="{{ asset('/inspina/css/style.css') }}" rel="stylesheet">
 
-            <link href="{{asset('inspina/css/plugins/datapicker/datepicker3.css')}}" rel="stylesheet">
+            <link href="{{asset('/datetime/css/bootstrap-datepicker3.css')}}" rel="stylesheet">
 
             <link href="{{asset('inspina/css/plugins/jasny/jasny-bootstrap.min.css')}}" rel="stylesheet">
 
@@ -165,8 +165,8 @@
 
 
 <!-- Mainly scripts -->
-<script src="{{ asset('/inspina/js/jquery-2.1.1.js') }}"></script>
-<script src="{{ asset('/inspina/js/bootstrap.min.js') }}"></script>
+<script src="{{ asset('/js/jquery.js') }}"></script>
+<!-- <script src="  asset('/inspina/js/bootstrap.min.js') "></script> -->
 <script src="{{ asset('/inspina/js/plugins/metisMenu/jquery.metisMenu.js') }}"></script>
 <script src="{{ asset('/inspina/js/plugins/slimscroll/jquery.slimscroll.min.js') }}"></script>
 <script src="{{ asset('/inspina/js/plugins/jeditable/jquery.jeditable.js') }}"></script>
@@ -174,13 +174,11 @@
 <!-- Custom and plugin javascript -->
 <script src="{{ asset('/inspina/js/inspinia.js') }}"></script>
 <script src="{{ asset('/inspina/js/plugins/pace/pace.min.js') }}"></script>
+<script src="{{ asset('/inspina/js/moment.js') }}"></script>
+<script type="text/javascript" src="{{ asset('/js/bootstrap.js')}}"></script>
+<script type="text/javascript" src="{{ asset('/datetime/js/bootstrap-datepicker.js') }}"></script>
 
- <!-- Flot -->
-    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.js') }}"></script>
-    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.tooltip.min.js') }}"></script>
-    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.spline.js') }}"></script>
-    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.resize.js') }}"></script>
-    <script src="{{ asset('/inspina/js/plugins/flot/jquery.flot.pie.js') }}"></script>
+
 
     <!-- Peity -->
     <script src="{{ asset('/inspina/js/plugins/peity/jquery.peity.min.js') }}"></script>
@@ -193,23 +191,13 @@
     <!-- jQuery UI -->
     <script src="{{ asset('/inspina/js/plugins/jquery-ui/jquery-ui.min.js') }}"></script>
 
-
-
-    <!-- Sparkline -->
-    <script src="{{ asset('/inspina/js/plugins/sparkline/jquery.sparkline.min.js') }}"></script>
-
-
-
-
-
     <!-- Toastr -->
     <script src="{{ asset('/inspina/js/plugins/toastr/toastr.min.js') }}"></script>
 
 
        <!-- Input Mask-->
         <script src="{{ asset('/inspina/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
-        <!-- Data picker -->
-        <script src="{{ asset('/inspina/js/plugins/datepicker/bootstrap-datepicker.js') }}"></script>
+
 
 
 

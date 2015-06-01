@@ -170,7 +170,9 @@ Route::get('/test/mail',function()
             [ 'middleware' => 'school', 'uses' => 'FileController@destroy' ]);
         Route::get('/manager/{group}/{folder}',
             [ 'middleware' => 'school', 'uses' => 'FileController@show' ]);
-        Route::get('/download/',
+        /*Route::get('/download/',
+            [ 'middleware' => 'school', 'uses' => 'FileController@download' ]);*/
+        Route::get('/download/{file}',
             [ 'middleware' => 'school', 'uses' => 'FileController@download' ]);
     /* End Client Routes */
 

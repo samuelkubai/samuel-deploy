@@ -1,5 +1,6 @@
 <?php namespace App\Http\File;
 
+use App\File;
 use App\Http\Traits\Postable;
 
 class FileRepository
@@ -18,11 +19,16 @@ class FileRepository
         if($requestName == null)
             $name = $file['file']['name'];
         else
+        {
             $fileName = preg_replace("([^\w\s\d\-_~,;:\[\]\(\].]|[\.]{2,})", '', $requestName);
             $fileName = filter_var($fileName, FILTER_SANITIZE_URL);
             $name = $fileName.'.'.$type;
+        }
+        $rand = $this->randomFileName();
+        $actualName = $rand . '.' . $type;
+
         $tmpName = $file['file']['tmp_name'];
-        $destination = 'uploads/' . $location . '/' . $name;
+        $destination = 'uploads/' . $location . '/' . $actualName;
 
         if (!move_uploaded_file($tmpName, $destination)) {
             return false;
@@ -31,6 +37,7 @@ class FileRepository
         $folder->files()->create([
             'name' => $name,
             'type' => $type,
+            'rand' => $rand,
             'source' => $destination,
             'user_id' => \Auth::user()->id,
         ]);
@@ -52,7 +59,8 @@ class FileRepository
         $tmpName = $data['tmp_name'];
         $location = 'uploads/images/profile/';
         $type = $request->file('profile')->getClientOriginalExtension();
-        $destination = $location . $name;
+        $rand = $this->randomFileName();
+        $destination = $location . $rand . '.' . $type;
 
         if (!move_uploaded_file($tmpName, $destination)) {
             return false;
@@ -61,7 +69,8 @@ class FileRepository
         $user->profile()->create([
             'name' => $name,
             'type' => $type,
-            'source' => $destination
+            'source' => $destination,
+            'rand' => $rand,
         ]);
 
         return true;
@@ -77,11 +86,11 @@ class FileRepository
         return false;
     }
 
-    public function downloadFile($fileName)
+    public function downloadFile($file)
     {
         ignore_user_abort(true);
         set_time_limit(0); // disable the time limit for this script
-
+        $fileName = $file->rand . '.' .$file->type;
         $path = "C:\wamp\www\skoolspace\public\uploads\documents\\"; // change the path to fit your websites document structure
         $dl_file = preg_replace("([^\w\s\d\-_~,;:\[\]\(\].]|[\.]{2,})", '', $fileName); // simple file name validation
         $dl_file = filter_var($dl_file, FILTER_SANITIZE_URL); // Remove (more) invalid characters
@@ -110,5 +119,18 @@ class FileRepository
             }
         }
         fclose ($fd);
+    }
+
+    public function randomFileName()
+    {
+        $randomName = rand(1000000, 9999999);
+
+        if(File::where('rand', $randomName)->first() != null)
+        {
+            return $this->randomFileName();
+
+        } else {
+            return $randomName;
+        }
     }
 } 

@@ -17,7 +17,8 @@ class CreateFilesTable extends Migration {
 			$table->increments('id');
             $table->string('name');
             $table->string('type');
-            $table->string('source');
+            $table->string('source')->unique();
+            $table->string('rand')->unique();
             $table->integer('folder_id');
             $table->integer('user_id');
 			$table->timestamps();

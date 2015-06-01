@@ -108,9 +108,9 @@ class FileController extends Controller
      * @return \Illuminate\Http\RedirectResponse
      * @internal param Request $request
      */
-    public function download()
+    public function download($file)
     {
-        $this->repo->downloadFile($_GET['download_file']);
+        $this->repo->downloadFile($file);
        return redirect()->back();
     }
 	public function destroy($folder, $file)
