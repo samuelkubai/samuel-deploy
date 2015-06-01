@@ -96,7 +96,7 @@ class Group extends Model {
         return $this->folders()->where('sub-directory', null)->get();
     }
 
-    public function scopeSearchFor($query, $field, $value)
+    public static function scopeSearchFor($query, $field, $value)
     {
         return $query->where($field, 'LIKE', "%$value%");
     }

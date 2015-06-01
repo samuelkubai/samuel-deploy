@@ -6,6 +6,7 @@ use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
 use App\Http\Requests\CreateSchoolRequest;
+use App\Http\Requests\SearchRequest;
 use App\Http\Requests\UpdateGroupRequest;
 use App\Http\User\UserRepository;
 use App\User;
@@ -182,4 +183,10 @@ class GroupController extends Controller {
         $group->save();
         return redirect($group->username);
     }
+
+    /**
+     * * Function for searching through the group records
+     * @param SearchRequest $request
+     */
+
 }

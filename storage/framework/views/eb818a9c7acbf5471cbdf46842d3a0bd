@@ -1,9 +1,5 @@
 <?php $__env->startSection('content'); ?>
-                <div class="row">
-                        <div class="col-md-3 pull-left">
-                            <a class="btn btn-md btn-rounded btn-default" href="<?php echo e(url($group->username)); ?>"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to group feed</a>
-                        </div>
-                </div><br>
+                <?php echo $__env->make('inspina.partials.to_group_feed_nav', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
                     <div class="ibox">
                         <div class="ibox-title">

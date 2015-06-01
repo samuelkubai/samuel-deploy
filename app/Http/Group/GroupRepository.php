@@ -29,4 +29,9 @@ class GroupRepository {
 
         return false;
     }
+
+    public function searchedGroups($value)
+    {
+        return Group::searchFor('name', $value)->paginate(10);
+    }
 } 

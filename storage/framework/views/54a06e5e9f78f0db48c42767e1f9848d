@@ -1,0 +1,6 @@
+<div class="row">
+    <div class="pull-left">
+        <?php echo $__env->make('inspina.partials.back_to_group_feed', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+    </div>
+</div>
+<br>

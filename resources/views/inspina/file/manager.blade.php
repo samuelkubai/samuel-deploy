@@ -4,15 +4,7 @@
                 <!-- Content starts here -->
                 <div class="wrapper wrapper-content" style="padding-right: 0px; padding-top: 0px;">
                     <div class="row">
-                    @if(!$folder->isSubFolder())
-                        <div class="col-md-3 pull-left">
-                            <a class="btn btn-md btn-rounded btn-default" href="{{ url($group->username) }}"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to group feed</a>
-                        </div>
-                    @else
-                        <div class="col-md-3 pull-left">
-                            <a class="btn btn-md btn-rounded btn-default" href="{{ url('manager/'.$group->username.'/'. $folder->folder_id) }}"><i class="glyphicon glyphicon-arrow-up"></i> &nbsp; Up One Directory</a>
-                        </div>
-                    @endif
+                   @include('inspina.partials.file_nav')
                     </div>
                     <br>
                     @include('inspina.partials.error')
@@ -24,7 +16,7 @@
                                     @include('inspina.file.partials.upload')
                                         <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload Files</button>
                                         <div class="hr-line-dashed"></div>
-                                        <h5>Folders</h5>
+                                        <h5>Sub-Folders</h5>
                                         <ul class="folder-list" style="padding: 0">
                                         @foreach($subFolders as $subFolder)
                                             <li><a href="{{url('manager/'.$group->username.'/'. $subFolder->id) }}"><i class="fa fa-folder"></i> {{ $subFolder->name}}</a></li>

@@ -231,6 +231,7 @@ Route::get('/test/events/profile',function()
 
     /* Client Routes */
         Route::get('/groups/all',  ['middleware' => 'school', 'uses' => 'FollowController@create']);
+        Route::post('/group/search',  ['middleware' => 'school', 'uses' => 'FollowController@search']);
         Route::get('/join/group',  ['middleware' => 'school', 'uses' => 'FollowController@store']);
         Route::get('{username}/join/group',  ['middleware' => 'school', 'uses' => 'FollowController@store']);
         Route::get('{username}/leave/group',  ['middleware' => 'school', 'uses' => 'FollowController@destroy']);
@@ -263,6 +264,7 @@ Route::get('/test/events/profile',function()
 
 
 /* Group Routes: Create, Update, Read/Show and Delete */
+
     Route::get('/create/group',  ['middleware' => 'school', 'uses' => 'GroupController@create']);
     Route::post('/create/group',  ['middleware' => 'school', 'uses' => 'GroupController@store']);
     Route::get('/admin/group',  ['middleware' => 'school', 'uses' => 'GroupController@index']);

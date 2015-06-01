@@ -2,9 +2,11 @@
 
 use App\Group;
 use App\Http\CLient\ClientRepository;
+use App\Http\Group\GroupRepository;
 use App\Http\Requests;
 use App\Http\Controllers\Controller;
 
+use App\Http\Requests\SearchRequest;
 use Illuminate\Http\Request;
 
 class FollowController extends Controller {
@@ -12,14 +14,20 @@ class FollowController extends Controller {
      * @var ClientRepository
      */
     private $clientRepository;
+    /**
+     * @var GroupRepository
+     */
+    private $groupRepository;
 
     /**
      * @param ClientRepository $clientRepository
+     * @param GroupRepository $groupRepository
      */
-    public function __construct(ClientRepository $clientRepository)
+    public function __construct(ClientRepository $clientRepository, GroupRepository $groupRepository)
     {
 
         $this->clientRepository = $clientRepository;
+        $this->groupRepository = $groupRepository;
     }
 	/**
 	 * Display a listing of the resource.
@@ -43,7 +51,8 @@ class FollowController extends Controller {
 	{
         $title = 'Join a new group';
         $groups = Group::allPaginatedGroups();
-        return view('inspina.groups.search', compact('groups', 'title'));
+        $tagline = "Join a New Group";
+        return view('inspina.groups.search', compact('groups', 'title', 'tagline'));
 	}
 
 	/**
@@ -102,5 +111,18 @@ class FollowController extends Controller {
         $this->clientRepository->clientLeave($group, $this->user());
         return redirect('/mygroups');
 	}
+
+    /**
+     * * Funtion for searching through the group records.
+     * @param SearchRequest $request
+     * @return \Illuminate\View\View
+     */
+    public function search(SearchRequest $request)
+    {
+        $title = 'Join a new group';
+        $groups = $this->groupRepository->searchedGroups($request->value);
+        $tagline = 'Results('.$groups->count().') for "'.$request->value.'"';
+        return view('inspina.groups.search', compact('groups', 'title', 'tagline'));
+    }
 
 }

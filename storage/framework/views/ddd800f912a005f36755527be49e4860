@@ -2,15 +2,7 @@
                 <!-- Content starts here -->
                 <div class="wrapper wrapper-content" style="padding-right: 0px; padding-top: 0px;">
                     <div class="row">
-                    <?php if(!$folder->isSubFolder()): ?>
-                        <div class="col-md-3 pull-left">
-                            <a class="btn btn-md btn-rounded btn-default" href="<?php echo e(url($group->username)); ?>"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to group feed</a>
-                        </div>
-                    <?php else: ?>
-                        <div class="col-md-3 pull-left">
-                            <a class="btn btn-md btn-rounded btn-default" href="<?php echo e(url('manager/'.$group->username.'/'. $folder->folder_id)); ?>"><i class="glyphicon glyphicon-arrow-up"></i> &nbsp; Up One Directory</a>
-                        </div>
-                    <?php endif; ?>
+                   <?php echo $__env->make('inspina.partials.file_nav', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     </div>
                     <br>
                     <?php echo $__env->make('inspina.partials.error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
@@ -22,7 +14,7 @@
                                     <?php echo $__env->make('inspina.file.partials.upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                         <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload Files</button>
                                         <div class="hr-line-dashed"></div>
-                                        <h5>Folders</h5>
+                                        <h5>Sub-Folders</h5>
                                         <ul class="folder-list" style="padding: 0">
                                         <?php foreach($subFolders as $subFolder): ?>
                                             <li><a href="<?php echo e(url('manager/'.$group->username.'/'. $subFolder->id)); ?>"><i class="fa fa-folder"></i> <?php echo e($subFolder->name); ?></a></li>

@@ -1,11 +1,7 @@
 @extends('inspina.layouts.main')
 
 @section('content')
-                <div class="row">
-                        <div class="col-md-3 pull-left">
-                            <a class="btn btn-md btn-rounded btn-default" href="{{ url($group->username) }}"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to group feed</a>
-                        </div>
-                </div><br>
+                @include('inspina.partials.to_group_feed_nav')
 
                     <div class="ibox">
                         <div class="ibox-title">

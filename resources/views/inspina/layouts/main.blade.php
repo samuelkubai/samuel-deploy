@@ -40,8 +40,8 @@
                 <ul class="nav navbar-nav">
                     <li class="">
                        <a aria-expanded="false" role="button" href="{{ url('/') }}">
-                        <i class="glyphicon glyphicon-bookmark"></i>
-                        News Feed
+                        <i class="fa fa-home"></i>
+                        Home
                         </a>
                     </li>
                     <li>
@@ -51,7 +51,7 @@
                           </a>
                           <ul class="dropdown-menu" role="menu">
                            @foreach(\Auth::user()->follows()->get() as $group)
-                             <li><a href="{{ url($group->username, 'events') }}">{{ $group->name }}</a></li>
+                             <li><a href="{{ url($group->username, 'events') }}">{{ $group->name }} &nbsp; <span class="badge badge-info test-right">{{ $group->events()->count() }}</span></a></li>
                            @endforeach
                           </ul>
                     </li>
@@ -62,7 +62,7 @@
                           </a>
                           <ul class="dropdown-menu" role="menu">
                            @foreach(\Auth::user()->follows()->get() as $group)
-                             <li><a href="{{ url($group->username, 'notice') }}">{{ $group->name }}</a></li>
+                             <li><a href="{{ url($group->username, 'notice') }}">{{ $group->name }} &nbsp; <span class="badge badge-info test-right">{{ $group->notices()->count() }}</span></a></li>
                            @endforeach
                           </ul>
                     </li>
@@ -72,21 +72,32 @@
 
                     <li>
 
-                          <a  href="" class=" dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                            <i class="glyphicon glyphicon-list"></i>
+                          <a  href="" class=" count-info dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                            <i class="fa fa-group"></i>
                             Followed Groups <span class="caret"></span>
                           </a>
-                          <ul class="dropdown-menu" role="menu">
+                          <ul class="dropdown-menu dropdown-messages" role="menu">
                            @foreach(\Auth::user()->follows()->get() as $group)
-                             <li><a href="{{ url($group->username) }}">{{ $group->name }}</a></li>
+                                <li>
+                                    <div class="dropdown-messages-box">
+                                        <a href="{{ $group->username }}" class="pull-left">
+                                            <img alt="image" class="img-circle img-responsive" src="{{ $group->profileSource() }}">
+                                        </a>
+                                        <div class="media-body">
+
+                                            <strong>{{ $group->name }}</strong> <br>
+                                            <small class="text-muted">Followers - {{ $group->followersCount() }}</small>
+                                        </div>
+                                    </div>
+                                </li>
+                                <li class="divider"></li>
                            @endforeach
-                             <li class="divider"></li>
-                             <li><a href="{{ url('/mygroups') }}">All Groups</a></li>
+                             <li class="text-center"><a href="{{ url('/mygroups') }}">All Groups</a></li>
                           </ul>
 
                     </li>
 
-                    <li class="active">
+                    <li>
                        <a aria-expanded="false" role="button" href="{{ url("/create/group ") }}"> Create Your Group</a>
                     </li>
                     <li>

@@ -3,7 +3,7 @@
 @section('content')
                 <div class="row">
                         <div class="col-md-3 pull-left">
-                            <a class="btn btn-md btn-rounded btn-default" href="{{ url($event->group()->first()->username,'events') }}"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to Events</a>
+                            <a class="btn btn-sm btn-info " href="{{ url($event->group()->first()->username,'events') }}"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to Events</a>
                         </div>
                 </div><br>
    <div class="row">

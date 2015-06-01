@@ -2,22 +2,21 @@
 
 @section('content')
             <div class="wrapper wrapper-content animated fadeInRight">
+                @include('inspina.partials.to_home_set')
+
                 <div class="row">
                     <div class="col-lg-12">
                         <div class="ibox float-e-margins">
                             <div class="ibox-content">
                                     <h2>
-                                    @if(isset($tagline))
-                                        Search for a group...
-                                    @else
                                         {{ $tagline }}
-                                    @endif
                                     </h2>
 
                                 <div class="search-form">
                                     <form action="{{ url('/group/search') }}" method="post">
+                                    <input type="hidden" name="_token" value="{{ csrf_token() }}">
                                         <div class="input-group">
-                                            <input type="text" placeholder="Search by group name" name="search" class="form-control input-lg">
+                                            <input type="text" placeholder="Search by group name" name="value" class="form-control input-lg">
                                             <div class="input-group-btn">
                                                 <button class="btn btn-lg btn-primary" type="submit">
                                                     Search

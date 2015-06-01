@@ -1,6 +1,7 @@
 @extends('inspina.layouts.main')
 
 @section('content')
+@include('inspina.partials.to_home_set')
     <div class="ibox-content m-b-sm border-bottom">
         <div class="p-xs">
             <div class="pull-left m-r-md">
