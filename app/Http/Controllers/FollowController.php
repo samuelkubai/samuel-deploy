@@ -109,7 +109,7 @@ class FollowController extends Controller {
 	public function destroy($group)
 	{
         $this->clientRepository->clientLeave($group, $this->user());
-        return redirect('/mygroups');
+        return redirect('/');
 	}
 
     /**

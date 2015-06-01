@@ -5,7 +5,7 @@
                             </div>
                             <div>
                                 <div class="ibox-content no-padding border-left-right">
-                                    <a href="<?php echo e(url('/')); ?>">
+                                    <a href="<?php echo e(url($group->username)); ?>">
                                         <img alt="image" class="img-preview" src="<?php echo e(asset($group->profileSource())); ?>">
                                     </a>
                                 </div>
@@ -30,7 +30,7 @@
                                         </div>
                                         <?php else: ?>
 
-                                        <p>Administered by <b> <?php echo e($group->user()->first()->firstName); ?>. ' '. <?php echo e($group->user()->first()->lastName); ?></b></p>
+                                        <p>Administered by <b> <?php echo e($group->user()->first()->firstName); ?>  <?php echo e($group->user()->first()->lastName); ?></b></p>
                                         <div class="row">
                                             <div class="col-md-4 pull-left">
                                                 <a href="<?php echo e(url($group->username . '/events')); ?>" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events</a>

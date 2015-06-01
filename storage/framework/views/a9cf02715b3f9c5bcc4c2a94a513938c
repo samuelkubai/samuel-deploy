@@ -78,6 +78,7 @@
                           </a>
                           <ul class="dropdown-menu dropdown-messages" role="menu">
                            <?php foreach(\Auth::user()->follows()->get() as $group): ?>
+
                                 <li>
                                     <div class="dropdown-messages-box">
                                         <a href="<?php echo e($group->username); ?>" class="pull-left">
@@ -85,14 +86,31 @@
                                         </a>
                                         <div class="media-body">
 
-                                            <strong><?php echo e($group->name); ?></strong> <br>
+
+                                            <strong><?php echo e($group->name); ?></strong>
+                                            <br>
                                             <small class="text-muted">Followers - <?php echo e($group->followersCount()); ?></small>
+
                                         </div>
                                     </div>
                                 </li>
+                                 <br>
                                 <li class="divider"></li>
+
                            <?php endforeach; ?>
-                             <li class="text-center"><a href="<?php echo e(url('/mygroups')); ?>">All Groups</a></li>
+                            <?php if(\Auth::user()->follows()->get()->count() != 0): ?>
+                                 <li class="text-center">
+                                 <div class="text-center link-block">
+                                    <a href="<?php echo e(url('/mygroups')); ?>"><i class="fa fa-group"></i> All Groups</a>
+                                 </div>
+                                </li>
+                            <?php else: ?>
+                                <li class="text-center">
+                                 <div class="text-center link-block">
+                                    <a href="<?php echo e(url('/groups/all')); ?>"><i class="fa fa-group"></i>Join Groups</a>
+                                 </div>
+                                </li>
+                            <?php endif; ?>
                           </ul>
 
                     </li>
@@ -107,8 +125,8 @@
                             <?php echo e(\Auth::user()->firstName . ' '. \Auth::user()->lastName); ?> <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu" role="menu">
-                                <li><a href="<?php echo e(url('/logout')); ?>"><i class="fa fa-sign-out"></i> Log out</a></li>
                                 <li><a href="<?php echo e(url('/profile/update')); ?>"><i class="fa fa-wrench"></i> Profile</a></li>
+                                <li><a href="<?php echo e(url('/logout')); ?>"><i class="fa fa-sign-out"></i> Log out</a></li>
                           </ul>
 
                     </li>

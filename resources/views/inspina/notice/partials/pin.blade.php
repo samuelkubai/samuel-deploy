@@ -18,7 +18,7 @@
                         </div> 
                     </div>
                     <div class="modal-footer">
-                        <button type="submit" class="btn btn-primary">Create Notice</button>
+                        <button type="submit" class="btn btn-primary">Pin Notice</button>
                         <button type="reset" class="btn btn-white" data-dismiss="modal">Cancel</button>
                     </div>
             </form>

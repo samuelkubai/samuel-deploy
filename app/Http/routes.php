@@ -108,11 +108,10 @@ Route::bind('code' , function($code)
 
 
 
-Route::get('/test/events/profile',function()
+Route::get('/test/mail',function()
 {
-    $title = "Events";
 
-    return view('inspina.timeline.profile', compact('title'));
+    return view('inspina.email.confirm');
 });
 
 

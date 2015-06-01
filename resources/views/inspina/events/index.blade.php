@@ -30,50 +30,55 @@
 
                                 <table class="table table-hover">
                                     <tbody>
-                                    @foreach($events as $event)
-                                    <tr>
-                                        <td class="project-status">
-                                             @if($event->status == 1)
-                                                <span class="label label-primary">Active</span></dd>
-                                             @else
-                                                <span class="label label-default">Unactive</span></dd>
-                                             @endif
-                                        </td>
-                                        <td class="project-title">
-                                            <a href="{{ url($event->id .'/events/profile') }}">{{ $event->title }}</a>
-                                            <br/>
-                                            <small>On {{ $event->date }}</small>
-                                        </td>
-                                        <td class="project-completion">
-                                            Participants: <b>{{ $event->participantsCount() }}</b>
-                                        </td>
-                                        <td class="project-people">
-                                            <div class="btn-group">
-                                            @if($event->isAttendedBy(\Auth::user()))
-                                              <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                Attending <span class="caret"></span>
-                                              </button>
-                                              <ul class="dropdown-menu" role="menu">
-                                                <li><a href="{{ url($event->id . '/events/notAttend') }}">Not Attend</a></li>
-                                              </ul>
-                                            @else
-                                              <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
-                                                Not Attending <span class="caret"></span>
-                                              </button>
-                                              <ul class="dropdown-menu" role="menu">
-                                                <li><a href="{{ url($event->id . '/events/attend') }}">Attend</a></li>
-                                              </ul>
-                                            @endif
-                                            </div>
-                                        </td>
-                                        <td class="project-actions">
-                                            <a href="{{ url($event->id .'/events/profile') }}" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
-                                           @if($group->isOwner(\Auth::user()))
-                                            <a href="{{ url($event->id .'/events/update') }}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
-                                           @endif
-                                        </td>
-                                    </tr>
-                                    @endforeach
+                                    @if($events->count() != 0)
+                                        @foreach($events as $event)
+                                        <tr>
+                                            <td class="project-status">
+                                                 @if($event->status == 1)
+                                                    <span class="label label-primary">Active</span></dd>
+                                                 @else
+                                                    <span class="label label-default">Unactive</span></dd>
+                                                 @endif
+                                            </td>
+                                            <td class="project-title">
+                                                <a href="{{ url($event->id .'/events/profile') }}">{{ $event->title }}</a>
+                                                <br/>
+                                                <small>On {{ $event->date }}</small>
+                                            </td>
+                                            <td class="project-completion">
+                                                Participants: <b>{{ $event->participantsCount() }}</b>
+                                            </td>
+                                            <td class="project-people">
+                                                <div class="btn-group">
+                                                @if($event->isAttendedBy(\Auth::user()))
+                                                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    Attending <span class="caret"></span>
+                                                  </button>
+                                                  <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="{{ url($event->id . '/events/notAttend') }}">Not Attend</a></li>
+                                                  </ul>
+                                                @else
+                                                  <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    Not Attending <span class="caret"></span>
+                                                  </button>
+                                                  <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="{{ url($event->id . '/events/attend') }}">Attend</a></li>
+                                                  </ul>
+                                                @endif
+                                                </div>
+                                            </td>
+                                            <td class="project-actions">
+                                                <a href="{{ url($event->id .'/events/profile') }}" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
+                                               @if($group->isOwner(\Auth::user()))
+                                                <a href="{{ url($event->id .'/events/update') }}" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                               @endif
+                                            </td>
+                                        </tr>
+                                        @endforeach
+                                    @else
+                                        <br>
+                                        <h2 align="center" >No Events created Just Yet!</h2>
+                                    @endif
                                     </tbody>
                                 </table>
                                 <div class="text-center">

@@ -78,7 +78,9 @@
                                 <div class="chat-discussion">
                                 @foreach($event->messages() as $message)
                                     <div class="chat-message">
+
                                         <img class="message-avatar" src="{{ asset($message->user()->first()->profileSource()) }}" alt="" >
+
                                         <div class="message">
                                             <a class="message-author" href=""> {{ $message->user()->first()->fullName() }} </a>
 											<span class="message-date"> {{ $message->created_at }} </span>
@@ -141,7 +143,9 @@
             <div class="col-lg-3">
                 <div class="wrapper wrapper-content project-manager" style="padding-top: 0px;">
                     <h3>{{ $event->group()->first()->name }}</h3>
-                    <img src="{{ asset($event->group()->first()->profileSource()) }}" class="img-responsive" alt=""/>
+                    <a href="{{ url($event->group()->first()->username) }}">
+                        <img src="{{ asset($event->group()->first()->profileSource()) }}" class="img-responsive" alt=""/>
+                    </a>
                     <br>
 
                     <h4>Event description</h4>

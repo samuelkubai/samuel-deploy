@@ -12,13 +12,17 @@
                                 <div class="ibox-content">
                                     <div class="file-manager">
                                     <?php echo $__env->make('inspina.file.partials.upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload Files</button>
+                                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#subModal">Create Sub Folder</button>
                                         <div class="hr-line-dashed"></div>
-                                        <h5>Sub-Folders</h5>
+                                        <h5>Folders</h5>
                                         <ul class="folder-list" style="padding: 0">
+                                        <?php if($subFolders->count() != 0): ?>
                                         <?php foreach($subFolders as $subFolder): ?>
                                             <li><a href="<?php echo e(url('manager/'.$group->username.'/'. $subFolder->id)); ?>"><i class="fa fa-folder"></i> <?php echo e($subFolder->name); ?></a></li>
                                         <?php endforeach; ?>
+                                        <?php else: ?>
+                                            <li><b> <span align="center">No Sub Folders for this group.</span></b></li>
+                                        <?php endif; ?>
                                         </ul>
                                         <div class="clearfix"></div>
                                     </div>
@@ -31,35 +35,38 @@
                                 <?php echo $__env->make('inspina.file.partials.createSubFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                                     <div class="file-box">
                                         <div class="file">
-                                            <a href="" data-toggle="modal" data-target="#subModal">
+                                            <a href="" data-toggle="modal" data-target="#uploadModal">
                                                 <span class="corner"></span>
 
                                                 <div class="icon">
                                                     <i class="fa fa-plus"></i>
                                                 </div>
                                                 <div  class="text-center file-name">
-                                                    <h3>Add Sub Folder</h3>
+                                                    <h3>Upload File</h3>
                                                 </div>
                                             </a>
                                         </div>
 
                                     </div>
-                                    <?php echo $__env->make('inspina.file.partials.updateFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                                    <div class="file-box">
-                                        <div class="file">
-                                            <a href="" data-toggle="modal" data-target="#updateModal">
-                                                <span class="corner"></span>
+                                    <?php if($group->isOwner(\Auth::user())): ?>
+                                        <?php echo $__env->make('inspina.file.partials.updateFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
 
-                                                <div class="icon">
-                                                    <i class="fa fa-edit"></i>
-                                                </div>
-                                                <div  class="text-center file-name">
-                                                    <h3>Edit Folder</h3>
-                                                </div>
-                                            </a>
+                                        <div class="file-box">
+                                            <div class="file">
+                                                <a href="" data-toggle="modal" data-target="#updateModal">
+                                                    <span class="corner"></span>
+
+                                                    <div class="icon">
+                                                        <i class="fa fa-edit"></i>
+                                                    </div>
+                                                    <div  class="text-center file-name">
+                                                        <h3>Edit Folder</h3>
+                                                    </div>
+                                                </a>
+                                            </div>
+
                                         </div>
-
-                                    </div>
+                                    <?php endif; ?>
                                 <?php foreach($subFolders as $subFolder): ?>
                                     <div class="file-box">
                                         <div class="file">

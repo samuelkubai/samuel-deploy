@@ -78,6 +78,7 @@
                           </a>
                           <ul class="dropdown-menu dropdown-messages" role="menu">
                            @foreach(\Auth::user()->follows()->get() as $group)
+
                                 <li>
                                     <div class="dropdown-messages-box">
                                         <a href="{{ $group->username }}" class="pull-left">
@@ -85,14 +86,31 @@
                                         </a>
                                         <div class="media-body">
 
-                                            <strong>{{ $group->name }}</strong> <br>
+
+                                            <strong>{{ $group->name }}</strong>
+                                            <br>
                                             <small class="text-muted">Followers - {{ $group->followersCount() }}</small>
+
                                         </div>
                                     </div>
                                 </li>
+                                 <br>
                                 <li class="divider"></li>
+
                            @endforeach
-                             <li class="text-center"><a href="{{ url('/mygroups') }}">All Groups</a></li>
+                            @if(\Auth::user()->follows()->get()->count() != 0)
+                                 <li class="text-center">
+                                 <div class="text-center link-block">
+                                    <a href="{{ url('/mygroups') }}"><i class="fa fa-group"></i> All Groups</a>
+                                 </div>
+                                </li>
+                            @else
+                                <li class="text-center">
+                                 <div class="text-center link-block">
+                                    <a href="{{ url('/groups/all') }}"><i class="fa fa-group"></i>Join Groups</a>
+                                 </div>
+                                </li>
+                            @endif
                           </ul>
 
                     </li>
@@ -107,8 +125,8 @@
                             {{\Auth::user()->firstName . ' '. \Auth::user()->lastName }} <span class="caret"></span>
                           </a>
                           <ul class="dropdown-menu" role="menu">
-                                <li><a href="{{url('/logout')}}"><i class="fa fa-sign-out"></i> Log out</a></li>
                                 <li><a href="{{url('/profile/update')}}"><i class="fa fa-wrench"></i> Profile</a></li>
+                                <li><a href="{{url('/logout')}}"><i class="fa fa-sign-out"></i> Log out</a></li>
                           </ul>
 
                     </li>

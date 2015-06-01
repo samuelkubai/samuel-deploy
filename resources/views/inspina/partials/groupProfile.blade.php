@@ -5,7 +5,7 @@
                             </div>
                             <div>
                                 <div class="ibox-content no-padding border-left-right">
-                                    <a href="{{ url('/') }}">
+                                    <a href="{{ url($group->username) }}">
                                         <img alt="image" class="img-preview" src="{{asset($group->profileSource())}}">
                                     </a>
                                 </div>
@@ -29,7 +29,7 @@
                                         </div>
                                         @else
 
-                                        <p>Administered by <b> {{ $group->user()->first()->firstName }}. ' '. {{ $group->user()->first()->lastName }}</b></p>
+                                        <p>Administered by <b> {{ $group->user()->first()->firstName }}  {{ $group->user()->first()->lastName }}</b></p>
                                         <div class="row">
                                             <div class="col-md-4 pull-left">
                                                 <a href="{{ url($group->username . '/events') }}" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events</a>

@@ -16,6 +16,10 @@
                                         @endforeach
                                      @else
                                         <div class="feed-element">
-                                            <h2 align="center"> No Activities :( </h2>
+                                            <h2 align="center"> No Activities Recorded</h2>
+                                            <br>
+                                            <h4 align="center"class="muted text-center">
+                                            Perhaps Join a new Group :)
+                                            </h4>
                                         </div>
                                      @endif

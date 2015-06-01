@@ -14,13 +14,17 @@
                                 <div class="ibox-content">
                                     <div class="file-manager">
                                     @include('inspina.file.partials.upload')
-                                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload Files</button>
+                                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#subModal">Create Sub Folder</button>
                                         <div class="hr-line-dashed"></div>
-                                        <h5>Sub-Folders</h5>
+                                        <h5>Folders</h5>
                                         <ul class="folder-list" style="padding: 0">
+                                        @if($subFolders->count() != 0)
                                         @foreach($subFolders as $subFolder)
                                             <li><a href="{{url('manager/'.$group->username.'/'. $subFolder->id) }}"><i class="fa fa-folder"></i> {{ $subFolder->name}}</a></li>
                                         @endforeach
+                                        @else
+                                            <li><b> <span align="center">No Sub Folders for this group.</span></b></li>
+                                        @endif
                                         </ul>
                                         <div class="clearfix"></div>
                                     </div>
@@ -33,35 +37,38 @@
                                 @include('inspina.file.partials.createSubFolder')
                                     <div class="file-box">
                                         <div class="file">
-                                            <a href="" data-toggle="modal" data-target="#subModal">
+                                            <a href="" data-toggle="modal" data-target="#uploadModal">
                                                 <span class="corner"></span>
 
                                                 <div class="icon">
                                                     <i class="fa fa-plus"></i>
                                                 </div>
                                                 <div  class="text-center file-name">
-                                                    <h3>Add Sub Folder</h3>
+                                                    <h3>Upload File</h3>
                                                 </div>
                                             </a>
                                         </div>
 
                                     </div>
-                                    @include('inspina.file.partials.updateFolder')
-                                    <div class="file-box">
-                                        <div class="file">
-                                            <a href="" data-toggle="modal" data-target="#updateModal">
-                                                <span class="corner"></span>
+                                    @if($group->isOwner(\Auth::user()))
+                                        @include('inspina.file.partials.updateFolder')
 
-                                                <div class="icon">
-                                                    <i class="fa fa-edit"></i>
-                                                </div>
-                                                <div  class="text-center file-name">
-                                                    <h3>Edit Folder</h3>
-                                                </div>
-                                            </a>
+                                        <div class="file-box">
+                                            <div class="file">
+                                                <a href="" data-toggle="modal" data-target="#updateModal">
+                                                    <span class="corner"></span>
+
+                                                    <div class="icon">
+                                                        <i class="fa fa-edit"></i>
+                                                    </div>
+                                                    <div  class="text-center file-name">
+                                                        <h3>Edit Folder</h3>
+                                                    </div>
+                                                </a>
+                                            </div>
+
                                         </div>
-
-                                    </div>
+                                    @endif
                                 @foreach($subFolders as $subFolder)
                                     <div class="file-box">
                                         <div class="file">

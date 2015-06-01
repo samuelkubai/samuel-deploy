@@ -58,7 +58,7 @@ class GroupController extends Controller {
 	 */
 	public function create()
 	{
-        $title = 'New School';
+        $title = 'New Group';
 
         return view('school.inspina.create', compact('title'));
 	}
