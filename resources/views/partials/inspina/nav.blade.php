@@ -41,7 +41,7 @@
                 <a href="{{ url('/profile/update') }}"><i class="fa fa-cogs"></i> <span class="nav-label">Settings</span></a>
             </li>
             <li class="special_link">
-                <a href="{{ url('/admin/groups') }}"><i class="fa fa-database"></i> <span class="nav-label" style="color: #ffffff">Manage Your Groups</span></a>
+                <a href="{{ url(group) }}"><i class="fa fa-database"></i> <span class="nav-label" style="color: #ffffff">Manage Your Groups</span></a>
             </li>
         </ul>
 

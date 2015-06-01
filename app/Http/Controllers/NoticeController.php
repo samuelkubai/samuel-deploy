@@ -71,7 +71,7 @@ class NoticeController extends Controller {
             return redirect()->back();
         }
 
-        return redirect()->back()->withErrors('You are not a member of this group, You can not Pin anything here.');
+        return redirect()->back()->withErrors('You are not a member of this groups, You can not Pin anything here.');
 
 	}
 
@@ -115,7 +115,7 @@ class NoticeController extends Controller {
     {
         $title = 'Notice Board';
         $notices = $this->repo->pinsForSchool($group);
-        return view('inspina..notice.admin_board', compact('notices','group', 'title'));
+        return view('inspina..notice.admin_board', compact('notices','groups', 'title'));
     }
 
 

@@ -33,4 +33,20 @@ class FolderRepository {
 
         return false;
     }
+
+    public function createSubDirectory($folder, $newFolderName)
+    {
+        $newFolder = $folder->folders()->create([
+            'name' => $newFolderName,
+            'group_id' => $folder->group()->first()->id,
+            'sub-directory' => 1,
+        ]);
+
+        $message = 'New Folder: ' . $newFolderName . ' created in ' . $folder->group()->first()->name ;
+        $url = '/manager/'.$folder->group()->first()->username.'/'.$newFolder->id;
+        $this->post($message, $folder->group()->first(), $url);
+
+        return $newFolder;
+
+    }
 } 

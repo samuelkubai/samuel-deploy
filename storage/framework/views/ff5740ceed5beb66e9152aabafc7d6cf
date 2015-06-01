@@ -1,0 +1,64 @@
+<?php $__env->startSection('content'); ?>
+            <div class="wrapper wrapper-content animated fadeInRight">
+                <div class="row">
+                    <div class="col-lg-12">
+                        <div class="ibox float-e-margins">
+                            <div class="ibox-content">
+                                    <h2>
+                                        Search for a group...
+                                    </h2>
+
+                                <div class="search-form">
+                                    <form action="<?php echo e(url('/group/search')); ?>" method="post">
+                                        <div class="input-group">
+                                            <input type="text" placeholder="Search by group name" name="search" class="form-control input-lg">
+                                            <div class="input-group-btn">
+                                                <button class="btn btn-lg btn-primary" type="submit">
+                                                    Search
+                                                </button>
+                                            </div>
+                                        </div>
+
+                                    </form>
+                                </div>
+                              <?php foreach($groups as $group): ?>
+                                <div class="hr-line-dashed"></div>
+                                <div class="search-result">
+                                <h3><?php echo e($group->name); ?></h3>
+                                    <span class="search-link"><?php echo e($group->email); ?></span>
+                                    <p>
+                                        <?php echo e($group->description); ?>
+
+                                         <br>
+
+                                       <span> <b>Followers</b>: <?php echo e($group->followers()->get()->count()); ?></span>&nbsp;&nbsp;&nbsp;
+
+                                       <span> <b>Events</b>: <?php echo e($group->events()->get()->count()); ?></span>&nbsp;&nbsp;&nbsp;
+                                       <span> <b>Notices</b>: <?php echo e($group->notices()->get()->count()); ?></span>
+
+                                    <br>
+                                    <p align="center">
+                                    <?php if(!$group->isFollowedBy(\Auth::user())): ?>
+                                        <a href="<?php echo e(url($group->username . '/join/group')); ?>" class="btn btn-rounded btn-primary btn-outline">Join Group</a>
+                                    <?php else: ?>
+                                    <?php if(!$group->isOwner(\Auth::user())): ?>
+                                        <a href="<?php echo e(url($group->username . '/leave/group')); ?>" class="btn btn-rounded btn-danger btn-outline">Leave Group</a>
+                                    <?php else: ?>
+                                        <a href="<?php echo e(url($group->username)); ?>" class="btn btn-rounded btn-default btn-outline">Manage Group</a>
+                                    <?php endif; ?>
+                                    <?php endif; ?>
+                                    </p>
+                                </div>
+                              <?php endforeach; ?>
+
+                                <div class="hr-line-dashed"></div>
+                                <div class="text-center">
+                                    <?php echo $groups->render() ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+            </div>
+            </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -3,7 +3,7 @@
 @section('content')
  <div class="wrapper wrapper-content">
     <div class="row animated fadeInRight">
-        @include('inspina.partials.groupProfile', ['group' => $event->group()])
+        @include('inspina.partials.groupProfile', [groups => $event->group()])
                     <div class="col-md-8">
                         <div class="ibox float-e-margins">
                             <div class="ibox-title">

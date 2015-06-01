@@ -25,6 +25,7 @@ class UpdateEventRequest extends Request {
 			'date' => 'required',
 			'title' => 'required',
 			'description' => 'required',
+			'sponsor' => 'required',
 		];
 	}
 

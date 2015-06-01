@@ -108,11 +108,19 @@ Route::bind('code' , function($code)
 
 
 
-Route::get('/test/mail','HomeController@sendMail');
+Route::get('/test/events/profile',function()
+{
+    $title = "Events";
+
+    return view('inspina.timeline.profile', compact('title'));
+});
 
 
 /* Testing Route Ends */
+/* Joining groups routes */
 
+
+/* Joining groups routes ends here*/
 
 /* Community Routes */
     /* School Routes */
@@ -155,6 +163,8 @@ Route::get('/test/mail','HomeController@sendMail');
             [ 'middleware' => 'school', 'uses' => 'FileController@destroyFolder' ]);
         Route::post('/manager/{group}/folder',
             [ 'middleware' => 'school', 'uses' => 'FileController@storeFolder' ]);
+        Route::post('/manager/{folder}/sub/folder',
+            [ 'middleware' => 'school', 'uses' => 'FileController@storeSubFolder' ]);
         Route::post('/manager/{folder}/folder/update',
             [ 'middleware' => 'school', 'uses' => 'FileController@updateFolder' ]);
         Route::get('/manager/delete/{folder}/{file}',
@@ -182,7 +192,18 @@ Route::get('/test/mail','HomeController@sendMail');
     /* End School Routes */
 
     /* Client Routes */
-        Route::get('/{username}/events',  ['middleware' => 'school', 'uses' => 'TimelineController@Show']);
+        Route::get('/{username}/events',  ['middleware' => 'school', 'uses' => 'EventsController@index']);
+        Route::get('/{username}/events/create',  ['middleware' => 'school', 'uses' => 'EventsController@create']);
+        Route::post('/{username}/events/create',  ['middleware' => 'school', 'uses' => 'EventsController@store']);
+        Route::post('/{username}/events/search',  ['middleware' => 'school', 'uses' => 'EventsController@search']);
+        Route::get('/{event}/events/update',  ['middleware' => 'school', 'uses' => 'EventsController@edit']);
+        Route::get('/{event}/events/destroy',  ['middleware' => 'school', 'uses' => 'EventsController@destroy']);
+        Route::post('/{event}/events/update',  ['middleware' => 'school', 'uses' => 'EventsController@update']);
+        Route::post('/event/file/{folder}',  ['middleware' => 'school', 'uses' => 'EventsController@storeFile']);
+        Route::post('/{event}/event/chat/store',  ['middleware' => 'school', 'uses' => 'EventsController@storeMessage']);
+        Route::get('{event}/events/profile',  ['middleware' => 'school', 'uses' => 'EventsController@show']);
+        Route::get('{event}/events/attend',  ['middleware' => 'school', 'uses' => 'EventsController@attend']);
+        Route::get('{event}/events/notAttend',  ['middleware' => 'school', 'uses' => 'EventsController@notAttend']);
         Route::get('/events',  ['middleware' => 'school', 'uses' => 'TimelineController@Index']);
     /* End Client Routes */
     
@@ -209,11 +230,11 @@ Route::get('/test/mail','HomeController@sendMail');
     /* End School Routes */
 
     /* Client Routes */
-        Route::get('/groups',  ['middleware' => 'school', 'uses' => 'ClientController@index']);
-        Route::get('/join/group',  ['middleware' => 'school', 'uses' => 'ClientController@create']);
-        Route::get('{username}/join/group',  ['middleware' => 'school', 'uses' => 'ClientController@store']);
-        Route::get('{username}/leave/group',  ['middleware' => 'school', 'uses' => 'ClientController@destroy']);
-        Route::get('/mygroups',  ['middleware' => 'school', 'uses' => 'GroupController@allGroups']);
+        Route::get('/groups/all',  ['middleware' => 'school', 'uses' => 'FollowController@create']);
+        Route::get('/join/group',  ['middleware' => 'school', 'uses' => 'FollowController@store']);
+        Route::get('{username}/join/group',  ['middleware' => 'school', 'uses' => 'FollowController@store']);
+        Route::get('{username}/leave/group',  ['middleware' => 'school', 'uses' => 'FollowController@destroy']);
+        Route::get('/mygroups',  ['middleware' => 'school', 'uses' => 'FollowController@index']);
 
     /* End Client Routes */
 /* End Group Routes */
@@ -222,7 +243,8 @@ Route::get('/test/mail','HomeController@sendMail');
 
 
 /* Login and Registration */
-    Route::get('/login', 'SchoolController@getLoginAndRegister');
+    Route::get('/login', 'SchoolController@getLogin');
+    Route::get('/register', 'SchoolController@getRegister');
     Route::post('/register', 'SchoolController@postRegister');
     Route::post('/login', 'SchoolController@postLogin');
     Route::get('/logout', 'SchoolController@getLogout');
@@ -243,7 +265,7 @@ Route::get('/test/mail','HomeController@sendMail');
 /* Group Routes: Create, Update, Read/Show and Delete */
     Route::get('/create/group',  ['middleware' => 'school', 'uses' => 'GroupController@create']);
     Route::post('/create/group',  ['middleware' => 'school', 'uses' => 'GroupController@store']);
-    Route::get('/admin/groups',  ['middleware' => 'school', 'uses' => 'GroupController@index']);
+    Route::get('/admin/group',  ['middleware' => 'school', 'uses' => 'GroupController@index']);
     Route::get('/{username}/',  ['middleware' => 'school', 'uses' => 'GroupController@show']);
     Route::get('/{username}/update/',  ['middleware' => 'school', 'uses' => 'GroupController@edit']);
     Route::post('/{username}/update/',  ['middleware' => 'school', 'uses' => 'GroupController@update']);

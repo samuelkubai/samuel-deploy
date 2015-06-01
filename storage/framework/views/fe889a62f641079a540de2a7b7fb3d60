@@ -1,18 +1,22 @@
 <?php $__env->startSection('content'); ?>
     <div class="wrapper wrapper-content">
             <div class="row animated fadeInRight">
-                <?php echo $__env->make('inspina.partials.groupProfile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                <div class="col-md-8">
+                <div class="row">
+                        <div class="col-md-3 pull-left">
+                            <a class="btn btn-md btn-rounded btn-default" href="<?php echo e(url($group->username)); ?>"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to group feed</a>
+                        </div>
+                </div><br>
+                <div class="col-md-12">
                     <?php echo $__env->make('inspina.notice.partials.board', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     <br>
 
                 </div>
                 <?php if($notices==null): ?>
-                    <div class="row col-md-8" >
+                    <div class="row col-md-12" >
                     <?php echo $__env->make('inspina.partials.previous_pins', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     </div>
                 <?php endif; ?>
-                    <div class="row col-md-8" >
+                    <div class="row col-md-12" >
                     <?php echo $__env->make('inspina.notice.partials.pin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     </div>
              </div>

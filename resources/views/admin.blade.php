@@ -232,7 +232,7 @@
                 $image.cropper("setDragMode", "crop");
             });
 
-            $('#data_1 .input-group.date').datepicker({
+            $('#data_1 .input-groups.date').datepicker({
                 todayBtn: "linked",
                 keyboardNavigation: false,
                 forceParse: false,
@@ -240,7 +240,7 @@
                 autoclose: true
             });
 
-            $('#data_2 .input-group.date').datepicker({
+            $('#data_2 .input-groups.date').datepicker({
                 startView: 1,
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -248,7 +248,7 @@
                 autoclose: true
             });
 
-            $('#data_3 .input-group.date').datepicker({
+            $('#data_3 .input-groups.date').datepicker({
                 startView: 2,
                 todayBtn: "linked",
                 keyboardNavigation: false,
@@ -256,7 +256,7 @@
                 autoclose: true
             });
 
-            $('#data_4 .input-group.date').datepicker({
+            $('#data_4 .input-groups.date').datepicker({
                 minViewMode: 1,
                 keyboardNavigation: false,
                 forceParse: false,

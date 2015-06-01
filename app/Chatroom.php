@@ -4,11 +4,16 @@ use Illuminate\Database\Eloquent\Model;
 
 class Chatroom extends Model {
 
-	protected $fillable = ['person_one', 'person_two'];
+	protected $fillable = ['name', 'event_id'];
 
 	public function messages()
 	{
-		return $this->hasMany('App\Chatmessage');
+		return $this->hasOne('App\Chatmessage');
 	}
+
+    public function event()
+    {
+        return $this->belongsTo('App\Event');
+    }
 
 }

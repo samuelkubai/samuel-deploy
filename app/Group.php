@@ -21,6 +21,7 @@ class Group extends Model {
     {
         return $this->followers()->get()->count();
     }
+
     public function isFollowedBy($user)
     {
         $followersId = $this->followers()->lists('user_id');
@@ -82,6 +83,22 @@ class Group extends Model {
 
     public function paginatedPosts($howMany = 10)
     {
-        return Post::where('group_id', $this->id)->latest()->simplePaginate();
+        return Post::where('group_id', $this->id)->latest()->simplePaginate($howMany);
     }
+
+    public static function allPaginatedGroups($howMany = 10)
+    {
+        return self::simplePaginate($howMany);
+    }
+
+    public function mainFolders()
+    {
+        return $this->folders()->where('sub-directory', null)->get();
+    }
+
+    public function scopeSearchFor($query, $field, $value)
+    {
+        return $query->where($field, 'LIKE', "%$value%");
+    }
+
 }

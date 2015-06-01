@@ -57,8 +57,8 @@
         constructor: Timepicker
 
         , init: function () {
-            if (this.$element.parent().hasClass('input-group')) {
-                this.$element.parent('.input-group').find('.btn').on('click', $.proxy(this.showWidget, this));
+            if (this.$element.parent().hasClass('input-groups')) {
+                this.$element.parent('.input-groups').find('.btn').on('click', $.proxy(this.showWidget, this));
                 this.$element.on({
                     focus: $.proxy(this.highlightUnit, this),
                     click: $.proxy(this.highlightUnit, this),

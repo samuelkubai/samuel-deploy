@@ -238,7 +238,7 @@
                 classes.push("result-selected");
             }
             if (option.group_array_index != null) {
-                classes.push("group-option");
+                classes.push("groups-option");
             }
             if (option.classes !== "") {
                 classes.push(option.classes);
@@ -260,7 +260,7 @@
                 return '';
             }
             group_el = document.createElement("li");
-            group_el.className = "group-result";
+            group_el.className = "groups-result";
             group_el.innerHTML = group.search_text;
             return this.outerHTML(group_el);
         };

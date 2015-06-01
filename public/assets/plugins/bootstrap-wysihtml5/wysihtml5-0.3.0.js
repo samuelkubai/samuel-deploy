@@ -9103,7 +9103,7 @@ wysihtml5.views.Textarea = wysihtml5.views.View.extend(
         link    = links[i];
         name    = link.getAttribute("data-wysihtml5-" + type);
         value   = link.getAttribute("data-wysihtml5-" + type + "-value");
-        group   = this.container.querySelector("[data-wysihtml5-" + type + "-group='" + name + "']");
+        group   = this.container.querySelector("[data-wysihtml5-" + type + "-groups='" + name + "']");
         dialog  = this._getDialog(link, name);
         
         mapping[name + ":" + value] = {

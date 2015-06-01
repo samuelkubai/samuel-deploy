@@ -20,7 +20,7 @@
                 </div>
             </li>
             <li>
-                <a href="{{ url('/admin/groups/') }}"><i class="fa fa-desktop"></i> <span class="nav-label">My Groups</span></a>
+                <a href="{{ url(group) }}"><i class="fa fa-desktop"></i> <span class="nav-label">My Groups</span></a>
             </li>
             <li class="divider"></li>
 

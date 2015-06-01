@@ -16,7 +16,7 @@ class CreateChatmessagesTable extends Migration {
 		{
 			$table->increments('id');
 			$table->integer('chatroom_id');
-			$table->integer('owner_id');
+			$table->integer('user_id');
 			$table->string('message');
 			$table->timestamps();
 		});

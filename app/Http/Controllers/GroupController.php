@@ -63,7 +63,7 @@ class GroupController extends Controller {
 	}
 
     /**
-     * Store a newly created group to the database.
+     * Store a newly created groups to the database.
      *
      * @param CreateSchoolRequest $request
      * @internal param $school
@@ -88,7 +88,8 @@ class GroupController extends Controller {
 	public function show($group)
 	{
         $title = $group->name;
-        return view('inspina.profile.school' , compact('title','group'));
+
+        return view('inspina.groups.feed' , compact('title','group'));
 	}
 
     /**
@@ -172,7 +173,7 @@ class GroupController extends Controller {
         if(!$user)
             return redirect()->back()->withErrors('This is not a member of skoolspace');
 
-        #Checks whether the user is a member of the group
+        #Checks whether the user is a member of the groups
         if(!$this->repo->isFollowerOf($group, $user))
             return redirect()->back()->withErrors('This is not a member of '. $group->name);
 

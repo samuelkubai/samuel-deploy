@@ -1,17 +1,93 @@
 <?php $__env->startSection('content'); ?>
-        <!-- Content starts here -->
-        <div class="wrapper wrapper-content">
-            <div class="row animated fadeInRight">
-        <?php echo $__env->make('inspina.partials.groupProfile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-            <div class="col-md-8">
-                        <div class="col-sm-12 col-md-">
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload New File</button>
+                <!-- Content starts here -->
+                <div class="wrapper wrapper-content" style="padding-right: 0px; padding-top: 0px;">
+                    <div class="row">
+                    <?php if(!$folder->isSubFolder()): ?>
+                        <div class="col-md-3 pull-left">
+                            <a class="btn btn-md btn-rounded btn-default" href="<?php echo e(url($group->username)); ?>"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to group feed</a>
                         </div>
-                        <?php echo $__env->make('inspina.file.partials.upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                        <div class="col-lg-8 animated fadeInRight">
+                    <?php else: ?>
+                        <div class="col-md-3 pull-left">
+                            <a class="btn btn-md btn-rounded btn-default" href="<?php echo e(url('manager/'.$group->username.'/'. $folder->folder_id)); ?>"><i class="glyphicon glyphicon-arrow-up"></i> &nbsp; Up One Directory</a>
+                        </div>
+                    <?php endif; ?>
+                    </div>
+                    <br>
+                    <?php echo $__env->make('inspina.partials.error', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <div class="file-manager">
+                                    <?php echo $__env->make('inspina.file.partials.upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload Files</button>
+                                        <div class="hr-line-dashed"></div>
+                                        <h5>Folders</h5>
+                                        <ul class="folder-list" style="padding: 0">
+                                        <?php foreach($subFolders as $subFolder): ?>
+                                            <li><a href="<?php echo e(url('manager/'.$group->username.'/'. $subFolder->id)); ?>"><i class="fa fa-folder"></i> <?php echo e($subFolder->name); ?></a></li>
+                                        <?php endforeach; ?>
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 animated fadeInRight">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                <?php echo $__env->make('inspina.file.partials.createSubFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                    <div class="file-box">
+                                        <div class="file">
+                                            <a href="" data-toggle="modal" data-target="#subModal">
+                                                <span class="corner"></span>
 
-                       <br> <br><br>
-                        <div class="col-lg-12">
+                                                <div class="icon">
+                                                    <i class="fa fa-plus"></i>
+                                                </div>
+                                                <div  class="text-center file-name">
+                                                    <h3>Add Sub Folder</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                    <?php echo $__env->make('inspina.file.partials.updateFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                    <div class="file-box">
+                                        <div class="file">
+                                            <a href="" data-toggle="modal" data-target="#updateModal">
+                                                <span class="corner"></span>
+
+                                                <div class="icon">
+                                                    <i class="fa fa-edit"></i>
+                                                </div>
+                                                <div  class="text-center file-name">
+                                                    <h3>Edit Folder</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                <?php foreach($subFolders as $subFolder): ?>
+                                    <div class="file-box">
+                                        <div class="file">
+                                            <a href="<?php echo e(url('manager/'.$group->username.'/'. $subFolder->id)); ?>">
+                                                <span class="corner"></span>
+
+                                                <div class="icon">
+                                                    <i class="fa fa-folder"></i>
+                                                </div>
+                                                <div class="file-name">
+                                                    Folder: <?php echo e($subFolder->name); ?>
+
+                                                    <br/>
+                                                    <small>Added: <?php echo e($subFolder->created_at); ?></small>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+
                         <?php if($documents->count() != 0): ?>
                             <?php foreach($documents as $document): ?>
                                 <div class="file-box">
@@ -44,31 +120,13 @@
 
                                 </div>
                             <?php endforeach; ?>
-                        <?php else: ?>
-                            <h2 align="center"><br> <br> <br>THERE ARE NO DOCUMENTS UPLOADED YET!!
-
-                            </h2><br> <br> <br><br> <br> <br>
                         <?php endif; ?>
-
-                        </div>
-                        <?php if($group->isOwner(\Auth::user())): ?>
-                            <div class="col-sm-6">
-                                <button type="button" class="btn btn-info btn-block col-sm-3" data-toggle="modal" data-target="#updateModal">Rename Folder <i class="glyphicon glyphicon-pencil"></i></button>
-                                <?php echo $__env->make('inspina.file.partials.updateFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <a href="<?php echo e('/manager/'.$folder->id.'/delete/'); ?>" class="btn btn-danger btn-block col-sm-3">Delete Folder <i class="glyphicon glyphicon-remove"></i></a>
                             </div>
-                        <?php endif; ?>
                         </div>
-                    </div>
-                </div>
-                </div>
-
-        <!-- Content ends Here! -->
+                        </div>
+                <!-- Content ends Here! -->
 <?php $__env->stopSection(); ?>
 
-<?php $__env->startSection('scripts'); ?>
-
-<?php $__env->stopSection(); ?>
 <?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

@@ -81,4 +81,14 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
 
         return 'uploads/images/default/prof3.png';
     }
+
+    public function attend()
+    {
+        return $this->belongsToMany('App\Event', 'attendances', 'user_id', 'event_id')->withTimestamps();
+    }
+
+    public function fullName()
+    {
+        return $this->firstName . ' ' . $this->lastName;
+    }
 }

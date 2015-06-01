@@ -40,7 +40,7 @@
 @section('content')
     <div class="wrapper wrapper-content animated fadeInRight">
         <div class="row">
-            <div class="col-lg-12"> <a href="{{url('/create/group')}}" class="col-lg-12 btn btn-info">Create New Group</a></div>
+            <div class="col-lg-12"> <a href="{{url(groups)}}" class="col-lg-12 btn btn-info">Create New Group</a></div>
             <br>
             <br>
             <br>

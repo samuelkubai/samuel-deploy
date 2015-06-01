@@ -43,7 +43,7 @@ class ClientController extends Controller
     }
 
     /**
-     * Destroys the relationship between the use and group.
+     * Destroys the relationship between the use and groups.
      * @param $group
      * @return \Illuminate\Http\RedirectResponse|\Illuminate\Routing\Redirector
      */

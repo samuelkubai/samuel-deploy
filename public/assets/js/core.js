@@ -59,11 +59,11 @@ $(document).ready(function () {
         $(this).parent().children('.add-on').addClass('input-focus');
     });
 
-    $(".input-group.transparent").children('input').blur(function () {
+    $(".input-groups.transparent").children('input').blur(function () {
         $(this).parent().children('.input-group-addon').removeClass('input-focus');
     });
 
-    $(".input-group.transparent").children('input').focus(function () {
+    $(".input-groups.transparent").children('input').focus(function () {
         $(this).parent().children('.input-group-addon').addClass('input-focus');
     });
 

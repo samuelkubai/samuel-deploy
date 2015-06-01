@@ -1,6 +1,8 @@
 <component name="ProjectDictionaryState">
   <dictionary name="nanoy">
     <words>
+      <w>chatmessage</w>
+      <w>chatroom</w>
       <w>csrf</w>
       <w>datapicker</w>
       <w>datepicker</w>
@@ -11,10 +13,12 @@
       <w>inspinia</w>
       <w>jeditable</w>
       <w>kamausamuel</w>
+      <w>loginbtn</w>
       <w>metis</w>
       <w>mygroups</w>
       <w>peity</w>
       <w>slimscroll</w>
+      <w>tagline</w>
       <w>timeline</w>
     </words>
   </dictionary>

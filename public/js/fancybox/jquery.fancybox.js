@@ -191,7 +191,7 @@
 		},
 
 		//Current state
-		group    : {}, // Selected group
+		group    : {}, // Selected groups
 		opts     : {}, // Group options
 		previous : null,  // Previous element
 		coming   : null,  // Element being loaded
@@ -236,7 +236,7 @@
 				return;
 			}
 
-			// Normalize group
+			// Normalize groups
 			if (!$.isArray(group)) {
 				group = isQuery(group) ? $(group).get() : [group];
 			}
@@ -832,9 +832,9 @@
 			}
 
 			/*
-			 * Add reference to the group, so it`s possible to access from callbacks, example:
+			 * Add reference to the groups, so it`s possible to access from callbacks, example:
 			 * afterLoad : function() {
-			 *     this.title = 'Image ' + (this.index + 1) + ' of ' + this.group.length + (this.title ? ' - ' + this.title : '');
+			 *     this.title = 'Image ' + (this.index + 1) + ' of ' + this.groups.length + (this.title ? ' - ' + this.title : '');
 			 * }
 			 */
 
@@ -1933,7 +1933,7 @@
 				var what = $(this).blur(), idx = index, relType, relVal;
 
 				if (!(e.ctrlKey || e.altKey || e.shiftKey || e.metaKey) && !what.is('.fancybox-wrap')) {
-					relType = options.groupAttr || 'data-fancybox-group';
+					relType = options.groupAttr || 'data-fancybox-groups';
 					relVal  = what.attr(relType);
 
 					if (!relVal) {

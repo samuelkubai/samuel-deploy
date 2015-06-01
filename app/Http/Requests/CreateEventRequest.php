@@ -25,6 +25,7 @@ class CreateEventRequest extends Request {
 			'title' => 'required',
             'description' => 'required',
             'date' => 'required',
+            'sponsor' => 'required'
 		];
 	}
 

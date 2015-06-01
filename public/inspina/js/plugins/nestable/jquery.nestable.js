@@ -61,7 +61,7 @@
 
             list.reset();
 
-            list.el.data('nestable-group', this.options.group);
+            list.el.data('nestable-groups', this.options.group);
 
             list.placeEl = $('<div class="' + list.options.placeClass + '"/>');
 
@@ -421,7 +421,7 @@
              */
             if (!mouse.dirAx || isNewRoot || isEmpty) {
                 // check if groups match if dragging over new root
-                if (isNewRoot && opt.group !== pointElRoot.data('nestable-group')) {
+                if (isNewRoot && opt.group !== pointElRoot.data('nestable-groups')) {
                     return;
                 }
                 // check depth limit

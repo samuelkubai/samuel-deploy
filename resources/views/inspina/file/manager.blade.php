@@ -1,19 +1,94 @@
 @extends('inspina.layouts.main')
 
 @section('content')
-        <!-- Content starts here -->
-        <div class="wrapper wrapper-content">
-            <div class="row animated fadeInRight">
-        @include('inspina.partials.groupProfile')
-            <div class="col-md-8">
-                        <div class="col-sm-12 col-md-">
-                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload New File</button>
+                <!-- Content starts here -->
+                <div class="wrapper wrapper-content" style="padding-right: 0px; padding-top: 0px;">
+                    <div class="row">
+                    @if(!$folder->isSubFolder())
+                        <div class="col-md-3 pull-left">
+                            <a class="btn btn-md btn-rounded btn-default" href="{{ url($group->username) }}"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to group feed</a>
                         </div>
-                        @include('inspina.file.partials.upload')
-                        <div class="col-lg-8 animated fadeInRight">
+                    @else
+                        <div class="col-md-3 pull-left">
+                            <a class="btn btn-md btn-rounded btn-default" href="{{ url('manager/'.$group->username.'/'. $folder->folder_id) }}"><i class="glyphicon glyphicon-arrow-up"></i> &nbsp; Up One Directory</a>
+                        </div>
+                    @endif
+                    </div>
+                    <br>
+                    @include('inspina.partials.error')
+                    <div class="row">
+                        <div class="col-lg-3">
+                            <div class="ibox float-e-margins">
+                                <div class="ibox-content">
+                                    <div class="file-manager">
+                                    @include('inspina.file.partials.upload')
+                                        <button class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload Files</button>
+                                        <div class="hr-line-dashed"></div>
+                                        <h5>Folders</h5>
+                                        <ul class="folder-list" style="padding: 0">
+                                        @foreach($subFolders as $subFolder)
+                                            <li><a href="{{url('manager/'.$group->username.'/'. $subFolder->id) }}"><i class="fa fa-folder"></i> {{ $subFolder->name}}</a></li>
+                                        @endforeach
+                                        </ul>
+                                        <div class="clearfix"></div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-lg-9 animated fadeInRight">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                @include('inspina.file.partials.createSubFolder')
+                                    <div class="file-box">
+                                        <div class="file">
+                                            <a href="" data-toggle="modal" data-target="#subModal">
+                                                <span class="corner"></span>
 
-                       <br> <br><br>
-                        <div class="col-lg-12">
+                                                <div class="icon">
+                                                    <i class="fa fa-plus"></i>
+                                                </div>
+                                                <div  class="text-center file-name">
+                                                    <h3>Add Sub Folder</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                    @include('inspina.file.partials.updateFolder')
+                                    <div class="file-box">
+                                        <div class="file">
+                                            <a href="" data-toggle="modal" data-target="#updateModal">
+                                                <span class="corner"></span>
+
+                                                <div class="icon">
+                                                    <i class="fa fa-edit"></i>
+                                                </div>
+                                                <div  class="text-center file-name">
+                                                    <h3>Edit Folder</h3>
+                                                </div>
+                                            </a>
+                                        </div>
+
+                                    </div>
+                                @foreach($subFolders as $subFolder)
+                                    <div class="file-box">
+                                        <div class="file">
+                                            <a href="{{ url('manager/'.$group->username.'/'. $subFolder->id) }}">
+                                                <span class="corner"></span>
+
+                                                <div class="icon">
+                                                    <i class="fa fa-folder"></i>
+                                                </div>
+                                                <div class="file-name">
+                                                    Folder: {{ $subFolder->name }}
+                                                    <br/>
+                                                    <small>Added: {{ $subFolder->created_at }}</small>
+                                                </div>
+                                            </a>
+                                        </div>
+                                    </div>
+                                @endforeach
+
                         @if($documents->count() != 0)
                             @foreach($documents as $document)
                                 <div class="file-box">
@@ -45,30 +120,11 @@
 
                                 </div>
                             @endforeach
-                        @else
-                            <h2 align="center"><br> <br> <br>THERE ARE NO DOCUMENTS UPLOADED YET!!
-
-                            </h2><br> <br> <br><br> <br> <br>
                         @endif
-
-                        </div>
-                        @if($group->isOwner(\Auth::user()))
-                            <div class="col-sm-6">
-                                <button type="button" class="btn btn-info btn-block col-sm-3" data-toggle="modal" data-target="#updateModal">Rename Folder <i class="glyphicon glyphicon-pencil"></i></button>
-                                @include('inspina.file.partials.updateFolder')
+                                </div>
                             </div>
-                            <div class="col-sm-6">
-                                <a href="{{'/manager/'.$folder->id.'/delete/'}}" class="btn btn-danger btn-block col-sm-3">Delete Folder <i class="glyphicon glyphicon-remove"></i></a>
                             </div>
-                        @endif
                         </div>
-                    </div>
-                </div>
-                </div>
-
-        <!-- Content ends Here! -->
+                        </div>
+                <!-- Content ends Here! -->
 @endsection
-
-@section('scripts')
-
-@stop

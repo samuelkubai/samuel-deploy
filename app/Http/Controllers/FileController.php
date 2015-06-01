@@ -98,7 +98,9 @@ class FileController extends Controller
 	{
         $title = 'File Manager: '.$folder->name;
         $documents = $folder->files()->get();
-        return view('inspina.file.manager', compact('title','group','folder', 'documents'));
+        $subFolders = $folder->folders()->get();
+
+        return view('inspina.file.manager', compact('title','group','folder', 'documents', 'subFolders'));
 	}
 
     /**
@@ -142,5 +144,13 @@ class FileController extends Controller
         $this->folderRepository->destroy($folder);
 
         return redirect($group->username);
+    }
+
+    public function storeSubFolder(CreateFolderRequest $request, $folder)
+    {
+
+        $this->folderRepository->createSubDirectory($folder, $request->name);
+
+        return redirect()->back();
     }
 }

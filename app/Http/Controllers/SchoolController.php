@@ -65,6 +65,10 @@ class SchoolController extends Controller {
         return view('school.auth.loginAndRegistration');
     }
 
+    public function getRegister()
+    {
+        return view('inspina/auth/register');
+    }
 
     public function newUser($data, $activationCode)
     {
@@ -109,7 +113,7 @@ class SchoolController extends Controller {
 
         $this->auth->login($user);
 
-        $this->mailer->sendConfirmationMailTo($this->user(), $activationCode);
+        //$this->mailer->sendConfirmationMailTo($this->user(), $activationCode);
 
         return redirect('/notActivated');
     }
@@ -121,7 +125,7 @@ class SchoolController extends Controller {
      */
     public function getLogin()
     {
-        return view('school.auth.login');
+        return view('inspina/auth/login');
     }
 
     /**
@@ -246,7 +250,7 @@ class SchoolController extends Controller {
     public function showSchool($group)
     {
         $title = $group->name;
-        return view('inspina.profile.school' , compact('title','group'));
+        return view('inspina.profile.school' , compact('title','groups'));
     }
 
 
@@ -302,7 +306,7 @@ class SchoolController extends Controller {
     public function viewSchool($group)
     {
         $title = $group->name;
-        return view('inspina.update.school', compact('title', 'group'));
+        return view('inspina.update.school', compact('title', 'groups'));
     }
     public function postSchoolMessages()
     {

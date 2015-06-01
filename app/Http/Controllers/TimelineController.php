@@ -61,7 +61,7 @@ class TimelineController extends Controller {
 
 		$events = $this->repo->eventsForGroup($group);
 
-		return view('inspina.timeline.admin-index',compact('title' , 'events', 'group') );
+		return view('inspina.timeline.admin-index',compact('title' , 'events', 'groups') );
 	}
 
     /**
@@ -93,7 +93,7 @@ class TimelineController extends Controller {
 	{
 		$title = "Events";
 		$events = $this->repo->eventsForGroup($group);
-        //dd($group->user()->first());
+        //dd($groups->user()->first());
 		return view('inspina.timeline.index', compact('events','title','group'));
 	}
 

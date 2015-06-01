@@ -1,0 +1,174 @@
+<?php $__env->startSection('content'); ?>
+                <div class="row">
+                        <div class="col-md-3 pull-left">
+                            <a class="btn btn-md btn-rounded btn-default" href="<?php echo e(url($event->group()->first()->username,'events')); ?>"><i class="glyphicon glyphicon-arrow-left"></i> &nbsp; Back to Events</a>
+                        </div>
+                </div><br>
+   <div class="row">
+            <div class="col-lg-9">
+
+                <div class="wrapper wrapper-content animated fadeInUp" style="padding-top: 0px;">
+                    <div class="ibox">
+                        <div class="ibox-content">
+                            <div class="row">
+                                <div class="col-lg-12">
+                                    <div class="m-b-md">
+                                    <?php if($event->group()->first()->isOwner(\Auth::user())): ?>
+                                        <a href="<?php echo e(url($event->id . '/events/update')); ?>" class="btn btn-white btn-xs pull-right">Edit project</a>
+                                    <?php endif; ?>
+                                        <h2><?php echo e($event->title); ?></h2>
+                                    </div>
+                                    <dl class="dl-horizontal">
+                                        <dt>Status:</dt> <dd>
+                                        <?php if($event->status == 1): ?>
+                                            <span class="label label-primary">Active</span></dd>
+                                        <?php else: ?>
+                                            <span class="label label-default">Unactive</span></dd>
+                                        <?php endif; ?>
+
+                                    </dl>
+                                </div>
+                            </div>
+                            <div class="row">
+                                <div class="col-lg-5">
+                                    <dl class="dl-horizontal">
+
+                                        <dt>Created by:</dt> <dd><?php echo e($event->group()->first()->name); ?></dd>
+                                        <dt>Messages:</dt> <dd>  <?php echo e($event->messages()->count()); ?></dd>
+                                        <dt>Sponsor:</dt> <dd><span class="text-navy"> <?php echo e($event->sponsor); ?></span> </dd>
+
+                                    </dl>
+                                </div>
+                                <div class="col-lg-7" id="cluster_info">
+                                    <dl class="dl-horizontal" >
+
+                                        <dt>Last Updated:</dt> <dd><?php echo e($event->updated_at); ?></dd>
+                                        <dt>Created:</dt> <dd><?php echo e($event->created_at); ?></dd>
+                                        <dt>Participants:</dt>
+                                        <dd> <?php echo e($event->participantsCount()); ?></dd>
+                                    </dl>
+                                </div>
+                            </div>
+
+                            <div class="row m-t-sm">
+                                <div class="col-lg-12">
+
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+    <div class="row">
+        <div class="col-lg-12">
+
+                <div class="ibox chat-view">
+
+                    <div class="ibox-title">
+                        <small class="pull-right text-muted">You are: <b><?php echo e(\Auth::user()->fullName()); ?></b></small>
+                         Event Discussion Room
+                    </div>
+
+
+                    <div class="ibox-content">
+
+                        <div class="row">
+
+                            <div class="col-md-9 ">
+                                <div class="chat-discussion">
+                                <?php foreach($event->messages() as $message): ?>
+                                    <div class="chat-message">
+                                        <img class="message-avatar" src="<?php echo e(asset($message->user()->first()->profileSource())); ?>" alt="" >
+                                        <div class="message">
+                                            <a class="message-author" href=""> <?php echo e($message->user()->first()->fullName()); ?> </a>
+											<span class="message-date"> <?php echo e($message->created_at); ?> </span>
+                                            <span class="message-content">
+                                            <?php echo e($message->message); ?>
+
+                                            </span>
+                                        </div>
+                                    </div>
+                                <?php endforeach; ?>
+                                </div>
+
+                            </div>
+                            <div class="col-md-3">
+                                <div class="chat-users">
+
+
+                                    <div class="users-list">
+                                        <?php foreach($event->attending()->get() as $participant): ?>
+                                            <div class="chat-user">
+                                                <img class="chat-avatar img-responsive" src="<?php echo e(asset($participant->profileSource())); ?>" alt="" >
+                                                <div class="chat-user-name">
+                                                    <?php echo e($participant->fullName()); ?>
+
+                                                </div>
+                                            </div>
+                                        <?php endforeach; ?>
+                                    </div>
+
+                                </div>
+                            </div>
+
+                        </div>
+                        <?php if($event->isAttendedBy(\Auth::user())): ?>
+                        <div class="row">
+                            <div class="col-lg-12">
+                                <div class="chat-message-form">
+                                <form action="<?php echo e(url($event->id.'/event/chat/store')); ?>" method="POST" >
+                                    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                    <div class="form-group">
+                                        <textarea class="form-control message-input" name="message" placeholder="Enter message text"></textarea>
+                                    </div>
+
+                                    <div class="form-group">
+                                        <button class="btn btn-block btn-primary" type="submit">Send Message</button>
+                                    </div>
+                                </form>
+                                </div>
+                            </div>
+                        </div>
+                        <?php endif; ?>
+
+
+                    </div>
+
+                </div>
+        </div>
+
+    </div>
+                </div>
+            </div>
+            <div class="col-lg-3">
+                <div class="wrapper wrapper-content project-manager" style="padding-top: 0px;">
+                    <h3><?php echo e($event->group()->first()->name); ?></h3>
+                    <img src="<?php echo e(asset($event->group()->first()->profileSource())); ?>" class="img-responsive" alt=""/>
+                    <br>
+
+                    <h4>Event description</h4>
+                    <p class="small">
+                        <?php echo e($event->description); ?>
+
+                    </p>
+
+                    <h5>Event files</h5>
+                    <small class="muted">From:- Folder:<b> <?php echo e($event->folder()->first()->name); ?></b></small>
+                    <ul class="list-unstyled project-files">
+                    <?php foreach($event->folder()->first()->files()->get() as $file): ?>
+                        <li><a href="<?php echo e(url('/download/?download_file='.$file->name)); ?>"><i class="fa fa-file"></i> &nbsp; <?php echo e($file->name); ?></a></li>
+                    <?php endforeach; ?>
+                    </ul>
+                    <?php if($event->isAttendedBy(\Auth::user())): ?>
+                    <div class="text-center m-t-md">
+                        <?php echo $__env->make('inspina.events.partials.fileUpload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <button type="button" class="btn btn-xs btn-block btn-primary"  data-toggle="modal" data-target="#uploadEventFileModal">Add files</button>
+
+
+                    </div>
+                    <?php endif; ?>
+                </div>
+            </div>
+        </div>
+<?php $__env->stopSection(); ?>
+
+
+<?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

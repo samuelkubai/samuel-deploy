@@ -55,7 +55,7 @@
                  </div>
                 </li>
                     <li class="active">
-                       <a aria-expanded="false" role="button" href="{{ url('/admin/groups') }}"> Manage Groups</a>
+                       <a aria-expanded="false" role="button" href="{{ url(group) }}"> Manage Groups</a>
                     </li>
                     <li>
                         <a href="{{url('/logout')}}">

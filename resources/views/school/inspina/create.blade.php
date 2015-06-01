@@ -2,7 +2,7 @@
 
 @section('content')
     <div class="wrapper wrapper-content">
-        <form action="{{ url('/create/group/') }}" method="post" >
+        <form action="{{ url('create/group') }}" method="post" >
             <input type="hidden" name="_token" value="{{ csrf_token() }}">
             <div>
                 <div class="row form-group">
@@ -29,7 +29,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="{{url('/admin/groups')}}" class="btn btn-default">Close</a>
+                <a href="{{url('/')}}" class="btn btn-default">Close</a>
                 <button type="submit" class="btn btn-info">Create</button>
             </div>
         </form>

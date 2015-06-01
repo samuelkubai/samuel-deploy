@@ -1,6 +1,6 @@
 <?php $__env->startSection('content'); ?>
     <div class="wrapper wrapper-content">
-        <form action="<?php echo e(url('/create/group/')); ?>" method="post" >
+        <form action="<?php echo e(url('create/group')); ?>" method="post" >
             <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
             <div>
                 <div class="row form-group">
@@ -27,7 +27,7 @@
                 </div>
             </div>
             <div class="modal-footer">
-                <a href="<?php echo e(url('/admin/groups')); ?>" class="btn btn-default">Close</a>
+                <a href="<?php echo e(url('/')); ?>" class="btn btn-default">Close</a>
                 <button type="submit" class="btn btn-info">Create</button>
             </div>
         </form>

@@ -1,5 +1,5 @@
 <?php $__env->startSection('content'); ?>
-    <div class="wrapper wrapper-content">
+    <div class="wrapper wrapper-content" style="padding-top: 0px;  padding-left: 0px; padding-right: 0px;">
         <div class="row animated fadeInRight">
             <?php echo $__env->make('inspina.partials.groupProfile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
             <?php if($group->user()->first()->id == \Auth::user()->id): ?>

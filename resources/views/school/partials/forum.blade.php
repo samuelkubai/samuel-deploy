@@ -48,7 +48,7 @@
                 <div class="chat-txt">
                     <input type="text" class="form-control">
                 </div>
-                <!--<div class="btn-group hidden-sm hidden-xs">
+                <!--<div class="btn-groups hidden-sm hidden-xs">
                         <button type="button" class="btn btn-white"><i class="fa fa-meh-o"></i></button>
                         <button type="button" class="btn btn-white"><i class=" fa fa-paperclip"></i></button>
                     </div> -->
