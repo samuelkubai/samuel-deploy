@@ -67,7 +67,7 @@ class NoticeController extends Controller {
             /* Returns a command for the Controller to dispatch */
                 $this->service->storeNoticeCommand($request, $group)
             );
-            flash()->success('You have successfully pined a new notice on your group notice board');
+            $this->flash('You have successfully pined a new notice on your group notice board');
             return redirect()->back();
         }
 
@@ -97,7 +97,8 @@ class NoticeController extends Controller {
     public function destroy($notice)
     {
         $notice->delete();
-        flash()->warning('You have deleted a pin successfully');
+        $this->flash('You have deleted a pin successfully');
+
         return redirect()->back();
     }
 	public function adminIndex()

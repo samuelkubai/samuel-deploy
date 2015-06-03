@@ -117,7 +117,7 @@ class EventsController extends Controller {
 	public function update(UpdateEventRequest $request, $event)
 	{
 		$this->repo->updateEvent($event, $request);
-        flash()->success('You have successfully updated the event');
+        $this->flash('You have successfully updated the event');
         return redirect($event->id . '/events/profile');
 	}
 
@@ -133,21 +133,21 @@ class EventsController extends Controller {
 	{
         $group = $event->group()->first();
 		$event->delete();
-        flash()->success('You have successfully deleted the event');
+        $this->flash('You have successfully deleted the event');
         return redirect($group->username. '/events/');
 	}
 
     public function attend($event)
     {
         $this->repo->markAsAttending($event, $this->user());
-        flash()->info('You are now attending the event: ' .$event->title);
+        $this->flash('You are now attending the event: ' .$event->title);
         return redirect()->back();
     }
 
     public function notAttend($event)
     {
         $this->repo->markAsNotAttending($event, $this->user());
-        flash()->warning('You are no longer marked as attending the event: '. $event->title);
+        $this->flash('You are no longer marked as attending the event: '. $event->title);
         return redirect()->back();
     }
 
@@ -174,7 +174,7 @@ class EventsController extends Controller {
             return redirect()->back()->withErrors('This file extension is not supported.');
 
         $this->fileRepository->uploadGroupDocument($_FILES, 'documents', $folder  ,$type, $name);
-        flash()->success('You have successfully uploaded a file to the folder: '.$folder->name);
+        $this->flash('You have successfully uploaded a file to the folder: '.$folder->name);
         return redirect()->back();
     }
 
@@ -188,7 +188,7 @@ class EventsController extends Controller {
     {
 
         $this->repo->storeMessage($request->message, $event);
-        flash()->info('Message Sent');
+        $this->flash('Message Sent');
         return redirect()->back();
     }
 

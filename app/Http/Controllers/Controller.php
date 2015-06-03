@@ -58,4 +58,9 @@ abstract class Controller extends BaseController {
         
         return Group::where('user_id', $this->user()->id)->simplePaginate($howMany);
     }
+
+    public function flash($message)
+    {
+        session()->flash('message', $message);
+    }
 }

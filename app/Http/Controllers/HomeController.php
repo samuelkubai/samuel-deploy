@@ -3,7 +3,6 @@
 use App\course;
 use App\Http\Mail\UserMailer;
 use App\Http\Post\PostRepository;
-use Flash;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Mail;
 
@@ -51,7 +50,7 @@ class HomeController extends Controller {
         $title = 'Activity Feed';
         $statuses = $this->postRepository->feedForUser($this->user());
         $user = $this->user();
-        flash()->overlay('flash is working' ,'Blessed Be Jesus');
+        $this->flash('Test, this is a test');
         return view('inspina.home.feed', compact('title','user', 'statuses'));
 	}
 
