@@ -18,13 +18,13 @@
                                         @if($group->isOwner(\Auth::user()))
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <a href="{{ url($group->username . '/events') }}" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events</a>
+                                                <a href="{{ url($group->username . '/events') }}" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events <i class="badge badge-white">{{ $group->events()->get()->count() }}</i></a>
                                             </div>
                                             <div class="col-md-4">
-                                                <a href="{{ url($group->username . '/update') }}" class="btn btn-primary btn-sm btn-rounded"><i class="fa fa-edit"></i> Profile</a>
+                                                <a href="{{ url($group->username . '/update') }}" class="btn btn-primary btn-sm btn-rounded"><i class="fa fa-edit"></i> Edit Profile</a>
                                             </div>
                                             <div class="col-md-4">
-                                                <a href="{{ url($group->username . '/notice') }}" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="glyphicon glyphicon-pushpin"></i> Notices</a>
+                                                <a href="{{ url($group->username . '/notice') }}" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="glyphicon glyphicon-pushpin"></i> Notices <i class="badge badge-white">{{ $group->notices()->get()->count() }}</i></a>
                                             </div>
                                         </div>
                                         @else
@@ -32,10 +32,10 @@
                                         <p>Administered by <b> {{ $group->user()->first()->firstName }}  {{ $group->user()->first()->lastName }}</b></p>
                                         <div class="row">
                                             <div class="col-md-4 pull-left">
-                                                <a href="{{ url($group->username . '/events') }}" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events</a>
+                                                <a href="{{ url($group->username . '/events') }}" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events <i class="badge badge-white">{{ $group->events()->get()->count() }}</i></a>
                                             </div>
                                             <div class="col-md-4 pull-right">
-                                                <a href="{{ url($group->username . '/notice') }}" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="glyphicon glyphicon-pushpin"></i> Notices</a>
+                                                <a href="{{ url($group->username . '/notice') }}" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="glyphicon glyphicon-pushpin"></i> Notices <i class="badge badge-white">{{ $group->notices()->get()->count() }}</i></a>
                                             </div>
                                         </div>
                                         @endif

@@ -84,7 +84,8 @@ class FileController extends Controller
             return redirect()->back()->with('error', 'This file extension is not supported.');
 
         $this->repo->uploadGroupDocument($_FILES, 'documents', $folder  ,$type, $name);
-		return redirect()->back()->with('success', 'File Successfully Uploaded');
+        flash()->success('The File has now been successfully uploaded');
+		return redirect()->back();
 	}
 
     /**
@@ -105,17 +106,20 @@ class FileController extends Controller
 
     /**
      * @internal param $file_name
+     * @param $file
      * @return \Illuminate\Http\RedirectResponse
      * @internal param Request $request
      */
     public function download($file)
     {
         $this->repo->downloadFile($file);
-       return redirect()->back();
+        flash()->error('File download failed.');
+        return redirect()->back();
     }
 	public function destroy($folder, $file)
 	{
         $file->delete();
+        flash()->warning('You have deleted a file from this group');
 		return redirect('manager/'.$folder->group()->first()->username.'/'.$folder->id);
 	}
 
@@ -127,14 +131,14 @@ class FileController extends Controller
     public function storeFolder(CreateFolderRequest $request, $group)
     {
         $folder = $this->folderRepository->create($request->name, $group);
-
+        flash()->success('You have successfully created a new folder');
         return redirect('manager/'.$folder->group()->first()->username.'/'.$folder->id);
     }
 
     public function updateFolder($folder, CreateFolderRequest $request)
     {
         $this->folderRepository->update($request->name, $folder);
-
+        flash()->info('You have successfully renamed the folder');
         return redirect()->back();
     }
 
@@ -142,7 +146,7 @@ class FileController extends Controller
     {
         $group = $folder->group()->first();
         $this->folderRepository->destroy($folder);
-
+        flash()->warning('You have successfully deleted a folder');
         return redirect($group->username);
     }
 
@@ -150,7 +154,7 @@ class FileController extends Controller
     {
 
         $this->folderRepository->createSubDirectory($folder, $request->name);
-
+        flash()->success('You have successfully created a new sub folder');
         return redirect()->back();
     }
 }

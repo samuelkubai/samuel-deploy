@@ -51,8 +51,13 @@
                           </a>
                           <ul class="dropdown-menu" role="menu">
                            <?php foreach(\Auth::user()->follows()->get() as $group): ?>
-                             <li><a href="<?php echo e(url($group->username, 'events')); ?>"><?php echo e($group->name); ?> &nbsp; <span class="badge badge-info test-right"><?php echo e($group->events()->count()); ?></span></a></li>
+                             <li><a href="<?php echo e(url($group->username, 'events')); ?>"><?php echo e($group->name); ?> &nbsp; <span class="badge badge-info push-right"><?php echo e($group->events()->count()); ?></span></a></li>
                            <?php endforeach; ?>
+                             <li class="text-center">
+                               <div class="text-center link-block">
+                                  <a href="<?php echo e(url('/events/attending')); ?>"><i class="fa fa-calendar-o"></i> Attending Events <span class="badge badge-danger text-right"> <?php echo e(\Auth::user()->attend()->get()->count()); ?></span></a>
+                               </div>
+                             </li>
                           </ul>
                     </li>
                     <li>
@@ -143,10 +148,12 @@
         </div>
             <br>
 
-        <?php echo $__env->make('inspina.partials.messenger', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
          <div class="wrapper wrapper-content">
                     <div class="">
                         <div class="">
+                        <?php echo $__env->make('flash::message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <?php echo $__env->make('inspina.partials.messenger', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                             <?php echo $__env->yieldContent('content'); ?>
                         </div>
                     </div>
@@ -199,6 +206,32 @@
         <script src="<?php echo e(asset('/inspina/js/plugins/jasny/jasny-bootstrap.min.js')); ?>"></script>
 
 
+<script>
+    $('#flash-overlay-modal').modal();
+</script>
+
+<script>
+            function validateText(id)
+            {
+                if($("#" + id).val() == null || $("#" + id).val() == "")
+                {
+                    var div = $("#" + id).closest("div");
+                    div.addClass("has-error");
+                    return false;
+                }
+                else
+                {
+                    var div = $("#" + id).closest("div");
+                    div.removeClass("has-error");
+                    return true;
+                }
+            }
+            $(document).ready(
+                function(){
+                    <?php echo $__env->yieldContent('validation'); ?>
+                }
+            );
+</script>
 
 
 </body>

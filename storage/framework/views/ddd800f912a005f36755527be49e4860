@@ -91,7 +91,7 @@
                             <?php foreach($documents as $document): ?>
                                 <div class="file-box">
                                     <div class="file">
-                                        <a href="<?php echo e(url('/download/'.$document->id)); ?>">
+                                        <a href="<?php echo e(url($document->source)); ?>">
                                             <span class="corner"></span>
 
                                         <?php if($document->isImage()): ?>
@@ -107,7 +107,7 @@
                                                 <?php echo e($document->name); ?>
 
                                                 <?php if($group->isOwner(\Auth::user())): ?>
-                                                <span class="pull-right"><a href="<?php echo e('/manager/delete/'.$folder->id.'/'.$document->id); ?> " class="pull-right"><i class="glyphicon glyphicon-remove pull-right"></i></a></span>
+                                                <span class="pull-right"><a href="<?php echo e(url('/manager/delete/'.$folder->id.'/'.$document->id)); ?> " class="pull-right"><i class="glyphicon glyphicon-remove pull-right"></i></a></span>
                                                 <?php endif; ?>
                                                 <br/>
                                                 <small>Added: <?php echo e($document->created_at); ?></small>
@@ -127,5 +127,23 @@
                         </div>
                 <!-- Content ends Here! -->
 <?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('validation'); ?>
+                $("#createfolderbtn").click(function()
+                    {
+                        if(!validateText("name"))
+                            return false;
+                        $('form#createfolderform').submit();
+
+                    })
+                $("#uploadfilebtn").click(function()
+                    {
+                        if(!validateText("file"))
+                            return false;
+                        $('form#uploadfileform').submit();
+
+                    })
+<?php $__env->stopSection(); ?>
+
 
 <?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

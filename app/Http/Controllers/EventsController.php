@@ -73,6 +73,7 @@ class EventsController extends Controller {
 	{
 
 		$event = $this->repo->createEvent($request, $group, $this->user());
+        flash()->success('You have successfully created a new group');
         return redirect($event->id. '/events/profile');
 	}
 
@@ -116,7 +117,7 @@ class EventsController extends Controller {
 	public function update(UpdateEventRequest $request, $event)
 	{
 		$this->repo->updateEvent($event, $request);
-
+        flash()->success('You have successfully updated the event');
         return redirect($event->id . '/events/profile');
 	}
 
@@ -132,20 +133,21 @@ class EventsController extends Controller {
 	{
         $group = $event->group()->first();
 		$event->delete();
+        flash()->success('You have successfully deleted the event');
         return redirect($group->username. '/events/');
 	}
 
     public function attend($event)
     {
         $this->repo->markAsAttending($event, $this->user());
-
+        flash()->info('You are now attending the event: ' .$event->title);
         return redirect()->back();
     }
 
     public function notAttend($event)
     {
         $this->repo->markAsNotAttending($event, $this->user());
-
+        flash()->warning('You are no longer marked as attending the event: '. $event->title);
         return redirect()->back();
     }
 
@@ -168,9 +170,11 @@ class EventsController extends Controller {
         }
 
         if(!$this->fileRepository->authenticateType($type, $allowedTypes))
+
             return redirect()->back()->withErrors('This file extension is not supported.');
 
         $this->fileRepository->uploadGroupDocument($_FILES, 'documents', $folder  ,$type, $name);
+        flash()->success('You have successfully uploaded a file to the folder: '.$folder->name);
         return redirect()->back();
     }
 
@@ -184,7 +188,7 @@ class EventsController extends Controller {
     {
 
         $this->repo->storeMessage($request->message, $event);
-
+        flash()->info('Message Sent');
         return redirect()->back();
     }
 
@@ -204,4 +208,19 @@ class EventsController extends Controller {
         return view('inspina.events.index', compact('events','title','group'));
     }
 
+    public function getUserAttendingEvents()
+    {
+        $title = "Events You're Attending";
+        $events = $this->repo->eventsBeenAttendedByUser(\Auth::user());
+        return view('inspina.events.user', compact('events','title'));
+    }
+
+    public function getUserSearchedChosenEvents(SearchRequest $request)
+    {
+        $title = "Events";
+
+        $events = $this->repo->searchChosenEventsForUser(\Auth::user(), $request->value);
+
+        return view('inspina.events.user', compact('events','title'));
+    }
 }

@@ -1,4 +1,4 @@
-@extends('inspina.layouts.main')
+@extends('inspina.layouts.user')
 
 @section('content')
     <div class="wrapper wrapper-content">

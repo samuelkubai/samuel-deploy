@@ -2,20 +2,29 @@
     <div class="wrapper wrapper-content">
             <div class="row animated fadeInRight">
                 <?php echo $__env->make('inspina.partials.to_group_feed_nav', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
-                <div class="col-md-12">
-                    <?php echo $__env->make('inspina.notice.partials.board', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                    <div class="col-md-12">
+                        <?php echo $__env->make('inspina.notice.partials.board', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     <br>
-
-                </div>
-                <?php if($notices==null): ?>
-                    <div class="row col-md-12" >
-                    <?php echo $__env->make('inspina.partials.previous_pins', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     </div>
-                <?php endif; ?>
+                    <div class="text-center"><?php echo $notices->render() ?></div>
                     <div class="row col-md-12" >
                     <?php echo $__env->make('inspina.notice.partials.pin', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                     </div>
              </div>
     </div>
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('validation'); ?>
+                $("#createnoticebtn").click(function()
+                    {
+
+                        if(!validateText("title"))
+                            return false;
+
+                        if(!validateText("message"))
+                            return false;
+                        $('form#createnoticeform').submit();
+
+                    })
 <?php $__env->stopSection(); ?>
 <?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

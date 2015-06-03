@@ -32,13 +32,15 @@
                         </div>
                         <div>
                         <ul class="list-group ">
+                        <?php $counter = 1 ?>
                         <?php foreach($user->followedGroups() as $group): ?>
                             <li class="list-group-item fist-item">
                                 <span class="pull-right badge badge-info">
                                     <?php echo e($group->followersCount()); ?> Followers
                                 </span>
-                                <span class="label label-success">1</span> &nbsp;<a href="<?php echo e(url($group->username)); ?>"><?php echo e($group->name); ?></a>
+                                <span class="label label-success"><?php echo e($counter); ?></span> &nbsp;<a href="<?php echo e(url($group->username)); ?>"><?php echo e($group->name); ?></a>
                             </li>
+                            <?php $counter++ ?>
                          <?php endforeach; ?>
                         </ul>
                     </div>

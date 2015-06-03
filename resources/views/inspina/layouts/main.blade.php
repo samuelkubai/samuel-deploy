@@ -51,8 +51,13 @@
                           </a>
                           <ul class="dropdown-menu" role="menu">
                            @foreach(\Auth::user()->follows()->get() as $group)
-                             <li><a href="{{ url($group->username, 'events') }}">{{ $group->name }} &nbsp; <span class="badge badge-info test-right">{{ $group->events()->count() }}</span></a></li>
+                             <li><a href="{{ url($group->username, 'events') }}">{{ $group->name }} &nbsp; <span class="badge badge-info push-right">{{ $group->events()->count() }}</span></a></li>
                            @endforeach
+                             <li class="text-center">
+                               <div class="text-center link-block">
+                                  <a href="{{ url('/events/attending') }}"><i class="fa fa-calendar-o"></i> Attending Events <span class="badge badge-danger text-right"> {{ \Auth::user()->attend()->get()->count() }}</span></a>
+                               </div>
+                             </li>
                           </ul>
                     </li>
                     <li>
@@ -143,10 +148,12 @@
         </div>
             <br>
 
-        @include('inspina.partials.messenger')
+
          <div class="wrapper wrapper-content">
                     <div class="">
                         <div class="">
+                        @include('flash::message')
+                        @include('inspina.partials.messenger')
                             @yield('content')
                         </div>
                     </div>
@@ -199,6 +206,32 @@
         <script src="{{ asset('/inspina/js/plugins/jasny/jasny-bootstrap.min.js') }}"></script>
 
 
+<script>
+    $('#flash-overlay-modal').modal();
+</script>
+
+<script>
+            function validateText(id)
+            {
+                if($("#" + id).val() == null || $("#" + id).val() == "")
+                {
+                    var div = $("#" + id).closest("div");
+                    div.addClass("has-error");
+                    return false;
+                }
+                else
+                {
+                    var div = $("#" + id).closest("div");
+                    div.removeClass("has-error");
+                    return true;
+                }
+            }
+            $(document).ready(
+                function(){
+                    @yield('validation')
+                }
+            );
+</script>
 
 
 </body>

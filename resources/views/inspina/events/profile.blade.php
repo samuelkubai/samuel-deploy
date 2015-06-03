@@ -157,15 +157,17 @@
                     <small class="muted">From:- Folder:<b> {{ $event->folder()->first()->name }}</b></small>
                     <ul class="list-unstyled project-files">
                     @foreach($event->folder()->first()->files()->get() as $file)
-                        <li><a href="{{ url('/download/?download_file='.$file->name) }}"><i class="fa fa-file"></i> &nbsp; {{ $file->name }}</a></li>
+                        <li><a href="{{ url('/download/'.$file->id) }}"><i class="fa fa-file"></i> &nbsp; {{ $file->name }}</a></li>
                     @endforeach
                     </ul>
                     @if($event->isAttendedBy(\Auth::user()))
                     <div class="text-center m-t-md">
                         @include('inspina.events.partials.fileUpload')
                         <button type="button" class="btn btn-xs btn-block btn-primary"  data-toggle="modal" data-target="#uploadEventFileModal">Add files</button>
-
-
+                    </div>
+                    @else
+                    <div class="text-center m-t-md">
+                        <a href="{{ url($event->id . '/events/attend') }}" class="btn btn-xs btn-block btn-primary">Attend Event</a>
                     </div>
                     @endif
                 </div>

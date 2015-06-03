@@ -19,13 +19,13 @@
                                         <?php if($group->isOwner(\Auth::user())): ?>
                                         <div class="row">
                                             <div class="col-md-4">
-                                                <a href="<?php echo e(url($group->username . '/events')); ?>" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events</a>
+                                                <a href="<?php echo e(url($group->username . '/events')); ?>" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events <i class="badge badge-white"><?php echo e($group->events()->get()->count()); ?></i></a>
                                             </div>
                                             <div class="col-md-4">
-                                                <a href="<?php echo e(url($group->username . '/update')); ?>" class="btn btn-primary btn-sm btn-rounded"><i class="fa fa-edit"></i> Profile</a>
+                                                <a href="<?php echo e(url($group->username . '/update')); ?>" class="btn btn-primary btn-sm btn-rounded"><i class="fa fa-edit"></i> Edit Profile</a>
                                             </div>
                                             <div class="col-md-4">
-                                                <a href="<?php echo e(url($group->username . '/notice')); ?>" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="glyphicon glyphicon-pushpin"></i> Notices</a>
+                                                <a href="<?php echo e(url($group->username . '/notice')); ?>" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="glyphicon glyphicon-pushpin"></i> Notices <i class="badge badge-white"><?php echo e($group->notices()->get()->count()); ?></i></a>
                                             </div>
                                         </div>
                                         <?php else: ?>
@@ -33,10 +33,10 @@
                                         <p>Administered by <b> <?php echo e($group->user()->first()->firstName); ?>  <?php echo e($group->user()->first()->lastName); ?></b></p>
                                         <div class="row">
                                             <div class="col-md-4 pull-left">
-                                                <a href="<?php echo e(url($group->username . '/events')); ?>" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events</a>
+                                                <a href="<?php echo e(url($group->username . '/events')); ?>" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="fa fa-calendar"></i> Events <i class="badge badge-white"><?php echo e($group->events()->get()->count()); ?></i></a>
                                             </div>
                                             <div class="col-md-4 pull-right">
-                                                <a href="<?php echo e(url($group->username . '/notice')); ?>" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="glyphicon glyphicon-pushpin"></i> Notices</a>
+                                                <a href="<?php echo e(url($group->username . '/notice')); ?>" class="btn btn-info btn-sm btn-rounded btn-outline"><i class="glyphicon glyphicon-pushpin"></i> Notices <i class="badge badge-white"><?php echo e($group->notices()->get()->count()); ?></i></a>
                                             </div>
                                         </div>
                                         <?php endif; ?>

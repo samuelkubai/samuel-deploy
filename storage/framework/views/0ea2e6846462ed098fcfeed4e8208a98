@@ -8,15 +8,3 @@
 							</ul>
 						</div>
 					<?php endif; ?>
-					<?php if(isset($inputs)): ?>
-                        <?php if(count($inputs) > 0): ?>
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                <ul>
-                                    <?php foreach($inputs->all() as $input): ?>
-                                        <li><?php echo e($input); ?></li>
-                                    <?php endforeach; ?>
-                                </ul>
-                            </div>
-                        <?php endif; ?>
-					<?php endif; ?>

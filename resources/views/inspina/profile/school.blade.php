@@ -42,3 +42,14 @@
             </div>
         </div>
 @stop
+
+@section('validation')
+                $("#createfolderbtn").click(function()
+                    {
+                    alert();
+                        if(!validateText("name"))
+                            return false;
+                        $('form#createfolderform').submit();
+
+                    })
+@endsection

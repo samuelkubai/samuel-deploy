@@ -102,4 +102,14 @@ class TimelineRepository
     {
        return $group->events()->searchFor('title', $value)->paginate(10);
     }
+
+    public function eventsBeenAttendedByUser($user)
+    {
+        return $user->attend()->paginate(10);
+    }
+
+    public function searchChosenEventsForUser($user, $value)
+    {
+        return $user->attend()->searchFor('title', $value)->paginate(10);
+    }
 }

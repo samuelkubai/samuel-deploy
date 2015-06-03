@@ -8,15 +8,15 @@
                                                 <h4 class="modal-title">Upload New File</h4>
                                                 <small class="font-bold">Only images and documents to be shared ( Maximum file size: 24mb ).</small>
                                             </div>
-                                            <form action="<?php echo e(url('manager/upload',$folder->id)); ?>" method="POST" enctype="multipart/form-data">
+                                            <form action="<?php echo e(url('manager/upload',$folder->id)); ?>" method="POST" id="uploadfileform" enctype="multipart/form-data">
                                                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                                                 <div class="modal-body">
-                                                   <div class="row form-group"><input type="file" name="file" placeholder="Select a file to upload" class="form-control col-sm-12"></div>
+                                                   <div class="row form-group"><input type="file" name="file" id="file" placeholder="Select a file to upload" class="form-control col-sm-12"></div>
                                                    <div class="row form-group"><input type="text" name="name" placeholder="Rename File if you wish.." class="form-control col-sm-12"></div>
                                                 </div>
                                                 <div class="modal-footer">
                                                     <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
-                                                    <button type="submit" class="btn btn-primary">Upload File</button>
+                                                    <button type="button" id="uploadfilebtn" class="btn btn-primary">Upload File</button>
                                                 </div>
                                             </form>
                                         </div>

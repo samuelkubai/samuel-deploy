@@ -12,7 +12,7 @@ class Group extends Model {
         return $this->belongsTo('App\User');
     }
 
-    public function followers()
+    public function  followers()
     {
         return $this->belongsToMany('App\User', 'follows', 'group_id', 'user_id')->withTimestamps();
     }
@@ -66,7 +66,7 @@ class Group extends Model {
         if($profile != null)
 
             return $profile->source;
-        return 'uploads/images/default/pic4.jpg';
+        return 'uploads/images/default/prof5.png';
     }
 
     public function folders()

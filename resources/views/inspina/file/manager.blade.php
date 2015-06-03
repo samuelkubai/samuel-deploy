@@ -92,7 +92,7 @@
                             @foreach($documents as $document)
                                 <div class="file-box">
                                     <div class="file">
-                                        <a href="{{ url('/download/'.$document->id) }}">
+                                        <a href="{{ url($document->source) }}">
                                             <span class="corner"></span>
 
                                         @if($document->isImage())
@@ -107,7 +107,7 @@
                                             <div class="file-name">
                                                 {{ $document->name }}
                                                 @if($group->isOwner(\Auth::user()))
-                                                <span class="pull-right"><a href="{{ '/manager/delete/'.$folder->id.'/'.$document->id }} " class="pull-right"><i class="glyphicon glyphicon-remove pull-right"></i></a></span>
+                                                <span class="pull-right"><a href="{{ url('/manager/delete/'.$folder->id.'/'.$document->id) }} " class="pull-right"><i class="glyphicon glyphicon-remove pull-right"></i></a></span>
                                                 @endif
                                                 <br/>
                                                 <small>Added: {{ $document->created_at }}</small>
@@ -127,3 +127,21 @@
                         </div>
                 <!-- Content ends Here! -->
 @endsection
+
+@section('validation')
+                $("#createfolderbtn").click(function()
+                    {
+                        if(!validateText("name"))
+                            return false;
+                        $('form#createfolderform').submit();
+
+                    })
+                $("#uploadfilebtn").click(function()
+                    {
+                        if(!validateText("file"))
+                            return false;
+                        $('form#uploadfileform').submit();
+
+                    })
+@endsection
+

@@ -32,13 +32,15 @@
                         </div>
                         <div>
                         <ul class="list-group ">
+                        <?php $counter = 1 ?>
                         @foreach($user->followedGroups() as $group)
                             <li class="list-group-item fist-item">
                                 <span class="pull-right badge badge-info">
                                     {{ $group->followersCount() }} Followers
                                 </span>
-                                <span class="label label-success">1</span> &nbsp;<a href="{{ url($group->username) }}">{{ $group->name }}</a>
+                                <span class="label label-success">{{ $counter }}</span> &nbsp;<a href="{{ url($group->username) }}">{{ $group->name }}</a>
                             </li>
+                            <?php $counter++ ?>
                          @endforeach
                         </ul>
                     </div>

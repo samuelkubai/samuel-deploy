@@ -19,7 +19,7 @@
                                             <h2 align="center"> No Activities Recorded</h2>
                                             <br>
                                             <h4 align="center"class="muted text-center">
-                                            Perhaps Join a new Group :)
+                                            Perhaps you should try out the skoolspace features :)
                                             </h4>
                                         </div>
                                      <?php endif; ?>

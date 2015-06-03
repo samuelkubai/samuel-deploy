@@ -42,7 +42,7 @@ class FileRepository
             'user_id' => \Auth::user()->id,
         ]);
 
-        $message = 'New document: ' . $name . ' uploaded to Folder: ' . $folder->name .' by '.$group->user()->first()->firstName.' '.$group->user()->first()->lastName. ' in Group: ' . $group->name;
+        $message = 'New document: ' . $name . ' uploaded to Folder: ' . $folder->name .' by '.\Auth::user()->firstName.' '.\Auth::user()->lastName;
         $url = '/manager/'.$group->username.'/'.$folder->id;
         $this->post($message, $group, $url);
         return true;
@@ -88,7 +88,7 @@ class FileRepository
 
     public function downloadFile($file)
     {
-        ignore_user_abort(true);
+        ignore_user_abort(false);
         set_time_limit(0); // disable the time limit for this script
         $fileName = $file->rand . '.' .$file->type;
         $path = "C:\wamp\www\skoolspace\public\uploads\documents\\"; // change the path to fit your websites document structure
@@ -102,6 +102,10 @@ class FileRepository
             $ext = strtolower($path_parts["extension"]);
             switch ($ext) {
                 case "pdf":
+                    header("Content-type: application/pdf");
+                    header("Content-Disposition: attachment; filename=\"".$path_parts["basename"]."\""); // use 'attachment' to force a file download
+                    break;
+                case "txt":
                     header("Content-type: application/pdf");
                     header("Content-Disposition: attachment; filename=\"".$path_parts["basename"]."\""); // use 'attachment' to force a file download
                     break;

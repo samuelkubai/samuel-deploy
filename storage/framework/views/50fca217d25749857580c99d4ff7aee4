@@ -158,15 +158,17 @@
                     <small class="muted">From:- Folder:<b> <?php echo e($event->folder()->first()->name); ?></b></small>
                     <ul class="list-unstyled project-files">
                     <?php foreach($event->folder()->first()->files()->get() as $file): ?>
-                        <li><a href="<?php echo e(url('/download/?download_file='.$file->name)); ?>"><i class="fa fa-file"></i> &nbsp; <?php echo e($file->name); ?></a></li>
+                        <li><a href="<?php echo e(url('/download/'.$file->id)); ?>"><i class="fa fa-file"></i> &nbsp; <?php echo e($file->name); ?></a></li>
                     <?php endforeach; ?>
                     </ul>
                     <?php if($event->isAttendedBy(\Auth::user())): ?>
                     <div class="text-center m-t-md">
                         <?php echo $__env->make('inspina.events.partials.fileUpload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                         <button type="button" class="btn btn-xs btn-block btn-primary"  data-toggle="modal" data-target="#uploadEventFileModal">Add files</button>
-
-
+                    </div>
+                    <?php else: ?>
+                    <div class="text-center m-t-md">
+                        <a href="<?php echo e(url($event->id . '/events/attend')); ?>" class="btn btn-xs btn-block btn-primary">Attend Event</a>
                     </div>
                     <?php endif; ?>
                 </div>

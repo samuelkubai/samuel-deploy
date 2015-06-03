@@ -77,7 +77,7 @@
                                         @endforeach
                                     @else
                                         <br>
-                                        <h2 align="center" >No Events created Just Yet!</h2>
+                                        <h2 align="center" >No Events Recorded!</h2>
                                     @endif
                                     </tbody>
                                 </table>

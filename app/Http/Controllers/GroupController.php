@@ -83,6 +83,7 @@ class GroupController extends Controller {
         $user = $this->user();
         $group = $user->groups()->create($request->all());
         $this->clientRepo->clientJoin($group, $user);
+        flash()->success('You have successfully created a new group');
         return redirect($group->username);
 	}
 
@@ -148,6 +149,7 @@ class GroupController extends Controller {
             return redirect($group->username)->with('error', 'File has not been uploaded');
         }
         $group->fill($request->input())->save();
+        flash()->success('You have successfully updated your group');
         return redirect($group->username);
 	}
 
@@ -161,7 +163,8 @@ class GroupController extends Controller {
 	public function destroy($group)
 	{
         $group->delete();
-        return redirect('/admin/groups');
+        flash()->success('You have successfully destroyed your group');
+        return redirect('/');
 	}
 
     public function  allGroups()
@@ -191,6 +194,7 @@ class GroupController extends Controller {
         #Changes the administrator to the new user.
         $group->user_id = $user->id;
         $group->save();
+        flash()->success('You have successfully changed the group administrator to '.$user->fullName());
         return redirect($group->username);
     }
 

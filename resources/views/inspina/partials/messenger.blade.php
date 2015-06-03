@@ -8,15 +8,3 @@
 							</ul>
 						</div>
 					@endif
-					@if(isset($inputs))
-                        @if (count($inputs) > 0)
-                            <div class="alert alert-danger">
-                                <strong>Whoops!</strong> There were some problems with your input.<br><br>
-                                <ul>
-                                    @foreach ($inputs->all() as $input)
-                                        <li>{{ $input }}</li>
-                                    @endforeach
-                                </ul>
-                            </div>
-                        @endif
-					@endif

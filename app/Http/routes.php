@@ -204,6 +204,8 @@ Route::get('/test/mail',function()
         Route::post('/{event}/event/chat/store',  ['middleware' => 'school', 'uses' => 'EventsController@storeMessage']);
         Route::get('{event}/events/profile',  ['middleware' => 'school', 'uses' => 'EventsController@show']);
         Route::get('{event}/events/attend',  ['middleware' => 'school', 'uses' => 'EventsController@attend']);
+        Route::get('/events/attending',  ['middleware' => 'school', 'uses' => 'EventsController@getUserAttendingEvents']);
+        Route::post('/events/attending/search',  ['middleware' => 'school', 'uses' => 'EventsController@getUserSearchedChosenEvents']);
         Route::get('{event}/events/notAttend',  ['middleware' => 'school', 'uses' => 'EventsController@notAttend']);
         Route::get('/events',  ['middleware' => 'school', 'uses' => 'TimelineController@Index']);
     /* End Client Routes */
