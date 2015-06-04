@@ -35,6 +35,7 @@
             <form class="m-t" id="loginForm" role="form" action="<?php echo e(url('/login')); ?>" method="post">
                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
                 <div class="form-group">
+                    <label for="loginEmail" class="has-error pull-left" style="color: #ff0000; display: ;"> Email is needed</label>
                     <input type="email" id="loginEmail" class="form-control" placeholder="Username" required="" name="email">
                 </div>
                 <div class="form-group">
