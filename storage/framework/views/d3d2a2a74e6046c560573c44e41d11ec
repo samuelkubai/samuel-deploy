@@ -152,7 +152,7 @@
 
 
 
-         <div class="wrapper wrapper-content">
+         <div class="wrapper wrapper-content" style="padding-right: 0px; padding-left: 0px; margin-right: 0px;">
 
                     <div class="">
                         <div class="">

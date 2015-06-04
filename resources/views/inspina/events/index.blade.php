@@ -28,7 +28,7 @@
 
                             <div class="project-list">
 
-                                <table class="table table-hover">
+                                <table class="table table-hover ">
                                     <tbody>
                                     @if($events->count() != 0)
                                         @foreach($events as $event)
@@ -45,13 +45,11 @@
                                                 <br/>
                                                 <small>On {{ $event->date }}</small>
                                             </td>
-                                            <td class="project-completion">
-                                                Participants: <b>{{ $event->participantsCount() }}</b>
-                                            </td>
-                                            <td class="project-people">
+
+                                            <td class="">
                                                 <div class="btn-group">
                                                 @if($event->isAttendedBy(\Auth::user()))
-                                                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle"  data-toggle="dropdown" aria-expanded="false">
                                                     Attending <span class="caret"></span>
                                                   </button>
                                                   <ul class="dropdown-menu" role="menu">
@@ -66,6 +64,9 @@
                                                   </ul>
                                                 @endif
                                                 </div>
+                                            </td>
+                                            <td class="project-completion">
+                                                Participants: <b>{{ $event->participantsCount() }}</b>
                                             </td>
                                             <td class="project-actions">
                                                 <a href="{{ url($event->id .'/events/profile') }}" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>

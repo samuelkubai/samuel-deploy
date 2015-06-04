@@ -97,7 +97,7 @@
                                 <div class="chat-users">
 
 
-                                    <div class="users-list">
+                                    <div class="users-list col-xs-0">
                                         @foreach($event->attending()->get() as $participant)
                                             <div class="chat-user">
                                                 <img class="chat-avatar img-responsive" src="{{ asset($participant->profileSource()) }}" alt="" >

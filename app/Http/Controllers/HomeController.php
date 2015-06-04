@@ -50,7 +50,6 @@ class HomeController extends Controller {
         $title = 'Activity Feed';
         $statuses = $this->postRepository->feedForUser($this->user());
         $user = $this->user();
-        $this->flash('Test, this is a test');
         return view('inspina.home.feed', compact('title','user', 'statuses'));
 	}
 

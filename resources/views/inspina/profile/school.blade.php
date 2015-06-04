@@ -5,7 +5,7 @@
 	<div class="wrapper wrapper-content">
             <div class="row animated fadeInRight">
                 @include('inspina.partials.groupProfile')
-                <div class="col-md-8">
+                <div class="col-md-6">
                     <div class="ibox float-e-margins">
                         <div class="ibox-title">
                             <h5>Group Activites</h5>
@@ -39,6 +39,7 @@
                     </div>
 
                 </div>
+
             </div>
         </div>
 @stop

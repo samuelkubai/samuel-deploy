@@ -7,12 +7,17 @@
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right">{{ $status->updated_at }}</small>
+                                                        <a href="{{ url($status->url) }}">
                                                         <strong>{{ $status->title }}</strong><br>
-                                                        <span class="text-muted">{{ $status->message }}</span>
-                                                        <span class="pull-right"><a href="{{ url($status->url) }}"><i class="glyphicon glyphicon-play-circle"></i></a></span>
+                                                        </a>
+                                                        <a href="{{ url($status->url) }}">
+                                                            <span class="text-muted">{{ $status->message }}</span>
+                                                        </a>
+
 
                                                     </div>
                                                 </div>
+
                                         @endforeach
                                      @else
                                         <div class="feed-element">

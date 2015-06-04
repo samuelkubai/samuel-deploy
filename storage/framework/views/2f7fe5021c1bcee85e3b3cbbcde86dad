@@ -7,12 +7,17 @@
                                                     </a>
                                                     <div class="media-body ">
                                                         <small class="pull-right"><?php echo e($status->updated_at); ?></small>
+                                                        <a href="<?php echo e(url($status->url)); ?>">
                                                         <strong><?php echo e($status->title); ?></strong><br>
-                                                        <span class="text-muted"><?php echo e($status->message); ?></span>
-                                                        <span class="pull-right"><a href="<?php echo e(url($status->url)); ?>"><i class="glyphicon glyphicon-play-circle"></i></a></span>
+                                                        </a>
+                                                        <a href="<?php echo e(url($status->url)); ?>">
+                                                            <span class="text-muted"><?php echo e($status->message); ?></span>
+                                                        </a>
+
 
                                                     </div>
                                                 </div>
+
                                         <?php endforeach; ?>
                                      <?php else: ?>
                                         <div class="feed-element">

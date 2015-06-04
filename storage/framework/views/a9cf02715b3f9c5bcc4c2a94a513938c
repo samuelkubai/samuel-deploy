@@ -152,7 +152,6 @@
          <div class="wrapper wrapper-content">
                     <div class="">
                         <div class="">
-                        <?php echo $__env->make('flash::message', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                         <?php echo $__env->make('inspina.partials.messenger', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
                             <?php echo $__env->yieldContent('content'); ?>
                         </div>
