@@ -1,0 +1,35 @@
+<?php $__env->startSection('content'); ?>
+	<div class="wrapper wrapper-content" style="padding-top: 0px;  padding-left: 0px; padding-right: 0px;">
+
+            <div class="row animated fadeInRight">
+            <?php echo $__env->make('inspina.partials.groupProfile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                <div class="col-md-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Group Activites</h5>
+                            <div class="ibox-tools">
+
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div>
+                                <div class="feed-activity-list">
+                                    <?php echo $__env->make('inspina.partials.status', ['statuses' => $group->paginatedPosts()], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                </div>
+
+                                <?php echo $__env->make('inspina.partials.previous_feed_button', ['statuses' => $group->paginatedPosts()], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+                <div class="col-md-3 pull-right">
+                    <?php echo $__env->make('inspina.partials.group_features', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                </div>
+            </div>
+        </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

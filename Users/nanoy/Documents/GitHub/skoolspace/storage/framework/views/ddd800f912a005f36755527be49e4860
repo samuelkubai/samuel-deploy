@@ -1,0 +1,74 @@
+<?php $__env->startSection('content'); ?>
+        <!-- Content starts here -->
+        <div class="wrapper wrapper-content">
+            <div class="row animated fadeInRight">
+        <?php echo $__env->make('inspina.partials.groupProfile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+            <div class="col-md-8">
+                        <div class="col-sm-12 col-md-">
+                            <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#uploadModal">Upload New File</button>
+                        </div>
+                        <?php echo $__env->make('inspina.file.partials.upload', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                        <div class="col-lg-8 animated fadeInRight">
+
+                       <br> <br><br>
+                        <div class="col-lg-12">
+                        <?php if($documents->count() != 0): ?>
+                            <?php foreach($documents as $document): ?>
+                                <div class="file-box">
+                                    <div class="file">
+                                        <a href="<?php echo e(url('/download/?download_file='.$document->name)); ?>">
+                                            <span class="corner"></span>
+
+                                        <?php if($document->isImage()): ?>
+                                            <div class="image">
+                                                <img src="<?php echo e(asset($document->source)); ?>" alt="<?php echo e($document->name); ?>" class="img-responsive"/>
+                                            </div>
+                                        <?php else: ?>
+                                            <div class="icon">
+                                                <i class="fa fa-file"></i>
+                                            </div>
+                                        <?php endif; ?>
+                                            <div class="file-name">
+                                                <?php echo e($document->name); ?>
+
+                                                <?php if($group->isOwner(\Auth::user())): ?>
+                                                <span class="pull-right"><a href="<?php echo e('/manager/delete/'.$folder->id.'/'.$document->id); ?> " class="pull-right"><i class="glyphicon glyphicon-remove pull-right"></i></a></span>
+                                                <?php endif; ?>
+                                                <br/>
+                                                <small>Added: <?php echo e($document->created_at); ?></small>
+                                                <br>
+                                                <small>Uploaded By: <?php echo $__env->make('inspina.partials.name_tag',['user' => $document->user()->first()], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?></small>
+                                            </div>
+                                        </a>
+                                    </div>
+
+                                </div>
+                            <?php endforeach; ?>
+                        <?php else: ?>
+                            <h2 align="center"><br> <br> <br>THERE ARE NO DOCUMENTS UPLOADED YET!!
+
+                            </h2><br> <br> <br><br> <br> <br>
+                        <?php endif; ?>
+
+                        </div>
+                        <?php if($group->isOwner(\Auth::user())): ?>
+                            <div class="col-sm-6">
+                                <button type="button" class="btn btn-info btn-block col-sm-3" data-toggle="modal" data-target="#updateModal">Rename Folder <i class="glyphicon glyphicon-pencil"></i></button>
+                                <?php echo $__env->make('inspina.file.partials.updateFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                            </div>
+                            <div class="col-sm-6">
+                                <a href="<?php echo e('/manager/'.$folder->id.'/delete/'); ?>" class="btn btn-danger btn-block col-sm-3">Delete Folder <i class="glyphicon glyphicon-remove"></i></a>
+                            </div>
+                        <?php endif; ?>
+                        </div>
+                    </div>
+                </div>
+                </div>
+
+        <!-- Content ends Here! -->
+<?php $__env->stopSection(); ?>
+
+<?php $__env->startSection('scripts'); ?>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

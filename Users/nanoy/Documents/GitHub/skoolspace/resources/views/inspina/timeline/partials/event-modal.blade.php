@@ -1,0 +1,47 @@
+<div class="modal inmodal fade" id="myModal5" tabindex="-1" role="dialog"  aria-hidden="true">
+            <div class="modal-dialog modal-lg">
+                 <div class="modal-content">
+                    <div class="modal-header">
+                        <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                        <h4 class="modal-title">Create a new Event.</h4>
+                        <small class="font-bold">This event will be available for all of your group members to use.</small>
+                    </div>
+                    <form action="{{ url('/admin/'. $group->username . '/events/') }}" method="post" >
+                        <div class="modal-body">
+                                <input type="hidden" name="_token" value="{{ csrf_token() }}">
+
+                                    <div class="row">
+                                        <div class="form-group">
+                                            <label class="font-noraml">&nbsp; &nbsp;&nbsp; <i class="fa fa-calendar"></i> Select the Date of the Event</label>
+                                            <br>
+                                            <div class="col-sm-10">
+                                                <input type="text" name="date" class="form-control" data-mask="99/99/9999" placeholder="">
+                                                <span class="help-block text-muted">(dd/mm/yyyy)</span>
+                                            </div>
+                                        </div>
+                                    </div>
+                                    <br>
+                                    <div class="col-md-12">
+                                    <h3> Event Details</h3>
+                                        <hr/>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-12">
+                                            <input name="title" type="text" class="form-control" placeholder="Event title">
+                                        </div>
+                                    </div>
+                                    <div class="row form-group">
+                                        <div class="col-md-12">
+                                            <textarea class="form-control message-input" name="description" placeholder="Event Description"></textarea>
+
+                                        </div>
+                                    </div>
+                         </div>
+                        <div class="modal-footer">
+                            <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                            <button type="submit" class="btn btn-primary">Post Event</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>

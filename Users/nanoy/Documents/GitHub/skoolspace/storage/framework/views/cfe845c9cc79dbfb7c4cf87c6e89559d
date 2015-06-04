@@ -1,0 +1,39 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        <?php echo e($group->name); ?> Features:
+    </div>
+                            <div class="ibox-content">
+                                <div class="file-manager">
+
+                                    <ul class="folder-list" style="padding: 0">
+                                        <li><a href="<?php echo e($group->username .'/events'); ?>"><i class="fa fa-calendar-o"></i> Events <i class="badge badge-default pull-right"><?php echo e($group->events()->get()->count()); ?></i></a></li>
+                                        <li><a href="<?php echo e($group->username.'/notice'); ?>"><i class="glyphicon glyphicon-pushpin"></i> Notices <i class="badge badge-default pull-right"><?php echo e($group->notices()->get()->count()); ?></i></a></li>
+
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        File Manager
+    </div>
+                            <div class="ibox-content">
+                                <div class="file-manager">
+                                    <button type="button" class="btn btn-primary btn-block" data-toggle="modal" data-target="#myModal">New Folder</button>
+                                    <div class="hr-line-dashed"></div>
+                                    <?php echo $__env->make('inspina.file.partials.createFolder', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                    <h5>Group Folder</h5>
+                                    <ul class="folder-list" style="padding: 0">
+                                    <?php if($group->folders()->get()->count() != 0): ?>
+                                    <?php foreach($group->mainFolders() as $folder): ?>
+                                        <li><a href="<?php echo e('/manager/'.$group->username.'/'.$folder->id); ?>"><i class="fa fa-folder"></i> <?php echo e($folder->name); ?></a></li>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <li><b> <span align="center">No Folders for this group.</span></b></li>
+                                    <?php endif; ?>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>
+

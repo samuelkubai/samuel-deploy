@@ -1,0 +1,1 @@
+<a href="{{ url('/') }}" class="col-md-12 btn btn-block btn-primary">Back To News Feed</a>
