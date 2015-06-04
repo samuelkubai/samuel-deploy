@@ -1,0 +1,21 @@
+<div class="ibox float-e-margins">
+    <div class="ibox-title">
+        Followed Groups
+    </div>
+                            <div class="ibox-content">
+                                <div class="file-manager">
+
+                                    <ul class="folder-list" style="padding: 0">
+                                    <?php if($user->followedGroups()->count() != 0): ?>
+                                    <?php foreach($user->followedGroups() as $group): ?>
+                                        <li><a href="<?php echo e($group->username); ?>"><i class="fa fa-group"></i> <?php echo e($group->name); ?> <i class="badge badge-default pull-right"><?php echo e($group->followersCount()); ?></i></a></li>
+                                    <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <h3 align="center">Follow New Groups :)</h3>
+                                        <li><a href=""> </a></li>
+                                    <?php endif; ?>
+                                        <li class="text-center" ><a href="<?php echo e(url('/groups/all')); ?>" style="color: #0000cc"><i class="fa fa-info-circle"></i> Join New Group</a></li>
+                                    </ul>
+                                </div>
+                            </div>
+                        </div>

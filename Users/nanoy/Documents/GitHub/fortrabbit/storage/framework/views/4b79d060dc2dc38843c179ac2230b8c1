@@ -1,0 +1,7 @@
+<?php if(\Auth::user()->id == $user->id): ?>
+    <?php echo e('You'); ?>
+
+<?php else: ?>
+    <?php echo e($user->firstName . ' ' . $user->lastName); ?>
+
+<?php endif; ?>

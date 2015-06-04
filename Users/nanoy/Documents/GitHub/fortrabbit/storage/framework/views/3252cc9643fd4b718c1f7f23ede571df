@@ -1,0 +1,10 @@
+<?php if(count($errors) > 0): ?>
+                <div class="alert alert-danger" >
+
+                        <?php foreach($errors->all() as $error): ?>
+                            <?php echo e($error); ?>
+
+                        <?php endforeach; ?>
+
+                </div>
+            <?php endif; ?>

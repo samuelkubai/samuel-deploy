@@ -1,0 +1,91 @@
+<?php $__env->startSection('content'); ?>
+                <?php echo $__env->make('inspina.partials.to_group_feed_nav', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+                    <div class="ibox">
+                        <div class="ibox-title">
+                            <h5>All <?php echo e($group->name); ?> Events:</h5>
+                            <?php if($group->isOwner(\Auth::user())): ?>
+                                <div class="ibox-tools">
+                                    <a href="<?php echo e(url($group->username.'/events/create')); ?>" class="btn btn-primary btn-xs">Create new Event</a>
+                                </div>
+                            <?php endif; ?>
+                        </div>
+                        <div class="ibox-content">
+                            <div class="row m-b-sm m-t-sm">
+                                <div class="col-md-1">
+                                    <a href="<?php echo e(url($group->username . '/events')); ?>" id="loading-example-btn" class="btn btn-white btn-sm" ><i class="fa fa-refresh"></i> Refresh</a>
+                                </div>
+                                <form action="<?php echo e(url($group->username.'/events/search')); ?>" method="POST">
+                                 <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                    <div class="col-md-11">
+                                        <div class="input-group"><input type="text" name="value" placeholder="Search By Event Title" class="input-sm form-control"> <span class="input-group-btn">
+                                            <button type="submit" class="btn btn-sm btn-primary"> Go!</button> </span></div>
+                                    </div>
+                                </form>
+                            </div>
+
+                            <div class="project-list">
+
+                                <table class="table table-hover ">
+                                    <tbody>
+                                    <?php if($events->count() != 0): ?>
+                                        <?php foreach($events as $event): ?>
+                                        <tr>
+                                            <td class="project-status">
+                                                 <?php if($event->status == 1): ?>
+                                                    <span class="label label-primary">Active</span></dd>
+                                                 <?php else: ?>
+                                                    <span class="label label-default">Unactive</span></dd>
+                                                 <?php endif; ?>
+                                            </td>
+                                            <td class="project-title">
+                                                <a href="<?php echo e(url($event->id .'/events/profile')); ?>"><?php echo e($event->title); ?></a>
+                                                <br/>
+                                                <small>On <?php echo e($event->date); ?></small>
+                                            </td>
+
+                                            <td class="">
+                                                <div class="btn-group">
+                                                <?php if($event->isAttendedBy(\Auth::user())): ?>
+                                                  <button type="button" class="btn btn-primary btn-sm dropdown-toggle"  data-toggle="dropdown" aria-expanded="false">
+                                                    Attending <span class="caret"></span>
+                                                  </button>
+                                                  <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="<?php echo e(url($event->id . '/events/notAttend')); ?>">Not Attend</a></li>
+                                                  </ul>
+                                                <?php else: ?>
+                                                  <button type="button" class="btn btn-danger btn-sm dropdown-toggle" data-toggle="dropdown" aria-expanded="false">
+                                                    Not Attending <span class="caret"></span>
+                                                  </button>
+                                                  <ul class="dropdown-menu" role="menu">
+                                                    <li><a href="<?php echo e(url($event->id . '/events/attend')); ?>">Attend</a></li>
+                                                  </ul>
+                                                <?php endif; ?>
+                                                </div>
+                                            </td>
+                                            <td class="project-completion">
+                                                Participants: <b><?php echo e($event->participantsCount()); ?></b>
+                                            </td>
+                                            <td class="project-actions">
+                                                <a href="<?php echo e(url($event->id .'/events/profile')); ?>" class="btn btn-white btn-sm"><i class="fa fa-folder"></i> View </a>
+                                               <?php if($group->isOwner(\Auth::user())): ?>
+                                                <a href="<?php echo e(url($event->id .'/events/update')); ?>" class="btn btn-white btn-sm"><i class="fa fa-pencil"></i> Edit </a>
+                                               <?php endif; ?>
+                                            </td>
+                                        </tr>
+                                        <?php endforeach; ?>
+                                    <?php else: ?>
+                                        <br>
+                                        <h2 align="center" >No Events Recorded!</h2>
+                                    <?php endif; ?>
+                                    </tbody>
+                                </table>
+                                <div class="text-center">
+                                    <?php echo $events->render() ?>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('inspina.layouts.main', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

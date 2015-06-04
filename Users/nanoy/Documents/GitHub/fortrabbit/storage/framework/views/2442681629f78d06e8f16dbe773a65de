@@ -1,0 +1,19 @@
+                   <?php if(\Session::has('message')): ?>
+                        <div class="alert alert-info <?php echo e(\Session::has('message_important')?'alert-important':''); ?>" id="messenger">
+
+                                <button class="close" type="button" data-dismiss="alert" aria-hidden="true">&times;</button>
+
+                            <?php echo e(\Session::get('message')); ?>
+
+                        </div>
+                   <?php endif; ?>
+                    <?php if(count($errors) > 0): ?>
+						<div class=" col-md-10 col-md-offset-1 alert alert-danger">
+
+							<ul>
+								<?php foreach($errors->all() as $error): ?>
+									<li><?php echo e($error); ?></li>
+								<?php endforeach; ?>
+							</ul>
+						</div>
+					<?php endif; ?>

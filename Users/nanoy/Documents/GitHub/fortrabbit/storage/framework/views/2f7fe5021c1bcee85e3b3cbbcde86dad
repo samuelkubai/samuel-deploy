@@ -1,0 +1,21 @@
+                                     <?php if($statuses->count() != 0): ?>
+                                        <?php foreach($statuses as $status): ?>
+
+                                                <div class="feed-element">
+                                                    <a href="<?php echo e($status->group()->first()->username); ?>" class="pull-left">
+                                                        <img alt="image" class="img-circle" src="<?php echo e($status->group()->first()->profileSource()); ?>">
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right"><?php echo e($status->updated_at); ?></small>
+                                                        <strong><?php echo e($status->title); ?></strong><br>
+                                                        <span class="text-muted"><?php echo e($status->message); ?></span>
+                                                        <span class="pull-right"><a href="<?php echo e(url($status->url)); ?>"><i class="glyphicon glyphicon-play-circle"></i></a></span>
+
+                                                    </div>
+                                                </div>
+                                        <?php endforeach; ?>
+                                     <?php else: ?>
+                                        <div class="feed-element">
+                                            <h2 align="center"> No Activities :( </h2>
+                                        </div>
+                                     <?php endif; ?>
