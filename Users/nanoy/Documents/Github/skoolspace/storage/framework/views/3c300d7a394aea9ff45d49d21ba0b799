@@ -1,0 +1,30 @@
+                                     <?php if($statuses->count() != 0): ?>
+                                        <?php foreach($statuses as $status): ?>
+
+                                                <div class="feed-element">
+                                                    <a href="<?php echo e($status->group()->first()->username); ?>" class="pull-left">
+                                                        <img alt="image" class="img-circle" src="<?php echo e($status->group()->first()->profileSource()); ?>">
+                                                    </a>
+                                                    <div class="media-body ">
+                                                        <small class="pull-right"><?php echo e($status->updated_at); ?></small>
+                                                        <a href="<?php echo e(url($status->url)); ?>">
+                                                        <strong><?php echo e($status->title); ?></strong><br>
+                                                        </a>
+                                                        <a href="<?php echo e(url($status->url)); ?>">
+                                                            <span class="text-muted"><?php echo e($status->message); ?></span>
+                                                        </a>
+
+
+                                                    </div>
+                                                </div>
+
+                                        <?php endforeach; ?>
+                                     <?php else: ?>
+                                        <div class="feed-element">
+                                            <h2 align="center"> No Activities Recorded</h2>
+                                            <br>
+                                            <h4 align="center"class="muted text-center">
+                                            Perhaps you should try out the skoolspace features :)
+                                            </h4>
+                                        </div>
+                                     <?php endif; ?>

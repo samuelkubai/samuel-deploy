@@ -1,0 +1,26 @@
+
+                                <div class="modal inmodal" id="updateModal" tabindex="-1" role="dialog" aria-hidden="true">
+                                    <div class="modal-dialog">
+                                    <div class="modal-content animated bounceInRight">
+                                            <div class="modal-header">
+                                                <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
+                                                <i class="fa fa-laptop modal-icon"></i>
+                                                <h4 class="modal-title">Rename Folder</h4>
+                                                <small class="font-bold">Folders help in arranging and retrieving the files.</small>
+                                            </div>
+                                            <form action="<?php echo e(url('manager/'.$folder->id.'/folder/update')); ?>" method="POST" enctype="multipart/form-data">
+                                                <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+                                                <div class="modal-body">
+                                                   <div class=" form-group">
+                                                   <label>Folder Name:</label>
+                                                        <input class="form-control" name="name" VALUE="<?php echo e($folder->name); ?>" type="text"/>
+                                                   </div>
+                                                </div>
+                                                <div class="modal-footer">
+                                                    <button type="button" class="btn btn-white" data-dismiss="modal">Close</button>
+                                                    <button type="submit" class="btn btn-primary">Rename Folder</button>
+                                                </div>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>

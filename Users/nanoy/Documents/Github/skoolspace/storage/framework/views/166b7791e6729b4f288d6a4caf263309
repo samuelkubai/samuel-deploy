@@ -1,0 +1,40 @@
+<?php $__env->startSection('content'); ?>
+	<div class="wrapper wrapper-content" style="padding-top: 2px;">
+            <div class="row animated fadeInRight">
+                <div class="col-md-3">
+
+                   <?php echo $__env->make('inspina.partials.userProfile', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+
+                </div>
+                <div class="col-md-6">
+                    <div class="ibox float-e-margins">
+                        <div class="ibox-title">
+                            <h5>Group Activites</h5>
+                            <div class="ibox-tools">
+
+                            </div>
+                        </div>
+                        <div class="ibox-content">
+
+                            <div>
+                                <div class="feed-activity-list">
+                                        <?php echo $__env->make('inspina.partials.status', ['statuses' => $statuses], array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                                </div>
+                            <div class="text-center">
+                              <?php echo $statuses->render() ?>
+                            </div>
+
+                            </div>
+
+                        </div>
+                    </div>
+
+                </div>
+
+                <div class="col-md-3">
+                <?php echo $__env->make('inspina.partials.followed_groups', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>
+                </div>
+            </div>
+        </div>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('inspina.layouts.user', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

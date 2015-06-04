@@ -1,0 +1,42 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module type="WEB_MODULE" version="4">
+  <component name="NewModuleRootManager">
+    <content url="file://$MODULE_DIR$" />
+    <orderEntry type="inheritedJdk" />
+    <orderEntry type="sourceFolder" forTests="false" />
+    <orderEntry type="library" name="jquery.animateNumbers" level="application" />
+    <orderEntry type="library" name="pace" level="application" />
+    <orderEntry type="library" name="core" level="application" />
+    <orderEntry type="library" name="chat" level="application" />
+    <orderEntry type="library" name="jquery.scrollbar" level="application" />
+    <orderEntry type="library" name="jquery.unveil" level="application" />
+    <orderEntry type="library" name="breakpoints" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="jquery-1.8.3" level="application" />
+    <orderEntry type="library" name="jquery-ui-1.10.1.custom" level="application" />
+    <orderEntry type="library" name="select2" level="application" />
+    <orderEntry type="library" name="jquery.dataTables" level="application" />
+    <orderEntry type="library" name="dataTables.tableTools" level="application" />
+    <orderEntry type="library" name="datatables.responsive" level="application" />
+    <orderEntry type="library" name="lodash" level="application" />
+    <orderEntry type="library" name="datatables" level="application" />
+    <orderEntry type="library" name="demo" level="application" />
+    <orderEntry type="library" name="jqueryblockui" level="application" />
+    <orderEntry type="library" name="messages_notifications" level="application" />
+    <orderEntry type="library" name="bootstrap-wysihtml5" level="application" />
+    <orderEntry type="library" name="wysihtml5-0.3.0" level="application" />
+    <orderEntry type="library" name="tabs_accordian" level="application" />
+    <orderEntry type="library" name="jquery-2.1.1" level="application" />
+    <orderEntry type="library" name="bootstrap" level="application" />
+    <orderEntry type="library" name="jquery.metisMenu" level="application" />
+    <orderEntry type="library" name="jquery.slimscroll" level="application" />
+    <orderEntry type="library" name="inspinia" level="application" />
+    <orderEntry type="library" name="pace" level="application" />
+    <orderEntry type="library" name="jquery.jeditable" level="application" />
+    <orderEntry type="library" name="jquery.dataTables" level="application" />
+    <orderEntry type="library" name="dataTables.bootstrap" level="application" />
+    <orderEntry type="library" name="dataTables.responsive" level="application" />
+    <orderEntry type="library" name="dataTables.tableTools" level="application" />
+  </component>
+</module>
+

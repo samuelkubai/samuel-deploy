@@ -1,0 +1,6 @@
+<a class="btn btn-primary btn-block m"
+<?php if(!$statuses->hasMorePages()): ?>
+disabled="true"
+<?php endif; ?>
+href="<?php echo e($statuses->nextPageUrl()); ?>"><i class="fa fa-arrow-down"></i> Previous Posts
+</a>

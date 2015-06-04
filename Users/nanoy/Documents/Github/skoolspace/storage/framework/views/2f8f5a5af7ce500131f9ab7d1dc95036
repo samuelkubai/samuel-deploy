@@ -1,0 +1,17 @@
+<?php $__env->startSection('content'); ?>
+
+
+    <?php echo e($message); ?>
+
+   <form action="<?php echo e(url( '/test/')); ?>" method="post" enctype="multipart/form-data">
+
+
+    <input type="file" name="file" class="form-group-lg"/>
+
+    <input type="submit" value="Submit" class="form-group btn btn-info"/>
+
+    <input type="hidden" name="_token" value="<?php echo e(csrf_token()); ?>">
+
+    </form>
+<?php $__env->stopSection(); ?>
+<?php echo $__env->make('inspina', array_except(get_defined_vars(), array('__data', '__path')))->render(); ?>

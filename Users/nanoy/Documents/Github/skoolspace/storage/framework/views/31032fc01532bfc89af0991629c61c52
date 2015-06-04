@@ -1,0 +1,1 @@
+<a class="btn btn-sm  btn-info" href="<?php echo e(url($group->username)); ?>"><i class="glyphicon glyphicon-arrow-left"></i> Back To Group feed</a>
