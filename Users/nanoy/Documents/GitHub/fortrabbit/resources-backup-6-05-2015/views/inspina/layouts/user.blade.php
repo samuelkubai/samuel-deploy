@@ -156,7 +156,7 @@
 
                     <div class="">
                         <div class="">
-
+                        
                         @include('inspina.partials.messenger')
                             @yield('content')
                         </div>

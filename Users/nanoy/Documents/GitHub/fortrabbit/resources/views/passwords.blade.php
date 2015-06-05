@@ -29,23 +29,9 @@
             <p>Perfectly designed and precisely built for school groups event management and file sharing.
                 <!--Continually expanded and constantly improved Inspinia Admin Them (IN+)-->
             </p>
-            <p>Login in. To see it in action.</p>
+            <p> </p>
             <div class="errorBox" id="error">@include('inspina.partials.error')</div>
-
-            <form class="m-t" id="loginForm" role="form" action="{{ url('/login') }}" method="post">
-                <input type="hidden" name="_token" value="{{ csrf_token() }}">
-                <div class="form-group">
-                    <input type="email" id="loginEmail" class="form-control" placeholder="Username" required="" name="email">
-                </div>
-                <div class="form-group">
-                    <input type="password" id="loginPassword" class="form-control" placeholder="Password" required="" name="password">
-                </div>
-                <button type="button" id="loginbtn" class="btn btn-primary block full-width m-b">Login</button>
-
-                <a href="{{ url('/password/email')  }}"><small>Forgot password?</small></a>
-                <p class="text-muted text-center"><small>Do not have an account?</small></p>
-                <a class="btn btn-sm btn-white btn-block" href="{{ url('/register') }}">Create an account</a>
-            </form>
+                @yield('content')
             <p class="m-t"> <small>skoolspace framework built for school group management <br> &copy; 2014</small> </p>
         </div>
     </div>
